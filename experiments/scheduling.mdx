@@ -1,0 +1,90 @@
+---
+title: "Scheduling"
+description: "Automate recurring experiment executions so your AI visibility and sentiment data stays current without manual effort."
+---
+
+A **schedule** automates the execution of an experiment on a recurring basis. Instead of manually clicking **Rerun Experiment** each time, a schedule triggers a new execution at a fixed interval — so you always have fresh data to track how your AI presence changes over time.
+
+Schedules are attached to a specific experiment. When a schedule fires, it creates a new execution with the same configuration as the experiment: same queries, same models, same geo-targeting.
+
+## Schedule frequencies
+
+When you create a schedule, choose one of these cadences:
+
+- **Daily**
+- **Weekly**
+- **Bi-weekly**
+- **Monthly**
+
+## Creating a schedule
+
+<Steps>
+  <Step title="Open the experiment">
+    Navigate to **Experiments** and open the experiment you want to schedule.
+  </Step>
+  <Step title="Open the schedule settings">
+    In the experiment detail view, click **Schedule** (or the schedule icon in the header). If no schedule exists yet, you'll see an option to create one.
+  </Step>
+  <Step title="Choose a frequency">
+    Select how often you want the experiment to run automatically: **Daily**, **Weekly**, **Bi-weekly**, or **Monthly**.
+  </Step>
+  <Step title="Set the first run date">
+    Pick a **next run date** — the date and time when the schedule should first trigger. All subsequent runs will be calculated from this anchor date based on the frequency you selected.
+  </Step>
+  <Step title="Save the schedule">
+    Click **Create Schedule**. The schedule is now active and linked to the experiment. You can see the next scheduled run date in the experiment detail view.
+  </Step>
+</Steps>
+
+## Updating a schedule
+
+To change the frequency or next run date of an existing schedule:
+
+1. Open the experiment detail view.
+2. Click the schedule settings.
+3. Update the **frequency** or **next run date** as needed.
+4. Save the changes.
+
+The updated schedule takes effect immediately. The next execution will fire at the new next run date.
+
+## Pausing a schedule
+
+To temporarily stop a schedule without deleting it, toggle the schedule to **inactive** in the schedule settings. The schedule remains attached to the experiment but will not trigger new executions until you reactivate it.
+
+## Deleting a schedule
+
+To permanently remove a schedule:
+
+1. Open the experiment detail view.
+2. Open the schedule settings.
+3. Click **Delete Schedule** and confirm.
+
+The experiment remains intact — only the automation is removed. You can still run executions manually.
+
+<Note>
+  Deleting an experiment also deletes its associated schedule. You do not need to delete the schedule separately before deleting the experiment.
+</Note>
+
+## Viewing scheduled execution history
+
+All executions — whether triggered manually or by a schedule — appear in the same execution list on the experiment detail page. There is no separate view for scheduled runs.
+
+Use [Analytics](/analytics/overview) to compare results across all executions over time, regardless of how they were triggered. Organization admins can also manage schedules in bulk from **Settings → Experiment Schedules**.
+
+<CardGroup cols={2}>
+  <Card title="Experiments overview" icon="flask" href="/experiments/overview">
+    Learn how to create and manage experiments on XLR8.ai.
+  </Card>
+
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Compare scheduled execution results over time.
+  </Card>
+
+  <Card title="Concepts" icon="lightbulb" href="/concepts">
+    Understand how schedules, executions, and experiments relate to each other.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Manage org-wide experiment schedules from Settings.
+  </Card>
+</CardGroup>

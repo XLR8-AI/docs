@@ -1,0 +1,163 @@
+---
+title: "Experiments"
+description: "Track your brand's AI presence and sentiment by running experiments across multiple LLMs. Learn how to create, manage, and act on experiments in XLR8.ai."
+---
+
+An **experiment** is the core unit of measurement in XLR8.ai. Each experiment defines what you're tracking — your brand, the type of analysis, the queries to test, and the AI models to run against. You run experiments repeatedly over time to see how your AI visibility and brand sentiment change.
+
+<CardGroup cols={2}>
+  <Card title="Query Generation" icon="magnifying-glass" href="/query-generation">
+    Build reusable query sets — company briefing, categories, and queries — then pick a set when you create an experiment.
+  </Card>
+
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Measure how often your brand appears in AI-generated responses across leading models.
+  </Card>
+
+  <Card title="Sentiment experiments" icon="face-smile" href="/experiments/sentiment">
+    Understand how AI models describe and perceive your brand in their responses.
+  </Card>
+
+  <Card title="Reading results" icon="chart-bar" href="/experiments/results">
+    Interpret mention rates, sentiment scores, citations, and AI-generated analysis.
+  </Card>
+
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Compare executions over time with trends, baselines, and source concentration.
+  </Card>
+
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Automate recurring experiment runs so your data stays current without manual effort.
+  </Card>
+</CardGroup>
+
+## Visibility vs. sentiment — which should you use?
+
+<Tabs>
+  <Tab title="Visibility">
+    Choose a **Visibility Analysis** experiment when you want to measure whether your brand is being mentioned in AI responses at all.
+
+    Visibility answers questions like:
+
+    - "Does Perplexity mention us when users search for our category?"
+    - "How often do we appear vs. our competitors?"
+    - "Is our website being cited as a source?"
+
+    Visibility results show mention rates per model, citation presence, and competitor comparison — all broken down by query category.
+
+    **Best for:** Brands establishing an AI presence baseline, competitive benchmarking, and tracking the impact of content changes over time.
+  </Tab>
+  <Tab title="Sentiment">
+    Choose a **Sentiment Analysis** experiment when you want to understand the tone and framing of how AI models talk about your brand.
+
+    Sentiment answers questions like:
+
+    - "Does ChatGPT describe us positively or negatively?"
+    - "How do AI models position us relative to a competitor?"
+    - "What pros and cons do AI models associate with our brand?"
+
+    Sentiment results include sentiment scores, listed pros and cons per query, and competitor positioning data.
+
+    **Best for:** Brand reputation monitoring, competitive positioning analysis, and identifying specific messaging improvements to address.
+  </Tab>
+</Tabs>
+
+## Creating a new experiment
+
+Company details, experiment type, and queries now live on a **query set**. Create or edit those in [Query Generation](/query-generation) first. Creating an experiment then has two steps: **Query set** and **Create**.
+
+<Steps>
+  <Step title="Create a query set (if you do not have one)">
+    From the sidebar under **Strategy**, click **Query Generation**, then **New query set**. Enter company details, analyze the domain, review categories, generate or import queries, and **Save query set**.
+
+    See [Query Generation](/query-generation) for the full walkthrough, including CSV import, Keyword Planner, and comments.
+  </Step>
+  <Step title="Open New Experiment">
+    From the sidebar under **Strategy**, click **Experiments**. Then click **New Experiment**.
+  </Step>
+  <Step title="Step 1 — Query set">
+    Pick a saved query set that already has queries. Experiment type, company, domain, and aliases come from that set — you will not enter them again.
+
+    The selector shows each set's name, company, category count, and query count. After you select one, a summary shows company, domain, type/subtype, aliases, and query counts. Use **Edit** to open the set in Query Generation, or **Manage query sets** to go to the list.
+
+    If you have no saved sets with queries yet, create one in Query Generation first.
+
+    Click **Continue**.
+  </Step>
+  <Step title="Step 2 — Create">
+    Confirm the **Experiment Summary**, then configure:
+
+    - **Model Selection** — choose which AI models to test. If you select GPT Instant or GPT Thinking, an **Enforce Web Search** switch appears. New experiments start with this off, so those models may answer without searching unless you turn it on.
+    - **Location Information** (optional) — country, region/state, and city for geo-targeted answers
+
+    Click **Create Experiment**. XLR8.ai saves the configuration, opens the experiment detail page, and starts the first execution automatically.
+  </Step>
+</Steps>
+
+## Managing your experiments
+
+### Filtering and sorting
+
+On the **Experiments** page, search experiments and filter by type, subtype, or archival status. Sort by creation date or name.
+
+### Pinning
+
+Pin important experiments to keep them at the top of your list. Click the pin icon on any experiment card to toggle the pinned state.
+
+### Tags
+
+Add tags to categorize and filter your work. Tags are editable from the experiment detail view.
+
+### Archiving
+
+Archive experiments you no longer actively track. Archived experiments are hidden from the default view but remain accessible via the archived filter. Archiving does not delete any data.
+
+### Rerunning and scheduling
+
+From an experiment detail page you can:
+
+- **Rerun Experiment** — start a new execution with the current configuration
+- **Schedule** — set a recurring cadence (see [Scheduling](/experiments/scheduling))
+
+### Experiment settings
+
+Open **Settings** on an experiment to manage:
+
+- **Web search** — organization admins can toggle **Enforce web search**. When on, supported GPT models search the web before responding. New experiments start with this off. The change saves immediately and applies to future runs, not past executions.
+- Company aliases
+- Competitors
+- Tracked URLs
+- Queries and categories
+- Outreach excluded domains (visibility experiments)
+
+### Deleting
+
+Delete an experiment permanently from the experiment detail view. This removes the experiment and all of its executions and results.
+
+<Warning>
+  Deleting an experiment is irreversible. All execution history and results are permanently removed. Archive the experiment instead if you may need the data later.
+</Warning>
+
+## What's next?
+
+<CardGroup cols={2}>
+  <Card title="Query Generation" icon="magnifying-glass" href="/query-generation">
+    Build and edit the query sets you pick when creating an experiment.
+  </Card>
+
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Configure tracked URLs, company aliases, geo-targeting, and model selection for visibility.
+  </Card>
+
+  <Card title="Sentiment experiments" icon="face-smile" href="/experiments/sentiment">
+    Understand sentiment subtypes, action item sync, and how to interpret sentiment scores.
+  </Card>
+
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Track how visibility and sentiment change across executions.
+  </Card>
+
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Set up automatic recurring executions to track changes over time.
+  </Card>
+</CardGroup>

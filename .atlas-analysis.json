@@ -1,0 +1,95 @@
+{
+  "projectType": "saas",
+  "projectName": "XLR8.ai",
+  "projectDescription": "An AI Search Optimization (AEO) platform that helps brands track and improve their visibility across AI-powered search engines and large language models.",
+  "theme": "luma",
+  "primaryColor": "#1c64ec",
+  "lightColor": "#ffffff",
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "concepts"
+            ]
+          },
+          {
+            "group": "Experiments",
+            "pages": [
+              "experiments/overview",
+              "experiments/visibility",
+              "experiments/sentiment",
+              "experiments/results",
+              "experiments/scheduling"
+            ]
+          },
+          {
+            "group": "Content",
+            "pages": [
+              "content/overview",
+              "content/generation",
+              "content/optimization"
+            ]
+          },
+          {
+            "group": "Intelligence",
+            "pages": [
+              "intelligence/insights-agent",
+              "intelligence/action-center",
+              "intelligence/social-listening"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/webflow",
+              "integrations/settings"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "account/authentication",
+              "account/plans"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Visibility experiments tracking brand presence across multiple LLMs (Perplexity, ChatGPT, Gemini, Claude, Grok, Google AI Overview, Microsoft Copilot)",
+    "Sentiment experiments measuring brand perception and competitor comparison in AI responses",
+    "AI-powered content generation optimized for AEO (listicles, guides, comparisons, web pages)",
+    "Content optimization to improve AEO alignment for existing content",
+    "AI Insights Agent for conversational analysis of experiment results",
+    "Action Center with prioritized recommendations from experiment findings",
+    "Reddit and X (Twitter) social listening for brand intelligence",
+    "Automated experiment scheduling (weekly, biweekly, monthly)",
+    "Webflow integration to publish optimized content directly",
+    "Multi-LLM comparison across experiment runs with trend analysis"
+  ],
+  "publicApiSurface": [
+    "GET /api/v1/experiments — list all experiments",
+    "POST /api/v1/experiments — create a new experiment",
+    "GET /api/v1/experiments/{id} — get experiment details",
+    "POST /api/v1/experiments/{id}/executions — run an experiment",
+    "GET /api/v1/experiments/{id}/executions/{id}/results — get execution results",
+    "POST /api/v1/experiments/{id}/executions/{id}/analyse-results — generate AI analysis",
+    "GET /api/v1/experiments/{id}/executions-trend — get trend data across runs",
+    "POST /api/v1/content — generate AEO-optimized content",
+    "POST /api/v1/content/optimize-content-extended — optimize existing content",
+    "POST /api/v1/content/analyze-content-alignment — analyze content AEO alignment",
+    "GET /api/v1/action-center/items — get action recommendations",
+    "POST /api/v1/agent/invoke-insights-agent — query AI insights agent",
+    "POST /api/v1/schedules — create experiment schedule",
+    "GET /api/v1/user-profile — get organization profile",
+    "POST /api/v1/listener/get-reddit-relevant-posts — fetch Reddit intelligence"
+  ]
+}

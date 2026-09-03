@@ -1,0 +1,183 @@
+---
+title: "Content generation"
+description: "Generate AEO-optimized content from scratch by targeting a specific query, content type, and LLM — then edit, reorder, and publish the result."
+---
+
+Content generation produces structured, AEO-optimized content tailored to a query you want to rank for in AI-powered search. XLR8.ai generates the content as a set of discrete **sections**, each scored for semantic alignment with your target query. You can edit, reorder, add, or delete sections before publishing.
+
+## Generate a new piece of content
+
+Navigate to **Content → Content Generation**, then click **Create New Content Action**.
+
+<Steps>
+  <Step title="Choose a content type">
+    Select the content type that best matches the format you want to produce:
+
+    | Type | When to use |
+    | --- | --- |
+    | `listicle` | "Best X for Y" or "Top N tools" queries — ranked or curated lists |
+    | `competitor_comparison` | Side-by-side comparisons of your brand against named competitors |
+    | `guide` | How-to or explanatory content targeting informational queries |
+    | `ecommerce_guide` | Buying guides and product-focused content for commercial queries |
+    | `technical_guide` | Deep-dive technical content for developer or specialist audiences |
+
+    <Note>
+      The content type shapes the structure of the generated output. Choose the type that matches what AI models are most likely to cite for your target query.
+    </Note>
+  </Step>
+  <Step title="Enter your target query">
+    In the **Content Topic / Query** field, enter the exact query you want this content to rank for — for example, `best project management software for remote teams` or `how to reduce customer churn with AI`.
+
+    This query is used throughout generation to focus the content and calculate section scores. Use the same phrasing your target audience would type into an AI assistant.
+  </Step>
+  <Step title="Enter company name and domain">
+    Enter your **Company Name** and **Company Domain** (e.g., `example.com`). XLR8.ai uses these to personalize the content and position your brand within the generated output.
+
+    <Tip>
+      If you've saved your company details in **Settings**, they are pre-filled automatically.
+    </Tip>
+  </Step>
+  <Step title="Add a content title">
+    Enter a **Content Title** — the headline that will appear at the top of the generated piece. This becomes the H1 of your content and is factored into AEO scoring.
+  </Step>
+  <Step title="Optionally add competitors and context">
+    Two optional fields let you guide the output:
+
+    **Competitors** (available for `listicle` and `competitor_comparison` types): Add competitor brand names by typing each name and pressing **Enter** or **,**. XLR8.ai incorporates these into the comparison structure.
+
+    **Additional context**: Paste in brand voice, product names, target audience details, or any other preferences that should shape the content — for example:
+
+    > Brand voice: Friendly and authoritative. Products: AI-powered analytics suite. Target audience: Marketing leaders at B2B SaaS companies.
+
+    If you have generated content before, a **Previous additional context** control appears above the text field. Use it to reuse context from an earlier piece:
+
+    - Leave it on **Add new context** to type fresh instructions.
+    - Open the list to pick a previous context (shown with title, date, query, and a short preview).
+    - When you have more than five saved contexts, search by title, query, or text.
+    - Use the preview (eye) icon to read the full context, then click **Use this context**.
+
+    The control is hidden when there are no reusable previous contexts.
+
+    <Note>
+      Some older saved contexts already include a brand guide. Those items show a **Legacy context includes its original brand guide** notice. If you reuse one, your current brand-guide selections are not added again.
+    </Note>
+  </Step>
+  <Step title="Choose an LLM model">
+    Select the LLM you want to use for generation. The content form currently offers:
+
+    - GPT-5.1
+    - GPT-5.4
+    - Claude Opus 4.1
+    - Claude Opus 4.7
+    - Claude Sonnet 4.5
+    - Claude Sonnet 4.6
+    - Gemini 3 Flash Preview
+    - Gemini 3.1 Pro Preview
+    - Grok 4
+    - Grok 4.20
+
+    Different models have different strengths. If you are generating content targeting a specific AI audience, consider generating with that family of models to better match its citation patterns.
+  </Step>
+  <Step title="Generate and review sections">
+    Click **Generate Content**. XLR8.ai sends your inputs to the selected LLM and returns the content as a set of scored sections. Generation typically takes 15–60 seconds depending on content type and model.
+
+    Once complete, you are taken to the content detail view where you can review, edit, and manage each section.
+  </Step>
+</Steps>
+
+## Working with sections
+
+Generated content is structured as a series of **sections**, each with a name, body text, and a section score. Sections map to the logical parts of your content — introduction, key points, comparisons, conclusions, and so on.
+
+### Understanding section scores
+
+Each section displays a score between 0 and 1 representing its cosine similarity to your target query:
+
+- **0.7–1.0** — Strong alignment. The section is directly relevant to the query and likely to be cited.
+- **0.4–0.69** — Moderate alignment. The section supports the piece but may need tightening.
+- **0.0–0.39** — Low alignment. Consider rewriting or removing the section.
+
+Scores update automatically when you edit a section's content, giving you live feedback as you refine the text.
+
+<Tip>
+  Focus your editing on structurally important sections with low scores — the introduction, primary claims, and conclusion. Sections that score low and are non-essential are good candidates for deletion.
+</Tip>
+
+### Editing sections
+
+Click into any section's text area to edit it inline. Your changes are saved automatically. The score recalculates after you finish editing.
+
+### Adding sections
+
+Use the **insert** control between any two sections to add a new section at that position. You can also append a section at the end of the document. New sections start with a score of 0 and recalculate once you add content.
+
+### Reordering sections
+
+Drag sections into a new order using the drag handle on the left side of each section card. Reordering does not affect individual section scores.
+
+### Deleting sections
+
+Click the delete icon on any section to remove it permanently. You cannot undo a section deletion, so review before removing.
+
+<Warning>
+  Deleting a section is permanent. If you want to keep the content for reference, copy the text before deleting.
+</Warning>
+
+## Metadata description
+
+The first section of your content includes a **metadata description** field. This is the meta description that gets published alongside your content when you push it to Webflow. Keep it concise (under 160 characters) and include your target query keywords.
+
+## Brand guidelines
+
+If your organization has configured **Organization Brand Guidelines** in Settings, content generation can include them by default. You can also toggle brand guideline inclusion on the generation form.
+
+Approved **AI Brand Learnings** from resolved comment threads further steer future content.
+
+## Comments and review
+
+On the content detail view, the **Comments** sidebar lists comment and suggestion threads on the generated piece.
+
+- Filter by type (**Comments**, **Suggestions**, or **All types**) and status (**Open**, **Resolved**, or **All**).
+- Select a thread to reply, **Resolve** it, or **Reopen** it.
+- Pending suggestions also offer **Accept** and **Reject**.
+- When the status filter is **Open**, click **Resolve All** to resolve every open thread at once. Confirm the prompt before the action runs; thread actions are disabled while bulk resolve is in progress.
+
+Resolved threads can become **AI Brand Learnings** in [Settings](/integrations/settings).
+
+## After generating: publish
+
+Once you are satisfied with your sections, publish from the content toolbar to:
+
+- **Webflow** — see [Webflow integration](/integrations/webflow)
+- **WordPress** — see [WordPress integration](/integrations/wordpress)
+
+After the first Webflow publish, XLR8.ai tracks whether your local content has changed since the last sync.
+
+## Viewing your content library
+
+All generated content is accessible from **Content → Content Generation**. The library shows:
+
+- Content title and a short preview from the first section
+- Content type and LLM used
+- Creation date
+- Webflow publish status (if connected)
+
+Click any row to open the full content editor.
+
+<CardGroup cols={2}>
+  <Card title="Content optimization" icon="sparkles" href="/content/optimization">
+    Rewrite existing content for better AEO alignment instead of generating from scratch.
+  </Card>
+
+  <Card title="Webflow integration" icon="plug" href="/integrations/webflow">
+    Publish generated content directly to your Webflow CMS.
+  </Card>
+
+  <Card title="WordPress integration" icon="wordpress" href="/integrations/wordpress">
+    Publish posts or pages to connected WordPress sites.
+  </Card>
+
+  <Card title="Videos" icon="video" href="/content/videos">
+    Turn a script or content piece into an explainer video.
+  </Card>
+</CardGroup>

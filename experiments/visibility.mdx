@@ -1,0 +1,160 @@
+---
+title: "Visibility experiments"
+description: "Measure how often your brand is mentioned and cited by AI models. Configure subtypes, tracked URLs, company aliases, and geo-targeting."
+---
+
+A **visibility experiment** tells you whether AI models are including your brand in their responses. XLR8.ai submits your queries to each selected AI model, collects the responses, and checks whether your brand (and its known aliases) appear in the text — and whether your website is cited as a source.
+
+Run visibility experiments to answer questions like:
+
+- "When users ask Perplexity for the best tools in our category, do we appear?"
+- "How does our mention rate compare to our top competitors?"
+- "Which AI models are citing our website as a source?"
+- "Are we appearing in Google AI Overviews for our target queries?"
+
+## Subtypes
+
+Every visibility experiment has a subtype that shapes the kinds of queries XLR8.ai generates. You choose the subtype — and generate or import the queries — in [Query Generation](/query-generation), then pick that query set when you create the experiment.
+
+<AccordionGroup>
+  <Accordion title="Discovery">
+    **Subtype:** `discovery`
+
+    Discovery queries are broad, category-level questions a user might ask when exploring options for the first time. They typically take the form "best [product type] for [use case]" or "top [category] tools."
+
+    Use the discovery subtype to measure your brand's presence at the top of the funnel, before a user has a specific product in mind. Strong discovery visibility means AI models include you when users are forming their initial consideration set.
+  </Accordion>
+
+  <Accordion title="Informational">
+    **Subtype:** `informational`
+
+    Informational queries target users seeking to understand a product category, feature, or concept. They typically take the form "how does [category] work" or "what is [feature]."
+
+    Use the informational subtype to measure whether AI models associate your brand with expertise in your domain. Appearing in informational responses signals that AI models treat your content or website as a credible reference.
+  </Accordion>
+
+  <Accordion title="Competitor alternatives">
+    **Subtype:** `competitor_alternatives`
+
+    Competitor alternatives queries target users who are actively comparing options or looking for alternatives to a named competitor. They typically take the form "alternatives to [competitor]" or "tools similar to [competitor]."
+
+    Use this subtype to measure how well you capture demand that originates from competitor awareness. If a user is already considering a competitor and an AI model doesn't mention you as an alternative, you're missing a high-intent opportunity.
+  </Accordion>
+</AccordionGroup>
+
+## Supported AI models
+
+Visibility experiments can run against the models available in the New Experiment picker. The frontend currently exposes:
+
+| Model ID | AI model |
+| --- | --- |
+| `perplexity` | Perplexity |
+| `gpt-fast-gpt-5.1` | GPT Fast (GPT-5.1) |
+| `gpt-thinking-gpt-5.1` | GPT Thinking (GPT-5.1) |
+| `gpt-fast-gpt-5.3-chat-latest` | GPT Fast (GPT-5.3 Chat Latest) |
+| `gpt-thinking-gpt-5.4` | GPT Thinking (GPT-5.4) |
+| `grok-4` | Grok 4 |
+| `grok-4.20` | Grok 4.20 |
+| `gemini` | Gemini |
+| `claude-opus-4.8` | Claude Opus 4.8 |
+| `claude-opus-4.7` | Claude Opus 4.7 |
+| `claude-sonnet-5` | Claude Sonnet 5 |
+| `claude-sonnet-4.6` | Claude Sonnet 4.6 |
+| `claude-sonnet-4.5` | Claude Sonnet 4.5 |
+| `google_ai_mode` | Google AI Mode |
+| `microsoft_copilot` | Microsoft Copilot |
+
+<Note>
+  The live list is fetched from `/experiments/llm-models` when you create an experiment.
+</Note>
+
+## Company aliases
+
+When XLR8.ai scans an AI response for your brand, it checks for your company name **and** any aliases you've defined. This matters because AI models often refer to brands by shortened names, abbreviations, or colloquial versions.
+
+For example, if your company is "Acme Corporation," an AI model might write "Acme Corp" or simply "Acme." Without aliases, XLR8.ai would not count those as brand mentions.
+
+**To configure aliases:**
+
+1. Open the experiment detail page.
+2. Open **Settings** and select the **Aliases** tab.
+3. Add each alias and save your changes.
+
+Aliases apply to all future executions of the experiment. If you add an alias after running executions, re-run the experiment to see updated mention rates that include the new alias.
+
+<Tip>
+  Add common misspellings, abbreviations, ticker symbols, and product names that AI models are likely to use when referencing your brand.
+</Tip>
+
+## Tracked URLs
+
+**Tracked URLs** let you monitor whether specific pages on your website — like your homepage, a landing page, or a product page — are being cited as sources by AI models.
+
+When you configure tracked URLs, XLR8.ai identifies which citations in AI responses match your URLs and computes a **tracked URL impact** score that quantifies how much citation traffic those pages are generating across your queries.
+
+**To configure tracked URLs:**
+
+1. Open the experiment detail page.
+2. In the **Tracked URLs** section (visible only on visibility experiments), click **Edit**.
+3. Enter each URL you want to track, one per line. Duplicate and blank entries are automatically removed.
+4. Save your changes.
+
+<Note>
+  Tracked URLs are only available on visibility experiments. The impact analysis appears alongside your standard result analysis once URLs are configured and at least one execution has completed.
+</Note>
+
+## Geo-targeting
+
+Geo-targeting controls the geographic context used when submitting queries to AI models. This is useful when your brand has a regional focus or when competitive dynamics differ significantly by market.
+
+You can target at three levels of specificity:
+
+| Field | Example |
+| --- | --- |
+| Country | `US`, `GB`, `AU` (ISO alpha-2 codes) |
+| Region | `California`, `Ontario` |
+| City | `San Francisco`, `London` |
+
+Set geo-targeting when you create the experiment. It applies to all executions of that experiment.
+
+<Tip>
+  If you sell globally, consider creating separate experiments for your key markets rather than targeting a single location. This gives you clean, comparable data per region.
+</Tip>
+
+## How visibility scores are calculated
+
+After each execution, XLR8.ai analyzes the collected AI responses and computes visibility metrics for your brand across every query and model combination.
+
+**Mention rate** is the primary metric. It measures what percentage of queries resulted in your brand being mentioned in the AI response.
+
+```text
+Mention rate = (queries where brand was mentioned) / (total queries) × 100
+```
+
+Beyond the overall mention rate, results are broken down by:
+
+- **Model** — how your mention rate differs across AI models
+- **Category** — which query categories are driving the most visibility
+- **Individual query** — the raw AI response and whether your brand appeared
+
+**Citation presence** is tracked separately. A citation means your website URL appeared in the list of sources that the AI model used or referenced in its response. High citation presence indicates that AI models are actively using your content as a reference.
+
+**Competitor brands** are extracted from the same AI responses. For each query where competitors appear alongside (or instead of) you, XLR8.ai records which brands were mentioned. This lets you see your share of voice relative to the competitive landscape.
+
+<CardGroup cols={2}>
+  <Card title="Reading results" icon="chart-bar" href="/experiments/results">
+    Learn how to interpret visibility results and citation data.
+  </Card>
+
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Track how visibility changes across executions.
+  </Card>
+
+  <Card title="Outreach" icon="envelope" href="/outreach/overview">
+    Turn visibility citations into listicle outreach campaigns.
+  </Card>
+
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Set up automatic recurring executions to track how your visibility changes over time.
+  </Card>
+</CardGroup>

@@ -1,0 +1,114 @@
+---
+title: "AI Insights Agent"
+description: "Ask natural language questions about your experiment data and get instant, AI-powered answers about your AEO performance."
+---
+
+The AI Insights Agent is a conversational assistant built directly into your experiment results. Instead of manually scanning tables and charts, you can ask plain-language questions and receive data-driven answers grounded in your specific experiment and execution results.
+
+The agent is context-aware: it knows which experiment and execution you are viewing, so your questions do not need to include IDs or technical identifiers.
+
+## Accessing the Insights Agent
+
+Open any experiment from the **Experiments** dashboard, then navigate to its results view. The Insights Agent chat panel appears alongside your results data. You can open a conversation at any time while reviewing an execution.
+
+<Note>
+  The agent operates within the scope of the experiment and execution you are currently viewing. It does not search the general web or access data outside your XLR8.ai account.
+</Note>
+
+## Asking questions
+
+Type your question in the chat input and press **Enter** or click **Send**. The agent responds with an analysis grounded in your experiment data. You can ask follow-up questions to dig deeper — the agent maintains context across the conversation.
+
+### Example questions
+
+The following questions reflect common AEO analysis workflows. Use them as a starting point or inspiration for your own queries.
+
+<AccordionGroup>
+  <Accordion title="Model coverage and mention rates">
+    - "Which model mentions us most frequently?"
+    - "Which models never cite us in this execution?"
+    - "How does our mention rate compare across GPT-4o, Perplexity, and Gemini?"
+    - "Which query categories have the lowest mention rate?"
+  </Accordion>
+
+  <Accordion title="Visibility trends over time">
+    - "Compare our visibility across the last 3 executions."
+    - "Has our mention rate improved since we updated our content?"
+    - "Show me which queries saw the biggest change between execution 1 and execution 3."
+  </Accordion>
+
+  <Accordion title="Competitive analysis">
+    - "How does our visibility compare to Competitor X in this execution?"
+    - "Which models favor our competitors over us?"
+    - "Where are we beating Competitor X, and where are we losing?"
+  </Accordion>
+
+  <Accordion title="Citation and gap analysis">
+    - "What are the main reasons we're not being cited?"
+    - "Which queries consistently fail to mention us?"
+    - "Are there query categories where we have zero visibility?"
+  </Accordion>
+
+  <Accordion title="Sentiment and tone">
+    - "What is the overall sentiment toward our brand in this execution?"
+    - "Which models describe us most positively?"
+    - "Are there any negative themes in how we are being mentioned?"
+  </Accordion>
+</AccordionGroup>
+
+## Conversation flow
+
+The agent maintains the full history of your conversation within the current session. You can build on previous answers to drill down into specific findings.
+
+<Steps>
+  <Step title="Start with a broad question">
+    Open with a high-level question, such as "Summarize our visibility results for this execution."
+  </Step>
+  <Step title="Follow up on specifics">
+    Ask follow-up questions to investigate particular models, categories, or competitors: "Why is our mention rate low on Perplexity specifically?"
+  </Step>
+  <Step title="Request actionable takeaways">
+    Close the conversation with an action-oriented question: "What should we focus on to improve our visibility in the next execution?"
+  </Step>
+</Steps>
+
+## Tips for useful answers
+
+<Tip>
+  Be specific about what you want to compare. Questions like "Compare our visibility on GPT-4o vs. Gemini for the Healthcare category" produce more focused answers than "How are we doing?"
+</Tip>
+
+<Tip>
+  If you are viewing a specific execution, the agent focuses on that execution's data. Switch to a different execution in the results view before asking execution-specific questions.
+</Tip>
+
+<Tip>
+  Ask the agent to summarize before you dig into details. A summary response often reveals the most important finding and guides your next question.
+</Tip>
+
+## Limitations
+
+<Warning>
+  The Insights Agent answers questions based on your experiment data only. It cannot browse the web, fetch live search results, or access data from outside your XLR8.ai account.
+</Warning>
+
+- Conversations are session-scoped. Starting a new session clears the conversation history.
+- The agent focuses on the experiment and execution you are currently viewing. If you need to compare across multiple experiments, navigate to each one separately.
+- Answers reflect the data captured at the time the execution ran. The agent does not have access to real-time AI model outputs.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Experiments overview" icon="flask" href="/experiments/overview">
+    Learn how experiments are structured and how executions are run.
+  </Card>
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Understand how visibility data is collected across AI models.
+  </Card>
+  <Card title="Sentiment experiments" icon="face-smile" href="/experiments/sentiment">
+    See how sentiment is measured and scored per execution.
+  </Card>
+  <Card title="Action Center" icon="list-check" href="/intelligence/action-center">
+    Turn insights into prioritized recommendations.
+  </Card>
+</CardGroup>

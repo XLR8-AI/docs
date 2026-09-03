@@ -1,0 +1,176 @@
+---
+title: "Authentication"
+description: "Sign in, create your account, manage your organization, and add team members to XLR8.ai."
+---
+
+## Signing in
+
+Go to [app.tryxlr8.ai](https://app.tryxlr8.ai) to access XLR8.ai. On the welcome screen, choose **Sign In** or **Sign Up**.
+
+Enter your email address to sign in. You can use an email/password combination or any social login method presented on the sign-in screen.
+
+After you authenticate, XLR8.ai opens **Experiments** by default (or **Welcome** if you still need to finish setup).
+
+<Tip>
+  Bookmark [app.tryxlr8.ai](https://app.tryxlr8.ai) for quick access. Your session persists across browser restarts unless you explicitly sign out.
+</Tip>
+
+---
+
+## Creating an account
+
+<Steps>
+  <Step title="Open the sign-up screen">
+    Go to [app.tryxlr8.ai](https://app.tryxlr8.ai) and click **Sign Up**.
+  </Step>
+  <Step title="Enter your details">
+    Provide your email address and choose a password. Alternatively, use a social login option if available.
+  </Step>
+  <Step title="Verify your email">
+    Check your inbox for a verification email. Click the link in the email to confirm your address.
+
+    <Note>
+      The verification email may land in your spam or promotions folder if it doesn't appear in your inbox within a few minutes.
+    </Note>
+  </Step>
+  <Step title="Accept the terms">
+    New accounts must accept the Terms of Service at **Onboarding → Terms** before accessing the rest of the app.
+  </Step>
+  <Step title="Set up your organization">
+    Use the organization switcher in the header to create an organization, accept an invitation, or switch between organizations you already belong to.
+
+    Organizations are how XLR8.ai groups your team and data together.
+  </Step>
+</Steps>
+
+---
+
+## Organizations
+
+XLR8.ai uses **organizations** to manage team access and data. Every experiment, content piece, and integration belongs to an organization — not to an individual user.
+
+When you sign in, you're acting on behalf of the selected organization. Switching organizations reloads the app with that organization's data.
+
+### Creating an organization
+
+If you're the first person from your company to sign up, create a new organization from the organization switcher. You'll be assigned the **Admin** role automatically.
+
+### Managing the organization
+
+From the organization switcher, open **Manage organization** to use Clerk's organization profile. From there you can invite members, update the organization name, and manage membership.
+
+### Inviting team members
+
+<Steps>
+  <Step title="Open organization settings">
+    Open the organization switcher in the header, then select **Manage organization**.
+  </Step>
+  <Step title="Invite members">
+    Enter the email address of the person you want to invite and choose their role.
+  </Step>
+  <Step title="Choose their role">
+    Select either **Admin** or **Member**. See [Organization roles](#organization-roles) below for the difference.
+  </Step>
+  <Step title="Send the invitation">
+    Send the invitation. The invitee receives an email with a link to join your organization. Pending invitations also appear in the organization switcher.
+  </Step>
+</Steps>
+
+### Organization roles
+
+XLR8.ai has two roles within an organization:
+
+<Tabs>
+  <Tab title="Admin">
+    Admins have full control over the organization. As an admin, you can:
+
+    - Invite and remove team members
+    - Assign roles to other members
+    - Edit **Organization Brand Guidelines**
+    - Approve or dismiss **AI Brand Learnings**
+    - Manage org-wide **Experiment Schedules** in Settings
+    - Use all product features (experiments, content, intelligence, integrations)
+  </Tab>
+  <Tab title="Member">
+    Members can use product features but cannot manage org-level brand and schedule settings reserved for admins. As a member, you can:
+
+    - Create and run experiments
+    - Generate and optimize content
+    - Use Insights, Action Center, Outreach, and Social Listening
+    - Configure integrations such as Webflow, WordPress, indexing, and outreach email
+  </Tab>
+</Tabs>
+
+---
+
+## Staying signed in and signing out
+
+XLR8.ai keeps you signed in across browser sessions by default. Your session remains active until you explicitly sign out.
+
+To sign out, click your profile avatar or name in the navigation and select **Sign Out**. You'll be redirected to the sign-in screen.
+
+---
+
+## Resetting your password
+
+<Steps>
+  <Step title="Go to the sign-in screen">
+    Navigate to [app.tryxlr8.ai](https://app.tryxlr8.ai).
+  </Step>
+  <Step title="Click 'Forgot password'">
+    Below the password field, click the **Forgot password?** link.
+  </Step>
+  <Step title="Enter your email">
+    Type the email address associated with your account and submit the form.
+  </Step>
+  <Step title="Check your inbox">
+    Open the password reset email and click the reset link. The link is time-limited — use it promptly.
+  </Step>
+  <Step title="Set a new password">
+    Enter and confirm your new password. Once saved, sign in with the new credentials.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting sign-in issues
+
+<AccordionGroup>
+  <Accordion title="I'm not receiving the verification or password reset email">
+    Check your spam, junk, and promotions folders. If the email still doesn't arrive after a few minutes, make sure you entered the correct email address and try again.
+  </Accordion>
+
+  <Accordion title="My invitation link isn't working">
+    Invitation links expire after a set period. Ask your organization admin to resend the invitation. Make sure you're clicking the link from the most recent invite email if you received multiple invitations.
+  </Accordion>
+
+  <Accordion title="I'm signed in but I can't see my organization's data">
+    You may be signed into the correct account but not associated with the right organization. Use the organization switcher to confirm the active organization, or ask your admin to confirm your invitation was accepted.
+  </Accordion>
+
+  <Accordion title="I forgot which email I used to sign up">
+    Try any email addresses you commonly use for work accounts. If you're unable to determine the correct email, contact your organization admin — they can look up members by name in the organization settings.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What's next?
+
+<CardGroup cols={2}>
+  <Card title="Quick start" icon="rocket" href="/quickstart">
+    Create your first experiment and start tracking your AI visibility.
+  </Card>
+
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Learn how to run visibility and sentiment experiments across LLMs.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Configure your company profile, brand guidelines, and integrations.
+  </Card>
+
+  <Card title="Core Concepts" icon="lightbulb" href="/concepts">
+    Learn the key terms used across XLR8.ai.
+  </Card>
+</CardGroup>

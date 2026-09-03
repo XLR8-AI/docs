@@ -1,0 +1,60 @@
+---
+title: "AEO Audit"
+description: "Run a homepage-only AEO audit to score AI discoverability and get fix suggestions."
+icon: "gauge-high"
+---
+
+AEO Audit runs a homepage-only scorecard for AI discoverability. It evaluates your homepage and returns an overall AEO score, category scores, and check-level recommendations.
+
+---
+
+## In-app audit
+
+In the authenticated app:
+
+1. Enable **Show Additional Tools in the sidebar** under **Settings → Navigation**
+2. Open **Execution → AEO Audit**
+3. Enter your **Homepage URL**
+4. Click **Run audit**
+
+The report shows:
+
+- **Overall AEO Score**
+- Category cards labeled **Good**, **Average**, or **Needs work**
+- Per-check scores with optional **fix** guidance
+
+---
+
+## Public audit
+
+A public lead-capture version is available at `/aeo-audit` without signing in. That form asks for:
+
+- **Full name**
+- **Email**
+- Homepage URL
+
+After the audit completes, XLR8.ai can email an AI Visibility Report within 24 hours.
+
+---
+
+## When to use it
+
+Use AEO Audit when you want a fast homepage health check before or alongside a full experiment. It does not replace visibility or sentiment experiments — it complements them with site-level discoverability guidance.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Measure brand mentions and sentiment across AI models.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Enable Additional Tools so AEO Audit appears in the sidebar.
+  </Card>
+
+  <Card title="Content optimization" icon="sparkles" href="/content/optimization">
+    Improve existing pages based on audit and experiment findings.
+  </Card>
+</CardGroup>

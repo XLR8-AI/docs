@@ -1,0 +1,130 @@
+---
+title: "Action Center"
+description: "Track and act on prioritized recommendations generated from your experiment results."
+---
+
+The Action Center is a unified inbox for recommendations derived from your XLR8.ai experiments. Each time an experiment execution completes, the platform analyzes the results — visibility gaps, sentiment patterns, low-performing query categories — and surfaces them as actionable items so you always know what to work on next.
+
+Action items are organized, filterable, and trackable. You can mark them complete as you address each recommendation, and reopen them if circumstances change.
+
+## Accessing the Action Center
+
+Click **Action Center** in the left sidebar. The page loads with all pending action items from your experiments, sorted by most recent by default.
+
+## Understanding action items
+
+Each action item represents a specific finding from an experiment result. The item tells you:
+
+- **Source** — which experiment (or other source) generated the recommendation
+- **Category** — the query category or topic area the finding relates to
+- **Action data** — the specific insight, such as a list of gaps or negative sentiment themes
+- **Created date** — when the finding was detected
+- **Status** — whether the item is pending or has been marked complete
+
+### Action source types
+
+<Tabs>
+  <Tab title="Experiment">
+    Items sourced from **experiment** results are the most common. They are generated when an execution completes and the platform identifies:
+
+    - Query categories with low or zero visibility
+    - Competitors outperforming you across specific models
+    - Negative sentiment trends requiring content updates
+    - Significant drops in mention rate compared to previous executions
+
+    Each experiment-sourced item links back to the originating experiment so you can review the underlying data.
+  </Tab>
+  <Tab title="Content">
+    Items sourced from **content** analysis flag opportunities or issues related to your published content. These appear when content optimization workflows detect recommendations that require your attention.
+  </Tab>
+</Tabs>
+
+## Filtering and sorting
+
+Use the filter bar at the top of the Action Center to narrow down the list to what matters most right now.
+
+| Filter | Description |
+|--------|-------------|
+| **Source** | Show items from a specific source type (`experiment` or `content`). |
+| **Experiment name** | Search for action items from a particular experiment by name. |
+| **Category** | Filter by query category (e.g., "Healthcare", "Pricing", "Competitor Comparison"). |
+| **Date range** | Show only items created within a specific date window. |
+| **Status** | Toggle between **Pending** (open items) and **Completed** (resolved items). |
+| **Tags** | Filter by one or more tags attached to action items. |
+
+You can combine multiple filters at the same time. To reset, clear all active filters.
+
+<Tip>
+  Start each week by filtering to **Pending** items sorted by **Newest first**. This surfaces the freshest experiment findings before older items accumulate.
+</Tip>
+
+### Sorting
+
+Click the **Sort** control to change the ordering. Available sort options:
+
+- **Newest first** (default) — most recently created items appear at the top
+- **Oldest first** — useful for working through a backlog in order
+
+## Marking items complete
+
+When you have addressed a recommendation — for example, updated your content to close a visibility gap — mark the action item as complete to keep your list clean.
+
+<Steps>
+  <Step title="Find the action item">
+    Locate the item in the list. Use filters to narrow down to the relevant experiment or category if needed.
+  </Step>
+  <Step title="Mark as complete">
+    Click the **Mark complete** button or checkbox on the action item card. The item moves to the **Completed** view immediately.
+  </Step>
+  <Step title="Confirm in Completed view">
+    Switch the status filter to **Completed** to verify the item was recorded, along with the timestamp of when it was completed.
+  </Step>
+</Steps>
+
+<Note>
+  Completion is recorded per organization. Any member of your organization can mark items complete, and the record shows who completed each item and when.
+</Note>
+
+## Reopening a completed item
+
+If you need to revisit a recommendation — for example, if a follow-up execution shows the issue persists — you can reopen a completed item.
+
+<Steps>
+  <Step title="Switch to Completed view">
+    Set the **Status** filter to **Completed** to see your resolved items.
+  </Step>
+  <Step title="Reopen the item">
+    Click **Reopen** on the completed item card. The item returns to **Pending** status and reappears in your active list.
+  </Step>
+</Steps>
+
+## Working through your backlog
+
+<Tip>
+  Focus on action items tied to your highest-traffic query categories first. Improvements to high-volume categories have the largest impact on overall AI visibility.
+</Tip>
+
+<Tip>
+  Use the **Experiment name** filter to review all recommendations from a single experiment at once. This is useful after a major execution completes and you want a comprehensive view of findings.
+</Tip>
+
+<Warning>
+  Action items are generated automatically from experiment results. New items appear after each execution completes. Check the Action Center regularly after scheduling automated runs to stay on top of fresh recommendations.
+</Warning>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Experiments overview" icon="flask" href="/experiments/overview">
+    Learn how experiments generate the data behind action items.
+  </Card>
+  <Card title="Experiment results" icon="chart-bar" href="/experiments/results">
+    Review the raw results that action items are derived from.
+  </Card>
+  <Card title="AI Insights Agent" icon="robot" href="/intelligence/insights-agent">
+    Ask questions about your experiment data in plain language.
+  </Card>
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Automate executions so action items stay current.
+  </Card>
+</CardGroup>

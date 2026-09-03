@@ -1,0 +1,96 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "XLR8.ai",
+  "theme": "luma",
+  "logo": {
+    "light": "https://media.brand.dev/70b72158-03b3-46dc-bfcf-4b2d01a43703.svg",
+    "dark": "https://media.brand.dev/70b72158-03b3-46dc-bfcf-4b2d01a43703.svg"
+  },
+  "favicon": "https://media.brand.dev/4155d945-6a5e-41de-a5e5-fda12b9f868a.png",
+  "colors": {
+    "primary": "#1c64ec",
+    "light": "#ffffff"
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://app.tryxlr8.ai"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "concepts"
+            ]
+          },
+          {
+            "group": "Experiments",
+            "pages": [
+              "experiments/overview",
+              "query-generation",
+              "experiments/visibility",
+              "experiments/sentiment",
+              "experiments/results",
+              "experiments/scheduling"
+            ]
+          },
+          {
+            "group": "Reporting",
+            "pages": [
+              "analytics/overview"
+            ]
+          },
+          {
+            "group": "Content",
+            "pages": [
+              "content/overview",
+              "content/generation",
+              "content/optimization",
+              "content/videos"
+            ]
+          },
+          {
+            "group": "Intelligence",
+            "pages": [
+              "intelligence/insights-agent",
+              "intelligence/action-center",
+              "intelligence/social-listening",
+              "outreach/overview",
+              "intelligence/aeo-audit"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/webflow",
+              "integrations/wordpress",
+              "indexing/overview",
+              "integrations/settings"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "account/authentication"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "redirects": [
+    {
+      "source": "/account/plans",
+      "destination": "/account/authentication",
+      "permanent": true
+    }
+  ]
+}

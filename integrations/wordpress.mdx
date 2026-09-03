@@ -1,0 +1,76 @@
+---
+title: "WordPress Integration"
+description: "Connect WordPress sites over XML-RPC and publish XLR8.ai-generated content as posts or pages."
+icon: "wordpress"
+---
+
+Publish XLR8.ai-generated content directly to WordPress over XML-RPC. You can connect multiple sites, verify credentials, and publish as a live post/page or as a draft.
+
+---
+
+## Connect a WordPress site
+
+<Steps>
+  <Step title="Open WordPress settings">
+    Go to **Settings → Integrations → WordPress**, or open `/settings/integrations/wordpress`.
+  </Step>
+  <Step title="Add a site">
+    Click **Add site** and fill in:
+
+    - **Label**
+    - **XML-RPC URL** — typically `https://YOUR_SITE_URL/xmlrpc.php`
+    - **Username**
+    - **Password / app password**
+    - **Public site URL** (optional)
+  </Step>
+  <Step title="Verify credentials">
+    Click **Verify credentials** on the site card to confirm the connection works.
+  </Step>
+</Steps>
+
+You can connect multiple WordPress sites and mark them Active or Inactive.
+
+---
+
+## Publish from content generation
+
+<Steps>
+  <Step title="Open a generated content piece">
+    Go to **Content Generation** and open the item you want to publish.
+  </Step>
+  <Step title="Click Publish to WordPress">
+    Use the publish toolbar action **Publish to WordPress**.
+  </Step>
+  <Step title="Configure the publish dialog">
+    Choose:
+
+    - **Site**
+    - **Content type** — Blog post or Page
+    - **Parent page** (for pages)
+    - **URL slug**
+    - **Publish immediately** — off saves as a WordPress draft
+  </Step>
+  <Step title="Publish">
+    Click **Publish**. The content toolbar updates to show **WordPress · Live** or **WordPress · Draft**.
+  </Step>
+</Steps>
+
+If no sites are configured, the dialog links you to **Open WordPress settings**.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Content generation" icon="pen-to-square" href="/content/generation">
+    Generate the content you want to publish.
+  </Card>
+
+  <Card title="Webflow integration" icon="plug" href="/integrations/webflow">
+    Publish to Webflow CMS instead of WordPress.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Manage all workspace integrations from one place.
+  </Card>
+</CardGroup>

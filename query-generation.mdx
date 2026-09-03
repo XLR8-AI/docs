@@ -1,0 +1,106 @@
+---
+title: "Query Generation"
+description: "Build reusable query sets with company details, categories, and queries — then pick a set when you create an experiment."
+sidebarTitle: "Query Generation"
+icon: "magnifying-glass"
+---
+
+**Query Generation** is where you prepare the queries an experiment will run. Enter company details once, generate or import queries, and save a **query set**. When you create an experiment, you pick a saved set — you do not re-enter type, domain, or aliases.
+
+From the sidebar under **Strategy**, click **Query Generation**.
+
+## Query sets
+
+Each query set stores:
+
+- Experiment type and subtype
+- Company name, website, and aliases
+- Categories and queries
+- Optional Keyword Planner keywords, source citations, and comments
+
+The list shows company, type, category and query counts, and last update. From a row you can open the set, export **CSV**, or archive it (trash icon).
+
+Click **New query set** to start. If you already have sets, company fields can be prefilled from the most recent one. Use **Reuse company briefing** to copy type, company, domain, and aliases from another set.
+
+## Create a query set
+
+Creating a query set has three steps: **Company**, **Categories**, and **Queries**.
+
+<Steps>
+  <Step title="Company — analyze the domain">
+    Fill in:
+
+    - **Query set name** (optional — defaults from company and type)
+    - **Experiment type** — Visibility Analysis or Sentiment Analysis
+    - **Sub-type** — for visibility: Discovery, Informational, or Competitor Alternatives; for sentiment: Competitor Comparison or Brand Sentiment
+    - **Company name** (required)
+    - **Company website** (required)
+    - **Categories & queries CSV** (optional) — upload a CSV with **Category** and **Query** columns to use your own queries instead of AI generation. Click **Download sample CSV** for the format (max 5MB)
+    - **Company aliases** (optional)
+    - **Additional context** (optional) — ICP, goals, known keywords, competitors, phrasing notes
+    - **Internal documents** (optional) — PDFs, Office files, text, or images; they are parsed and used when generating queries
+    - **Sales transcript** (optional) — `.txt` file
+
+    Click **Analyze domain**. XLR8.ai analyzes the website and prepares category suggestions.
+  </Step>
+  <Step title="Categories — review and edit">
+    Review the **Domain description** and category chips. Add, rename, or remove categories. If you have fewer than five, use **Generate categories** or **Fill to 5**. **Replace all from website** regenerates the full list from the domain.
+
+    Optionally use **Keyword Planner**:
+
+    - **Fetch Keyword Planner ideas** using your categories plus extra seed keywords
+    - **Add keywords with metrics** for exact keywords (comma or newline separated)
+    - Remove any ideas you do not want to use
+
+    Selected keywords inform query generation and are saved with the query set.
+
+    Click **Continue** to generate queries for the current categories.
+  </Step>
+  <Step title="Queries — generate and refine">
+    Review the query map. Generated queries are fully editable — add, edit, or remove them before saving. Each query can show **citation** badges that explain where it came from, such as Domain, Document, Sales, Context, Keyword, Model, Manual, Edited, or CSV.
+
+    Use **Regenerate queries** to run generation again with the current briefing, documents, and Keyword Planner selection. **Download CSV** exports the map (including citations when present).
+
+    Click **Save query set**. After saving, comments become available on this step.
+  </Step>
+</Steps>
+
+## Edit a saved query set
+
+Open a set from the list to change it. You land on **Queries**. Use **Back to categories** or **Back** to revisit categories and the company briefing. On the Company step, **Re-analyze domain** refreshes the description and category suggestions without losing the set.
+
+Keyword Planner keywords saved on the set refresh their monthly-search and competition metrics when you reopen it.
+
+## Comments
+
+On a saved query set that has queries, a **Comments** sidebar appears on the Queries step.
+
+- Check a query to attach feedback to it, or leave a comment on the whole set.
+- Filter by **Open**, **Resolved**, or **All**.
+- **Post comment**, **Reply**, **Resolve**, or **Reopen** a thread.
+
+Notifications for query-set comments open that set.
+
+## Use a query set in an experiment
+
+From **Strategy → Experiments**, click **New Experiment**. Step 1 is **Query set** — pick a saved set that already has queries. Experiment type, company, domain, and aliases come from that set. Use **Manage query sets** or **Edit** if you need to change them first.
+
+Then continue to **Create** to choose models and launch. See [Creating a new experiment](/experiments/overview#creating-a-new-experiment).
+
+<CardGroup cols={2}>
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Pick a saved query set and launch a visibility or sentiment experiment.
+  </Card>
+
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Measure mention rate and citations across AI models.
+  </Card>
+
+  <Card title="Sentiment experiments" icon="face-smile" href="/experiments/sentiment">
+    Analyze how AI models describe and compare your brand.
+  </Card>
+
+  <Card title="Core Concepts" icon="lightbulb" href="/concepts">
+    How query sets, category maps, and experiments fit together.
+  </Card>
+</CardGroup>

@@ -1,0 +1,147 @@
+---
+title: "Reading results"
+description: "Understand how to read execution results, compare models, use AI-generated analysis, track trends, add notes, and explore citation metadata."
+---
+
+After an execution reaches `success` status, XLR8.ai displays a full results view for that execution. This page explains how to read and work with results for both visibility and sentiment experiments.
+
+## Navigating executions
+
+An experiment can have many executions — one for each time you (or a schedule) triggered a run. From the experiment detail page:
+
+- The **execution list** shows all executions, sorted most-recent first, along with their status and creation date.
+- Click any execution to make it the active view. The results panel updates to show that execution's data.
+- Only executions with `success` status have results available. Executions in `pending`, `in_progress`, `updating`, or `failed` states display their current status instead.
+
+The most recent successful execution is selected by default when you open an experiment.
+
+## Filtering by model
+
+If your experiment runs across multiple AI models, you can filter the results view to show data for one or more specific models. Use the **model filter** in the results toolbar to select the models you want to compare.
+
+This is useful when you want to isolate how a single model treats your brand, or when comparing two models side by side without the noise of all others.
+
+## Visibility results
+
+Visibility experiment detail pages use three tabs:
+
+- **Overview** — high-level mention and competitive summary for the selected execution
+- **Query Analytics** — query-level breakdowns across models and categories
+- **Source Analytics** — citation and source-domain analysis, including tracked URL impact when configured
+
+Use the execution selector and model filter in the toolbar to change which run and models you are viewing.
+
+If you've configured [tracked URLs](/experiments/visibility#tracked-urls), Source Analytics helps you see which of your pages are being cited and how frequently.
+
+## Sentiment results
+
+Sentiment experiment detail pages use two tabs:
+
+- **Overview** — overall sentiment summary for the selected execution. The overall score uses a −5 to +5 scale, labeled **Negative** (below 0), **Neutral** (0 to less than 3), or **Positive** (3 to 5). **Positive Features** counts categories whose mean score is Positive (≥ 3). **Most Positive** and **Most Negative** are the highest- and lowest-scoring categories in this run.
+- **Detailed Analysis** — category-level sentiment, pros/cons, and supporting citations. Filter rows by polarity: **Positive (3.0 to 5.0)**, **Neutral (0.0 to less than 3.0)**, or **Negative (below 0.0)**.
+
+Review repeated cons across categories and models — those are usually the highest-priority perception issues to address. Use **Sync Action Items** when available to send them to the [Action Center](/intelligence/action-center).
+
+## AI-generated analysis
+
+On any successful execution, click **Analyse Results** to generate an AI-powered summary of the execution's findings.
+
+For **visibility experiments**, the analysis includes:
+
+- A narrative summary of your brand's visibility across models and categories
+- Identification of your strongest and weakest performing query categories
+- Competitor brand presence patterns
+- Tracked URL impact (if tracked URLs are configured)
+
+For **sentiment experiments**, the analysis includes:
+
+- An overall assessment of brand sentiment across the execution
+- The most frequently cited pros and cons
+- Patterns in how different models frame your brand
+- Key areas for improvement
+
+<Note>
+  AI analysis is generated on demand. It is not cached — each time you click **Analyse Results**, XLR8.ai generates a fresh analysis based on the current results data and your active model filter.
+</Note>
+
+## Execution notes
+
+You can attach notes to any execution to record context — such as what content changes you made before a run, external factors that might have affected results, or observations you want to preserve.
+
+### Adding a note
+
+1. Open the execution in the results view.
+2. Click **Add Note** in the execution notes section.
+3. Enter your note text and save.
+
+Notes are displayed in chronological order on the execution and help you correlate later Analytics trends with real-world changes.
+
+### Editing a note
+
+1. Find the note in the execution notes list.
+2. Click the edit icon next to the note.
+3. Update the text and save.
+
+### Deleting a note
+
+1. Find the note in the execution notes list.
+2. Click the delete icon next to the note.
+3. Confirm the deletion.
+
+<Warning>
+  Deleting a note is permanent. There is no way to recover a deleted note.
+</Warning>
+
+## Trend view
+
+The **trend view** compares results across all successful executions for an experiment, displayed as a timeline. Use it to track how your visibility or sentiment changes over time.
+
+For **visibility trends**, the chart shows mention rate per execution, with breakdowns by model available. You can spot the impact of content updates or competitor activity as inflection points in the trend line.
+
+For **sentiment trends**, the chart shows sentiment score per execution. Declining scores can signal that new sources — competitor content, negative reviews — have entered the AI training or retrieval pool.
+
+Each data point on the trend chart corresponds to a specific execution. Hover over a data point to see:
+
+- The execution serial number and date
+- The computed metric value for that execution
+- Any notes attached to that execution
+
+<Tip>
+  Add an execution note whenever you publish new content, make significant website changes, or observe an unexpected shift in results. Notes on the trend chart make it easy to correlate actions with outcomes.
+</Tip>
+
+## Citation metadata
+
+For a deeper look at citations, use the **citation metadata** view. This enriches each citation URL with:
+
+- **Page title** — the title of the cited page
+- **Page description** — the meta description or summary of the cited page
+- **Query context** — which query and model produced this citation
+
+Citation metadata helps you understand:
+
+- What types of content AI models are drawing on (blog posts, review sites, product pages, competitor content)
+- Whether your own cited pages are well-optimized for the queries that surfaced them
+- Which third-party sites have influence over AI model responses in your category
+
+<CardGroup cols={2}>
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Configure tracked URLs, aliases, and geo-targeting for your visibility experiments.
+  </Card>
+
+  <Card title="Sentiment experiments" icon="face-smile" href="/experiments/sentiment">
+    Understand sentiment subtypes and action item sync for sentiment experiments.
+  </Card>
+
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Compare executions over time with trends, baselines, and insights.
+  </Card>
+
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Automate executions so your trend data stays current over time.
+  </Card>
+
+  <Card title="Action center" icon="list-check" href="/intelligence/action-center">
+    Turn sentiment results into prioritized action items.
+  </Card>
+</CardGroup>

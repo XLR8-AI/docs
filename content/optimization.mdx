@@ -1,0 +1,153 @@
+---
+title: "Content optimization"
+description: "Rewrite existing content for better AEO alignment. Paste your text or provide a URL and XLR8.ai returns an optimized version with structured edit instructions."
+---
+
+Content optimization takes content you already have — a published blog post, a landing page, a draft — and rewrites it to better align with a specific AEO query. XLR8.ai returns an optimized version of your content alongside a set of annotated **edit instructions** that explain what was changed and why.
+
+Use optimization when you want to improve an existing page rather than start from scratch, or when experiment results reveal a high-value query that your current content doesn't adequately target.
+
+<Tip>
+  After reviewing your experiment results, note the queries where competitors appear but you do not. Those are the highest-value targets for content optimization.
+</Tip>
+
+## How to optimize content
+
+Navigate to **Content → Content Optimizer**, then click **Open Content Optimizer**.
+
+<Steps>
+  <Step title="Choose your content source">
+    Select how you want to provide the content to optimize:
+
+    <Tabs>
+      <Tab title="Direct content">
+        Select **Direct Content** and paste your text into the content field. Use this option for drafts, copied web page text, or any content you have locally.
+
+        XLR8.ai accepts plain text or markdown. Content is processed as-is, so strip out navigation, footers, and other non-body text before pasting.
+      </Tab>
+      <Tab title="Content URL">
+        Select **Content URL** and enter a fully qualified URL (starting with `https://`). XLR8.ai fetches the page, extracts the readable body text, and uses that as the optimization input.
+
+        Use this option when you want to optimize a live published page without manually copying its content.
+
+        <Note>
+          XLR8.ai extracts up to 50,000 characters of readable text from the fetched page. Very long pages are truncated at that limit. The URL must be publicly accessible — pages behind authentication are not supported.
+        </Note>
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Enter your target AEO query">
+    In the **Content Topic / Query** field, enter the query you want the optimized content to rank for — for example, `enterprise data governance best practices` or `how does RAG work in LLMs`.
+
+    The optimizer rewrites your content to maximize semantic alignment with this query. Use precise, natural-language phrasing that matches how your audience would query an AI assistant.
+  </Step>
+
+  <Step title="Enter company name and domain">
+    Enter your **Company Name** and **Company Domain**. These are used to preserve brand references and domain-specific framing during optimization.
+  </Step>
+
+  <Step title="Select a content type">
+    Choose the content type that best describes your input content:
+
+    | Type | Use when your content is… |
+    |---|---|
+    | `listicle` | A ranked list or curated "best of" piece |
+    | `competitor_comparison` | A side-by-side product or brand comparison |
+    | `web_page` | A marketing or product page |
+    | `guide` | A how-to or explanatory article |
+    | `ecommerce_guide` | A buying guide or product-focused piece |
+    | `technical_guide` | A technical deep-dive for specialist readers |
+
+    The content type informs how the optimizer structures and frames the rewritten output.
+  </Step>
+
+  <Step title="Choose an LLM model">
+    Select the model to use for optimization. Available models include:
+
+    - GPT-5
+    - GPT-5.1
+    - GPT-5.2
+    - Claude Sonnet 4.5
+    - Claude Opus 4.1
+
+    If no model is specified, XLR8.ai uses the platform default.
+  </Step>
+
+  <Step title="Optionally add context">
+    Use the **Additional Context** field to provide constraints or preferences that should be respected during optimization — for example:
+
+    > Preserve the brand voice: direct and technical. Do not remove the section on security compliance. Priority keyword: "zero-trust architecture".
+
+    This is also the place to flag content you want to keep unchanged, terminology that must stay consistent, or structural preferences.
+  </Step>
+
+  <Step title="Run optimization and review the output">
+    Click **Optimize Content**. Optimization typically takes 15–45 seconds. When complete, the results panel appears showing the optimized content and edit instructions side by side.
+  </Step>
+</Steps>
+
+## Understanding optimization results
+
+The results view has two panels:
+
+### Optimized content
+
+The left panel displays the full rewritten content. You can copy it to the clipboard using the copy button in the header.
+
+If you click an edit instruction in the right panel, the corresponding change is highlighted in yellow within the optimized content, and the view scrolls to that location. This makes it easy to review each change in context.
+
+### Edit instructions
+
+The right panel lists the structured edit instructions that accompany the optimization. Each instruction includes:
+
+- **Action** — one of: `Add`, `Replace`, `Remove`, `Move`, or `Rewrite`
+- **Instruction** — a human-readable description of the change made and why
+
+Click any instruction card to highlight the relevant passage in the optimized content panel.
+
+Use the edit instructions to understand the reasoning behind each change, and to decide which edits to apply if you are manually updating your content rather than using the output as-is.
+
+<Note>
+  Optimization results are not saved to your content library. Copy the optimized content before navigating away, or apply the edits directly to your source page.
+</Note>
+
+## Content alignment analysis
+
+In addition to the full optimizer, XLR8.ai includes a **Content Alignment** tool under **Content → Additional Tools**. Use content alignment to audit how well a piece of existing content aligns with a query — without rewriting it.
+
+Content alignment returns:
+
+- A **document score** (0–1) representing overall query alignment
+- **Chunk scores** for each segment of the content, showing which parts align well and which don't
+- **Statistics** on how many chunks are high-performing vs. low-performing
+- An **audit** covering URL structure, title and meta description length and keyword presence, H1 structure, heading nesting, and word count
+
+### When to use content alignment vs. content optimization
+
+| Use content alignment when… | Use content optimization when… |
+|---|---|
+| You want to audit a page without changing it | You are ready to produce an improved version |
+| You need a quick score to prioritize which pages to update | You want structured, actionable edit instructions |
+| You're comparing multiple pages against the same query | You want AI to do the rewriting work for you |
+
+<Tip>
+  Run a content alignment check first to see the current score, then run optimization on the pages with the lowest scores and highest strategic value. This gives you a clear before/after benchmark.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Content generation" icon="wand-magic-sparkles" href="/content/generation">
+    Generate net-new AEO-optimized content from scratch instead of optimizing existing content.
+  </Card>
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Identify which queries to target by running visibility and sentiment experiments.
+  </Card>
+  <Card title="Publish to Webflow" icon="plug" href="/integrations/webflow">
+    Publish generated content directly to your Webflow CMS after optimizing.
+  </Card>
+  <Card title="Action center" icon="list-check" href="/intelligence/action-center">
+    See prioritized recommendations that surface the highest-impact queries to target.
+  </Card>
+</CardGroup>

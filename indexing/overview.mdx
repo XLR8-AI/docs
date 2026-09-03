@@ -1,0 +1,81 @@
+---
+title: "Indexing"
+description: "Queue URLs for Google Search Console and Bing Webmaster indexing, and monitor submission status."
+icon: "magnifying-glass"
+---
+
+Indexing lets you submit URLs to **Google Search Console** and **Bing Webmaster** from XLR8.ai. Properties are matched per URL automatically.
+
+Navigate to **General → Indexing** in the sidebar, or open **Configure Indexing** from Settings → Integrations.
+
+---
+
+## Connect Google and Bing
+
+On the Indexing page:
+
+1. Click **Connect** for **Google Search Console** and/or **Bing Webmaster**
+2. Complete OAuth for the account that owns your properties
+3. Confirm the connected badge shows your site count
+
+To disconnect an engine, use **Disconnect**. Disconnecting clears queued URLs for that engine; completed history is preserved.
+
+---
+
+## Submit URLs to the queue
+
+<Steps>
+  <Step title="Choose engines">
+    Toggle **Google** and/or **Bing**. Engines that are not connected appear disabled.
+  </Step>
+  <Step title="Add URLs">
+    Paste full `https://` URLs into the textarea, or use **Upload CSV** / **Sample CSV**.
+  </Step>
+  <Step title="Submit">
+    Click **Submit to queue**.
+  </Step>
+</Steps>
+
+Submissions are processed by a drain job. Indexing status updates hourly.
+
+---
+
+## Queue statuses
+
+Filter the queue by status and date range:
+
+- Queued
+- Submitted
+- Last discovered
+- Indexed
+- Failed
+
+Each row shows the URL, matched property, and per-engine progress for Google and Bing.
+
+If you hit a daily quota for an engine, XLR8.ai surfaces that error in the UI.
+
+When Google Search Console cannot verify site ownership or inspect permissions for a URL, a **Verify** error appears under that engine's status with the reason.
+
+---
+
+## Content staleness
+
+Under **General → Indexing → Content staleness**, monitor blog URLs for freshness. Add blog URLs so XLR8.ai can flag content that may need a refresh before you re-optimize or re-index it.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Visibility experiments" icon="eye" href="/experiments/visibility">
+    Track whether indexed pages start appearing as citations.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Open indexing and other integrations from Settings.
+  </Card>
+
+  <Card title="Content optimization" icon="sparkles" href="/content/optimization">
+    Refresh stale pages before submitting them for indexing.
+  </Card>
+</CardGroup>

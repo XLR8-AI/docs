@@ -1,0 +1,147 @@
+---
+title: "Core Concepts"
+description: "Key terms and concepts you need to understand how XLR8.ai works."
+---
+
+## Experiments
+
+An **experiment** is the core unit of work in XLR8.ai. It defines:
+
+- Your company and domain being analyzed
+- The type of analysis (Visibility or Sentiment)
+- The query categories and specific queries to test
+- The AI models to test against
+- Optional geo-targeting (country, region, city)
+
+Experiments are reusable — you run the same experiment multiple times over time to track how your AI visibility changes.
+
+### Experiment Types
+
+<Tabs>
+  <Tab title="Visibility">
+    **Visibility experiments** measure how often your brand appears in AI responses.
+
+    XLR8.ai submits queries to each selected AI model and checks whether your brand (and its aliases) are mentioned in the response. Results show:
+
+    - **Mention rate** — percentage of queries where your brand appeared
+    - **Citation presence** — whether your website was cited as a source
+    - **Competitor comparison** — which other brands appeared for the same queries
+
+    **Subtypes:**
+
+    - `discovery` — broad discovery queries ("best project management tools")
+    - `informational` — informational queries about your category
+    - `competitor_alternatives` — queries asking for alternatives to competitors
+  </Tab>
+  <Tab title="Sentiment">
+    **Sentiment experiments** measure how AI models describe and perceive your brand.
+
+    XLR8.ai collects AI responses and analyzes the tone, framing, and comparative positioning of your brand. Results show:
+
+    - **Brand sentiment** — positive, neutral, or negative perception
+    - **Competitor comparison** — how you're positioned relative to competitors
+    - **Action items** — specific improvements to shift AI sentiment
+
+    **Subtypes:**
+
+    - `brand_sentiment` — how AI models describe your brand overall
+    - `competitor_comparison` — how AI models compare your brand to competitors
+  </Tab>
+</Tabs>
+
+## Executions
+
+An **execution** is a single run of an experiment. Each time you click **Rerun Experiment** (or a schedule triggers), a new execution is created. Creating a new experiment also starts its first execution automatically.
+
+Executions have the following statuses:
+
+| Status | Description |
+| --- | --- |
+| `pending` | Execution queued, not yet started |
+| `in_progress` | Queries are actively being submitted to AI models |
+| `updating` | Results received, analysis being computed |
+| `success` | Execution completed successfully |
+| `failed` | Execution encountered an error |
+
+You can run multiple executions of the same experiment over time to build trend data and compare how your visibility changes.
+
+## AI Models
+
+XLR8.ai supports testing against multiple AI models simultaneously. Each model represents a distinct AI search engine or assistant.
+
+Selectable models currently exposed by the frontend include:
+
+| Model ID | Display Name |
+| --- | --- |
+| `perplexity` | Perplexity |
+| `gpt-fast-gpt-5.1` | GPT Fast (GPT-5.1) |
+| `gpt-thinking-gpt-5.1` | GPT Thinking (GPT-5.1) |
+| `gpt-fast-gpt-5.3-chat-latest` | GPT Fast (GPT-5.3 Chat Latest) |
+| `gpt-thinking-gpt-5.4` | GPT Thinking (GPT-5.4) |
+| `grok-4` | Grok 4 |
+| `grok-4.20` | Grok 4.20 |
+| `gemini` | Gemini |
+| `claude-opus-4.8` | Claude Opus 4.8 |
+| `claude-opus-4.7` | Claude Opus 4.7 |
+| `claude-sonnet-5` | Claude Sonnet 5 |
+| `claude-sonnet-4.6` | Claude Sonnet 4.6 |
+| `claude-sonnet-4.5` | Claude Sonnet 4.5 |
+| `google_ai_mode` | Google AI Mode |
+| `microsoft_copilot` | Microsoft Copilot |
+
+<Note>
+  The New Experiment picker loads models from the platform API (`/experiments/llm-models`). Display names come from the frontend model map.
+</Note>
+
+## Category Map
+
+A **category map** organizes your experiment queries into labeled groups. For example:
+
+```json
+{
+  "Project Management": [
+    "best project management tools for remote teams",
+    "top task management software 2024"
+  ],
+  "Competitor Alternatives": [
+    "alternatives to Asana",
+    "tools similar to Monday.com"
+  ]
+}
+```
+
+XLR8.ai's domain analyzer suggests categories and queries automatically based on your company domain and experiment type. You build and edit this map in [Query Generation](/query-generation), then pick the saved query set when you create an experiment.
+
+## Query sets
+
+A **query set** is a reusable briefing plus category map. It stores experiment type and subtype, company name, domain, aliases, categories, queries, and optional Keyword Planner keywords.
+
+Create and edit query sets under **Strategy → Query Generation**. When you create an experiment, you select a saved set instead of re-entering company details or generating queries inline.
+
+## Company Aliases
+
+**Aliases** are alternative names, abbreviations, or spellings of your brand. XLR8.ai uses aliases when scanning AI responses to ensure it correctly identifies all mentions of your brand.
+
+For example, if your company is "Acme Corporation," you might add aliases: `["Acme", "Acme Corp", "ACME"]`.
+
+## Schedules
+
+A **schedule** automates experiment executions on a recurring basis. Available frequencies include daily, weekly, bi-weekly, and monthly.
+
+Each schedule is attached to a specific experiment and triggers a new execution automatically.
+
+## Content Sections
+
+When XLR8.ai generates content, it produces multiple **sections** — structured blocks that form the full article. Each section has:
+
+- A **name** (section title/heading)
+- **Content** (the written text)
+- A **score** — a cosine similarity score indicating how well the section's content aligns with your target AEO query
+
+Higher section scores indicate stronger alignment with the query, which tends to improve AI citation rates.
+
+## Action Items
+
+**Action items** are specific, prioritized recommendations generated from your experiment results. They suggest concrete changes — to your content, website, or messaging — that can improve your AI visibility or shift sentiment.
+
+Action items can be marked as complete once you've addressed them.

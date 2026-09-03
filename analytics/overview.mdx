@@ -1,0 +1,86 @@
+---
+title: "Analytics"
+description: "Compare experiment executions over time with trends, baselines, model compare, sources, and insights."
+icon: "chart-line"
+---
+
+Analytics is the multi-execution reporting view for an experiment. Use it when you want to see how visibility or sentiment changed across runs — not just the latest snapshot.
+
+Navigate to **Reporting → Analytics** in the sidebar, then select an experiment.
+
+---
+
+## Analytics vs experiment results
+
+|  | Analytics | Experiment results |
+| --- | --- | --- |
+| Scope | All successful executions over time | One selected execution |
+| Best for | Trends, baselines, movers | Deep dive into a single run |
+| Location | **Reporting → Analytics** | **Strategy → Experiments → [experiment]** |
+
+---
+
+## Dashboard tabs
+
+After you open an experiment, the analytics dashboard includes:
+
+- **Overview** — KPIs, top movers, source concentration, category performance
+- **Trends** — charts across executions
+- **Model compare** — visibility experiments only
+- **Sources** — citation mix, domains, tracked URLs
+- **Themes** — sentiment experiments only
+- **Insights** — auto-generated insight cards
+
+---
+
+## Filters and baselines
+
+Use the filter bar to narrow by:
+
+- **Models**
+- **Categories**
+
+You can also toggle execution sanitization to include only executions where every active model returned at least one query result.
+
+On **Overview**, choose a baseline comparison:
+
+- **Default** — compare to the previous execution
+- **Previous** — explicit previous-execution baseline
+- **First** — compare against the first successful execution
+
+---
+
+## KPI bands
+
+**Visibility experiments** surface metrics such as overall visibility, visibility trend, winning categories, and at-risk categories.
+
+**Sentiment experiments** surface an **Overall rating** (the plurality of Positive / Neutral / Negative labels), **Negative Categories**, and brand citation share. Each response is labeled **Positive** if the score is 3 or higher, **Neutral** if it is 0 up to but not including 3, and **Negative** if it is below 0.
+
+---
+
+## Empty states
+
+- **No Execution Data** — run at least one successful execution before analytics can load
+- **Unable to Load Analytics** — retry or confirm the experiment still exists
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Reading results" icon="chart-bar" href="/experiments/results">
+    Interpret a single execution's visibility or sentiment results.
+  </Card>
+
+  <Card title="Insights Agent" icon="comments" href="/intelligence/insights-agent">
+    Ask natural language questions about experiment data.
+  </Card>
+
+  <Card title="Scheduling" icon="clock" href="/experiments/scheduling">
+    Keep analytics fresh with recurring executions.
+  </Card>
+
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Create and manage visibility and sentiment experiments.
+  </Card>
+</CardGroup>

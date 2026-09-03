@@ -1,0 +1,101 @@
+---
+title: "Content"
+description: "Generate AEO-optimized content from scratch and improve existing pages so AI search engines recommend your brand more often."
+---
+
+The Content section of XLR8.ai helps you close the loop between insight and action. Identify high-value queries through your experiments, then produce or improve content that targets them — and publish it to your CMS.
+
+<CardGroup cols={2}>
+  <Card title="Content generation" icon="wand-magic-sparkles" href="/content/generation">
+    Generate new AEO-optimized content targeting a specific query, content type, and LLM.
+  </Card>
+
+  <Card title="Content optimization" icon="sparkles" href="/content/optimization">
+    Rewrite an existing page or draft to better align with target queries.
+  </Card>
+
+  <Card title="Videos" icon="video" href="/content/videos">
+    Generate explainer videos from a script or an existing content piece.
+  </Card>
+
+  <Card title="Publish" icon="plug" href="/integrations/webflow">
+    Publish generated content to Webflow or WordPress.
+  </Card>
+</CardGroup>
+
+## Content types
+
+When generating or optimizing content, choose a content type that shapes the structure of the output:
+
+| Content type | Description |
+| --- | --- |
+| Listicle | A ranked or curated list — ideal for "best X" and "top Y" queries |
+| Competitor Comparison | A side-by-side analysis of your brand versus named competitors |
+| Guide | A how-to or explanatory guide targeting an informational query |
+| Ecommerce Guide | A buying or product guide optimized for commercial queries |
+| Technical Guide | A deep-dive technical document targeting specialist queries |
+
+Choose the type that matches the format AI models are most likely to cite for your target query. For example, if your query is "best project management tools for startups", a listicle or competitor comparison is usually a better fit than a general guide.
+
+## Brand guidelines and learnings
+
+Content tools can use:
+
+- **Organization Brand Guidelines** from Settings (text and PDFs)
+- **AI Brand Learnings** approved from resolved comment threads
+
+Configure both under [Settings](/integrations/settings).
+
+## How content scoring works
+
+Generated sections can receive a **section score** — a cosine similarity value that measures how closely the section's text aligns with your target query.
+
+- **Higher scores** indicate stronger semantic alignment with the query
+- **Lower scores** flag sections that drift from the query focus
+
+Use scores to prioritize editing effort on structurally important sections with weak alignment.
+
+<Note>
+  Section scores measure query alignment, not overall writing quality. A section can be well-written but score low if it covers tangential topics.
+</Note>
+
+## Managing your content library
+
+All content you generate is saved to your organization's content library at **Execution → Content Generation**.
+
+From the library you can:
+
+- Open any piece of content and edit sections
+- Review comments and resolve threads
+- Publish to Webflow or WordPress from the content toolbar
+- Delete content you no longer need
+
+## Optional Additional Tools
+
+If you enable **Show Additional Tools in the sidebar** in Settings, you also get:
+
+- **Content Alignment** — score content chunks against a query or URL
+- **Cosine Similarity Maximiser** — iterative similarity optimization
+- **AEO Audit** — homepage AI discoverability scorecard
+
+See [AEO Audit](/intelligence/aeo-audit) for details.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Generate content" icon="wand-magic-sparkles" href="/content/generation">
+    Step-by-step guide to creating a new AEO-optimized content piece.
+  </Card>
+
+  <Card title="Optimize content" icon="sparkles" href="/content/optimization">
+    Learn how to rewrite an existing page for better query alignment.
+  </Card>
+
+  <Card title="Videos" icon="video" href="/content/videos">
+    Turn scripts into explainer videos.
+  </Card>
+
+  <Card title="Run experiments" icon="flask" href="/experiments/overview">
+    Identify which queries to target before generating content.
+  </Card>
+</CardGroup>

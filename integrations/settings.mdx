@@ -1,0 +1,134 @@
+---
+title: "Settings"
+description: "Configure your company profile, blog URL monitoring, and third-party integrations from a single place."
+---
+
+The **Settings** page is where you configure the details XLR8.ai uses across every feature — your company identity, brand guidelines, schedules, navigation preferences, `llms.txt`, and third-party integrations.
+
+Navigate to **Settings** from the **General** section of the main sidebar at any time.
+
+---
+
+## Company profile
+
+Under **Company Profile → Company Name & Domain**, set:
+
+- **Company Name** — your brand name as it should appear in experiments and content
+- **Company Domain** — your primary domain without a protocol (for example, `acme.com`)
+- **Third-Party Reviews Domain** (optional) — used when analyzing third-party review sources
+
+XLR8.ai pre-fills your company name and domain when you create experiments, generate content, and configure social listeners.
+
+---
+
+## Organization brand guidelines
+
+Under **Brand Guidelines → Organization Brand Guidelines**, admins can provide:
+
+- Freeform guidance text
+- PDF uploads (max 10MB each)
+- A toggle to **Default to including brand guidelines in content tools**
+
+Members can view guidelines; only organization admins can edit them. When the default toggle is on, content generation and related tools include these guidelines automatically.
+
+---
+
+## AI Brand Learnings
+
+Under **Brand Corrections → AI Brand Learnings**, review corrections captured from resolved content comment threads.
+
+Admins can:
+
+- Filter by **pending**, **approved**, **dismissed**, or **all**
+- **Add correction** manually
+- **Apply to future content** (approve) or **Dismiss** a learning
+
+Approved learnings help keep future generated content consistent with your brand.
+
+---
+
+## Experiment schedules
+
+Under **Experiment Schedules → Schedule Overview**, organization admins can view and manage automated run schedules across experiments.
+
+See [Scheduling](/experiments/scheduling) for cadence options and how schedules work.
+
+---
+
+## Navigation — Additional Tools
+
+Under **Navigation → Additional Tools**, toggle **Show Additional Tools in the sidebar**.
+
+When enabled, the sidebar shows:
+
+- **Additional Tools** — Content Alignment and Cosine Similarity Maximiser
+- **AEO Audit** — homepage AI discoverability scorecard
+
+This preference is stored in your browser (localStorage) and defaults to off.
+
+---
+
+## LLM.txt
+
+Under **AI Models & Content Settings → LLM.txt**, generate a downloadable `llms.txt` file for your site.
+
+Provide:
+
+- **Company name**
+- **Company URL**
+
+Then click **Generate & download**.
+
+---
+
+## Content staleness
+
+Blog URL monitoring lives under **General → Indexing → Content staleness** (`/settings/content-staleness`), not on the main Settings page.
+
+Add blog URLs to monitor content freshness. See [Indexing](/indexing/overview) for related URL submission workflows.
+
+---
+
+## Integrations
+
+The **Integrations** section links to configuration pages for third-party tools:
+
+<CardGroup cols={2}>
+  <Card title="Webflow" icon="plug" href="/integrations/webflow">
+    Publish generated content to Webflow CMS collections.
+  </Card>
+
+  <Card title="WordPress" icon="wordpress" href="/integrations/wordpress">
+    Connect WordPress sites over XML-RPC and publish posts or pages.
+  </Card>
+
+  <Card title="Indexing" icon="magnifying-glass" href="/indexing/overview">
+    Connect Google Search Console and Bing Webmaster, then queue URLs for indexing.
+  </Card>
+
+  <Card title="Outreach Email" icon="envelope" href="/outreach/overview">
+    Connect Gmail so you can send listicle outreach emails from XLR8.ai.
+  </Card>
+</CardGroup>
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Content generation" icon="pen-to-square" href="/content/generation">
+    Generate AI-optimized content using your company profile and brand guidelines.
+  </Card>
+
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Run visibility and sentiment experiments with your company domain.
+  </Card>
+
+  <Card title="Authentication" icon="lock" href="/account/authentication">
+    Manage organizations, roles, and team access.
+  </Card>
+
+  <Card title="Quick start" icon="rocket" href="/quickstart">
+    New to XLR8.ai? Start here.
+  </Card>
+</CardGroup>

@@ -1,0 +1,121 @@
+---
+title: "Sentiment experiments"
+description: "Analyze how AI models describe and perceive your brand. Learn about sentiment subtypes, scores, pros and cons, and action item sync."
+---
+
+A **sentiment experiment** tells you _how_ AI models talk about your brand — not just whether they mention you. XLR8.ai submits your queries to each selected AI model, collects the responses, and analyzes the tone, framing, pros and cons, and comparative positioning of your brand in those responses.
+
+You choose the sentiment subtype and generate or import queries in [Query Generation](/query-generation), then pick that query set when you create the experiment.
+
+Run sentiment experiments to answer questions like:
+
+- "Does ChatGPT describe our product positively or negatively?"
+- "What reasons do AI models give when recommending us — or not recommending us?"
+- "How do AI models position us relative to a specific competitor?"
+- "What are the most common criticisms AI models associate with our brand?"
+
+## Subtypes
+
+<AccordionGroup>
+  <Accordion title="Brand sentiment">
+    **Subtype:** `brand_sentiment`
+
+    Brand sentiment experiments analyze how AI models describe your brand on its own terms. Queries are open-ended questions about your company, product, or category that a real user might ask.
+
+    Results show:
+
+    - An overall sentiment score for each query
+    - The pros AI models associate with your brand
+    - The cons AI models associate with your brand
+    - The specific citations used to support those claims
+
+    Use brand sentiment to understand your baseline AI reputation and identify specific negatives you can address through content and messaging improvements.
+  </Accordion>
+
+  <Accordion title="Competitor comparison">
+    **Subtype:** `competitor_comparison`
+
+    Competitor comparison experiments analyze how AI models position your brand relative to named competitors. Queries are direct comparison questions ("how does [your brand] compare to [competitor]?" or "[competitor] vs [your brand]").
+
+    Results show:
+
+    - A sentiment score reflecting how favorably you're positioned in the comparison
+    - The pros and cons AI models surface for your brand in the comparison context
+    - Which competitor brands appear in each response
+    - Citations supporting the comparison claims
+
+    Use competitor comparison to understand where AI models see you as stronger or weaker than specific competitors, and to identify positioning gaps you can close.
+  </Accordion>
+</AccordionGroup>
+
+## How sentiment is measured
+
+For each query-model combination, XLR8.ai extracts and analyzes the full AI response. The analysis produces:
+
+**Sentiment score** — a numeric value on a −5 to +5 scale reflecting the overall tone of the AI's response toward your brand. A higher score indicates more favorable sentiment; a lower score indicates more negative or critical framing.
+
+Each score is labeled as one of three polarities, matching what you see on experiment results and Analytics:
+
+| Label | Score range |
+| --- | --- |
+| **Positive** | 3.0 to 5.0 |
+| **Neutral** | 0.0 up to, but not including, 3.0 |
+| **Negative** | below 0.0 |
+
+Ratings and mix percentages (Positive / Neutral / Negative) use these labels. A score such as +1.5 is Neutral, not Positive.
+
+**Pros** — the positive attributes, features, or qualities the AI response attributes to your brand. These are extracted as discrete points, each mapped back to specific citations where possible.
+
+**Cons** — the negative attributes, drawbacks, or criticisms the AI response attributes to your brand. Like pros, these are extracted as discrete points with citation mappings.
+
+**Competitor brands** — for competitor comparison experiments, the specific competitor names that appear in the response alongside your brand.
+
+<Note>
+  Sentiment scoring reflects how AI models currently describe your brand based on the sources they have access to. The most effective way to shift sentiment is to create high-quality, citable content that reflects your brand's actual strengths.
+</Note>
+
+## Understanding action item sync
+
+For sentiment experiments, XLR8.ai performs an additional processing step after each execution completes: **action item sync**. This step maps the pros, cons, and citations extracted from AI responses to concrete, prioritized action items in the [Action Center](/intelligence/action-center).
+
+Each execution has a sync status that tells you whether this processing has completed:
+
+| Status | Meaning |
+| --- | --- |
+| `not_started` | The execution completed but action item mapping hasn't begun yet |
+| `in_progress` | Action item mapping is currently running |
+| `completed` | Mapping is done — action items are available in the Action Center |
+
+**When you see "needs sync":**
+
+If an execution shows that action items are not yet synced, you can trigger the sync manually from the experiment detail view. Click **Sync Action Items** on the relevant execution. The sync runs in the background and updates the status automatically.
+
+<Tip>
+  If you've updated your company aliases after running an execution, re-syncing that execution will recompute action items using the updated alias list for more accurate brand mapping.
+</Tip>
+
+<Warning>
+  Only one sync can run at a time per execution. If a sync is already in progress, wait for it to complete before triggering another.
+</Warning>
+
+## Interpreting sentiment results
+
+When reviewing a completed sentiment execution:
+
+**Overall sentiment score** gives you a quick read on whether AI responses about your brand lean positive or negative. Use [Analytics](/analytics/overview) to track sentiment direction across executions.
+
+**Pros and cons** are the most actionable outputs. Review the cons list to identify specific criticisms that AI models consistently surface — these represent content and messaging gaps you can address directly.
+
+**Citations** tell you which sources the AI model used to form its response. If the sources cited are competitor content, third-party reviews, or outdated pages about your brand, you have a clear signal about where to focus your content strategy.
+
+**Competitor brands** in competitor comparison results show you which brands the AI model positions you against — and in what framing. If the model consistently pairs you with a competitor you don't consider a direct rival, this can reveal how AI models categorize your product.
+
+<CardGroup cols={2}>
+  <Card title="Reading results" icon="chart-bar" href="/experiments/results">
+    Learn how to view execution results, run AI analysis, and track sentiment trends over time.
+  </Card>
+
+  <Card title="Action center" icon="list-check" href="/intelligence/action-center">
+    Review and act on the prioritized action items generated from your sentiment results.
+  </Card>
+</CardGroup>
