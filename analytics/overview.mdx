@@ -28,7 +28,7 @@ After you open an experiment, the analytics dashboard includes:
 - **Trends** — charts across executions
 - **Model compare** — visibility experiments only
 - **Sources** — citation mix, domains, tracked URLs
-- **Themes** — sentiment experiments only
+- **Themes** — sentiment experiments only; clustered pros and cons on a 3D/2D map
 - **Insights** — auto-generated insight cards
 
 ---
@@ -47,6 +47,20 @@ On **Overview**, choose a baseline comparison:
 - **Default** — compare to the previous execution
 - **Previous** — explicit previous-execution baseline
 - **First** — compare against the first successful execution
+
+---
+
+## Themes
+
+On sentiment experiments, the **Themes** tab groups similar pros and cons into clusters so large runs stay readable.
+
+If the map is empty, click **Sync themes**. That embeds missing phrases and clusters similar points — needed once for older runs.
+
+The **Theme cluster map** opens in **3D** by default. Drag to rotate; the same color means the same cluster. Hover a point to read the full topic and phrase. Switch to **2D** to pan (drag) and zoom (Shift+drag, or the zoom controls). Use **Table** to list the same phrases by cluster and topic.
+
+- **Pros / Cons** — choose which polarity the map shows
+- **Outliers** — off by default; turn on to include phrases that did not join a cluster
+- **Cons per theme** — when Cons is selected, a bar chart shows how many unique con phrases sit in each cluster theme
 
 ---
 
