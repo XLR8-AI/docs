@@ -28,7 +28,7 @@ After you open an experiment, the analytics dashboard includes:
 - **Trends** — charts across executions
 - **Model compare** — visibility experiments only
 - **Sources** — citation mix, domains, tracked URLs
-- **Themes** — sentiment experiments only
+- **Themes** — sentiment experiments only; clustered pros and cons with aspect, modifier, and intensity filters
 - **Insights** — auto-generated insight cards
 
 ---
@@ -47,6 +47,24 @@ On **Overview**, choose a baseline comparison:
 - **Default** — compare to the previous execution
 - **Previous** — explicit previous-execution baseline
 - **First** — compare against the first successful execution
+
+---
+
+## Themes
+
+On sentiment experiments, the **Themes** tab groups similar pros and cons into clusters so large runs stay readable.
+
+If the map is empty, click **Sync themes**. That embeds missing phrases and clusters similar points — needed once for older runs.
+
+Use **Theme filters** to narrow phrases by **Aspect**, **Modifier**, and **Intensity**. Filters apply to the current **Pros** or **Cons** polarity — switch Pros/Cons to filter the other side. A phrase must match every dimension you set (for example, both an aspect and an intensity). Selecting every option in a dropdown is the same as leaving that dimension unfiltered. **Clear filters** removes all constraints.
+
+Filters update the cluster map, top theme lists, and introduced themes. When **Cons** is selected, they also apply to the **Cons per theme** chart and **Watched cons over time**. Theme counts show matching phrases, so mild and moderate versions of the same theme appear as separate map points. If nothing matches, the map says **No clusters match these filters**.
+
+The **Theme cluster map** opens in **3D** by default. Drag to rotate; the same color means the same cluster. Hover a point to read the cluster name and phrase. Switch to **2D** to pan (drag) and zoom (Shift+drag, or the zoom controls). Use **Table** to list the same phrases by cluster and topic.
+
+- **Pros / Cons** — choose which polarity the map and filters apply to
+- **Outliers** — off by default; turn on to include phrases that did not join a cluster
+- **Cons per theme** — when Cons is selected, a bar chart shows how many unique con phrases sit in each cluster theme
 
 ---
 
