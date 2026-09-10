@@ -1,0 +1,149 @@
+---
+title: "Reporting"
+description: "Connect Google Search Console and Analytics, upload monthly first-touch surveys, and review search, traffic, and attribution in one place."
+sidebarTitle: "Reporting"
+icon: "chart-mixed"
+---
+
+**Reporting** brings live Google Search Console and Google Analytics data together with monthly first-touch survey uploads. Use it to see search performance, site traffic, and how people say they found you.
+
+This is separate from [Analytics](/analytics/overview), which compares experiment executions over time.
+
+Navigate to **Reporting → Reporting** in the sidebar.
+
+---
+
+## Reporting vs Analytics
+
+|  | Reporting | Analytics |
+| --- | --- | --- |
+| Data | Search Console, Google Analytics, and survey CSVs | Experiment executions over time |
+| Best for | Search performance, site traffic, and first-touch sources | Visibility and sentiment trends across runs |
+| Location | **Reporting → Reporting** | **Reporting → Analytics** |
+
+---
+
+## Connect Google
+
+One Google connection covers both Search Console and Analytics properties.
+
+<Steps>
+  <Step title="Start the connection">
+    Click **Connect Google** and complete Google authorization for the account that owns your properties.
+  </Step>
+  <Step title="Choose properties">
+    Select a **Search Console** property and an **Analytics** property. The connector shows **Connected** once both are selected.
+  </Step>
+  <Step title="Refresh data">
+    Charts load for the selected properties. Use **Refresh** to pull the latest data.
+  </Step>
+</Steps>
+
+If authorization is cancelled or expires, start **Connect Google** again. Connection errors appear at the top of the page and in place of charts, so a failed source does not look like zero traffic.
+
+Use **Disconnect** on the Google Data API card to remove the connector. **Show** / **Hide** next to Search Console or Analytics hides that source's charts without disconnecting.
+
+---
+
+## Filters
+
+After Google is connected, use the **Filters** bar and click **Apply filters**. **Reset** returns to the defaults.
+
+**Date range**
+
+- **Last X days** — Last 7, 28, or 90 days (default **Last 28 days**)
+- **Custom range** — pick a start and end date (the latest available day is yesterday)
+
+**Search Console**
+
+- **Device** — All devices, Desktop, Mobile, or Tablet
+- **Search type** — Web (default), Image, Video, News, Discover, or Google News
+- **Country** — optional three-letter code (for example, `usa`)
+
+**Analytics**
+
+- **Channel** — all channels, or a default channel group such as Organic Search or Direct
+
+---
+
+## Search Console
+
+When Search Console charts are visible, Reporting shows:
+
+- **Clicks**, **Impressions**, **CTR** (clicks / impressions), and **Avg position** (impression-weighted)
+- **Search clicks & impressions** — daily performance
+- **CTR & average position** — the position axis is inverted (lower is better)
+- **Top queries** and **Top pages** — ranked by clicks (lists start with a preview; use **Show all** to expand)
+- **Device split** — clicks vs impressions
+- **Top countries** — by clicks
+
+---
+
+## Google Analytics
+
+When Analytics charts are visible, Reporting shows:
+
+- **Sessions** and **Users**
+- **Site traffic over time** — sessions and users
+- **Traffic by channel** — default channel group
+- **Top landing pages** — by sessions, with users and engagement rate
+- **Source / medium** — sessions by source and medium
+- **Bounce rate over time**
+
+---
+
+## Unified page performance
+
+When both Search Console and Analytics charts are visible, **Unified page performance** joins Search Console pages and Analytics landing pages by path. Multiple Search Console URLs for the same path are grouped.
+
+If there are no exact path matches in the selected range, the table explains that no pages could be joined.
+
+---
+
+## Primary attribution
+
+**Primary attribution** is monthly survey data — typically “how did you hear about us” responses. It does not require the Google connection.
+
+<Steps>
+  <Step title="Open Manage data">
+    On the Primary attribution card, click **Manage data**. If you have no uploads yet, you can also click **Upload CSV**.
+  </Step>
+  <Step title="Pick a month">
+    Choose the calendar month the file belongs to. Uploading the same month again replaces that month's data.
+  </Step>
+  <Step title="Upload a CSV">
+    Required columns are **Answer** (the source) and **Count**. A **Share** column is optional and ignored. Use **Download sample CSV** for the format, then drop a file or click to browse.
+  </Step>
+</Steps>
+
+Uploaded months appear in the dialog with the file name and response count. You can delete a month from that list.
+
+When data is present, Reporting shows:
+
+- **Total responses**, **Months uploaded**, and **Distinct sources**
+- **Responses by source** — source trends month over month
+- **Responses by month** — one dataset per calendar month
+
+Use **Show** / **Hide** on the Primary attribution card to hide these charts without deleting uploads.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Analytics" icon="chart-line" href="/analytics/overview">
+    Compare experiment executions over time — a different view from this page.
+  </Card>
+
+  <Card title="Indexing" icon="magnifying-glass" href="/indexing/overview">
+    Submit URLs to Google Search Console and Bing Webmaster.
+  </Card>
+
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Company profile and other third-party integrations.
+  </Card>
+
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Track AI visibility and sentiment across models.
+  </Card>
+</CardGroup>
