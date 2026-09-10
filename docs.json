@@ -28,7 +28,8 @@
             "pages": [
               "introduction",
               "quickstart",
-              "concepts"
+              "concepts",
+              "changelog"
             ]
           },
           {
@@ -45,7 +46,8 @@
           {
             "group": "Reporting",
             "pages": [
-              "analytics/overview"
+              "analytics/overview",
+              "reporting/overview"
             ]
           },
           {
