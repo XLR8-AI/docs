@@ -46,7 +46,8 @@
           {
             "group": "Reporting",
             "pages": [
-              "analytics/overview"
+              "analytics/overview",
+              "reporting/overview"
             ]
           },
           {
