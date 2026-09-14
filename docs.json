@@ -92,16 +92,6 @@
       "source": "/account/plans",
       "destination": "/account/authentication",
       "permanent": true
-    },
-    {
-      "source": "/account/plans",
-      "destination": "/account/authentication",
-      "permanent": true
-    },
-    {
-      "source": "/account/plans",
-      "destination": "/account/authentication",
-      "permanent": true
     }
   ]
 }
