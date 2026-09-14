@@ -3,10 +3,11 @@
   "name": "XLR8.ai",
   "theme": "luma",
   "logo": {
-    "light": "https://media.brand.dev/70b72158-03b3-46dc-bfcf-4b2d01a43703.svg",
-    "dark": "https://media.brand.dev/70b72158-03b3-46dc-bfcf-4b2d01a43703.svg"
+    "light": "/images/xlr8-logo-light.png",
+    "dark": "/images/xlr8-logo-dark.png",
+    "href": "https://app.tryxlr8.ai"
   },
-  "favicon": "https://media.brand.dev/4155d945-6a5e-41de-a5e5-fda12b9f868a.png",
+  "favicon": "/images/favicon.ico",
   "colors": {
     "primary": "#1c64ec",
     "light": "#ffffff"
