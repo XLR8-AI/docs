@@ -5,7 +5,7 @@ sidebarTitle: "Query Generation"
 icon: "magnifying-glass"
 ---
 
-**Query Generation** is where you prepare the queries an experiment will run. Enter company details once, generate or import queries, and save a **query set**. When you create an experiment, you pick a saved set — you do not re-enter type, domain, or aliases.
+**Query Generation** is where you prepare the queries an experiment will run. Enter company details once, generate or import queries, and save a **query set**. When you create an experiment, you pick a saved set — you do not re-enter type, domain, aliases, or tracked competitors.
 
 From the sidebar under **Strategy**, click **Query Generation**.
 
@@ -15,6 +15,7 @@ Each query set stores:
 
 - Experiment type and subtype
 - Company name, website, and aliases
+- Tracked competitors (inferred from domain analysis, or from competitor names on Competitor Alternatives and Competitor Comparison)
 - Categories and queries
 - Optional Keyword Planner keywords and search-volume targeting (language and locations), source citations, and comments
 
@@ -36,15 +37,18 @@ Creating a query set has three steps: **Company**, **Categories**, and **Queries
     - **Company name** (required)
     - **Company website** (required)
     - **Categories & queries CSV** (optional) — upload a CSV with **Category** and **Query** columns to use your own queries instead of AI generation. Click **Download sample CSV** for the format (max 5MB)
-    - **Company aliases** (optional)
     - **Additional context** (optional) — ICP, goals, known keywords, competitors, phrasing notes
     - **Internal documents** (optional) — PDFs, Office files, text, or images; they are parsed and used when generating queries
     - **Sales transcript** (optional) — `.txt` file
 
-    Click **Analyze domain**. XLR8.ai analyzes the website and prepares category suggestions.
+    Click **Analyze domain**. XLR8.ai analyzes the website, prepares category suggestions, and infers **company aliases** and **tracked competitors**. Review and edit those on the next step — they are not entered on this step.
   </Step>
   <Step title="Categories — review and edit">
-    Review the **Domain description** and category chips. Add, rename, or remove categories. If you have fewer than five, use **Generate categories** or **Fill to 5**. **Replace all from website** regenerates the full list from the domain.
+    For **Competitor Alternatives** and **Competitor Comparison**, this step is labeled **Competitors** instead of **Categories**.
+
+    Review the **Domain description** and category (or competitor) chips. Add, rename, or remove items. If you have fewer than five, use **Generate categories** or **Fill to 5**. **Replace all from website** regenerates the full list from the domain.
+
+    After domain analysis, review **Company aliases** (suggested from the site — add or remove chips) and **Tracked competitors**. For Competitor Alternatives and Competitor Comparison, tracked competitors match the competitor names in that list. For other subtypes, they are inferred from your company and domain and stay separate from query categories.
 
     Optionally use **Keyword Planner**:
 
@@ -58,7 +62,7 @@ Creating a query set has three steps: **Company**, **Categories**, and **Queries
     Set **Queries per category** (1–20, default 5) to control how many queries are generated for each category. Click **Continue** to generate them.
   </Step>
   <Step title="Queries — generate and refine">
-    Review the query map. Use the pencil and trash icons on each row to edit or remove queries, or add a query to a category, then save the query set. Each query can show **citation** badges that explain where it came from, such as Domain, Document, Sales, Context, Keyword, Model, Manual, Edited, or CSV.
+    A summary of **Company aliases** and **Tracked competitors** appears at the top — edit aliases on the Categories step. Review the query map. Use the pencil and trash icons on each row to edit or remove queries, or add a query to a category, then save the query set. Each query can show **citation** badges that explain where it came from, such as Domain, Document, Sales, Context, Keyword, Model, Manual, Edited, or CSV.
 
     Set **Queries per category** (1–20) and click **Regenerate queries** to run generation again with the current briefing, documents, and Keyword Planner selection. Queries you added or edited stay in the map; new suggestions are added around them. **Download CSV** exports the map (including citations when present).
 
@@ -68,7 +72,7 @@ Creating a query set has three steps: **Company**, **Categories**, and **Queries
 
 ## Edit a saved query set
 
-Open a set from the list to change it. You land on **Queries**. Use **Back to categories** or **Back** to revisit categories and the company briefing. On the Company step, **Re-analyze domain** refreshes the description and category suggestions without losing the set.
+Open a set from the list to change it. You land on **Queries**. Use **Back to categories** or **Back** to revisit categories and the company briefing. On the Company step, **Re-analyze domain** refreshes the description, category suggestions, aliases, and tracked competitors without losing the set.
 
 Keyword Planner keywords saved on the set refresh their monthly-search and competition metrics when you reopen it, using the language and locations stored on that set.
 
@@ -84,7 +88,7 @@ Notifications for query-set comments open that set.
 
 ## Use a query set in an experiment
 
-From **Strategy → Experiments**, click **New Experiment**. Step 1 is **Query set** — pick a saved set that already has queries. Experiment type, company, domain, and aliases come from that set. Use **Manage query sets** or **Edit** if you need to change them first.
+From **Strategy → Experiments**, click **New Experiment**. Step 1 is **Query set** — pick a saved set that already has queries. Experiment type, company, domain, aliases, and tracked competitors come from that set. Use **Manage query sets** or **Edit** if you need to change them first.
 
 Then continue to **Create** to choose models and launch. See [Creating a new experiment](/experiments/overview#creating-a-new-experiment).
 

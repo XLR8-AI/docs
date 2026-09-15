@@ -68,7 +68,7 @@ Company details, experiment type, and queries now live on a **query set**. Creat
 
 <Steps>
   <Step title="Create a query set (if you do not have one)">
-    From the sidebar under **Strategy**, click **Query Generation**, then **New query set**. Enter company details, analyze the domain, review categories, generate or import queries, and **Save query set**.
+    From the sidebar under **Strategy**, click **Query Generation**, then **New query set**. Enter company details, analyze the domain, review categories, aliases, and tracked competitors, generate or import queries, and **Save query set**.
 
     See [Query Generation](/query-generation) for the full walkthrough, including CSV import, Keyword Planner, and comments.
   </Step>
@@ -76,16 +76,16 @@ Company details, experiment type, and queries now live on a **query set**. Creat
     From the sidebar under **Strategy**, click **Experiments**. Then click **New Experiment**.
   </Step>
   <Step title="Step 1 — Query set">
-    Pick a saved query set that already has queries. Experiment type, company, domain, and aliases come from that set — you will not enter them again.
+    Pick a saved query set that already has queries. Experiment type, company, domain, aliases, and tracked competitors come from that set — you will not enter them again.
 
-    The selector shows each set's name, company, category count, and query count. After you select one, a summary shows company, domain, type/subtype, aliases, and query counts. Use **Edit** to open the set in Query Generation, or **Manage query sets** to go to the list.
+    The selector shows each set's name, company, category count, and query count. After you select one, a summary shows company, domain, type/subtype, aliases, tracked competitors, and query counts. Use **Edit** to open the set in Query Generation, or **Manage query sets** to go to the list.
 
     If you have no saved sets with queries yet, create one in Query Generation first.
 
     Click **Continue**.
   </Step>
   <Step title="Step 2 — Create">
-    Confirm the **Experiment Summary**, then configure:
+    Confirm the **Experiment Summary** — including company aliases and tracked competitors when the query set has them. Those names are saved on the experiment for competitor mention tracking. Then configure:
 
     - **Model Selection** — choose which AI models to test. If you select GPT Instant or GPT Thinking, an **Enforce Web Search** switch appears. New experiments start with this on, so those models search the web before answering unless you turn it off.
     - **Location Information** (optional) — country, region/state, and city for geo-targeted answers
@@ -124,8 +124,8 @@ From an experiment detail page you can:
 Open **Settings** on an experiment to manage:
 
 - **Web search** — organization admins can toggle **Enforce web search**. When on, supported GPT models search the web before responding. New experiments start with this on. The change saves immediately and applies to future runs, not past executions.
-- Company aliases
-- Competitors
+- Company aliases — copied from the query set; you can still edit them here
+- Competitors — pre-filled from the query set's tracked competitors; edit names and aliases here
 - Tracked URLs — or add the same URLs to several experiments from **Settings → Tracked URLs**
 - Queries and categories
 - Outreach excluded domains (visibility experiments)

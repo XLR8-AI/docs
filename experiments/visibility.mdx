@@ -74,7 +74,9 @@ When XLR8.ai scans an AI response for your brand, it checks for your company nam
 
 For example, if your company is "Acme Corporation," an AI model might write "Acme Corp" or simply "Acme." Without aliases, XLR8.ai would not count those as brand mentions.
 
-**To configure aliases:**
+When you create an experiment from a query set, aliases inferred during domain analysis — plus any you added on the Categories step — are copied onto the experiment.
+
+**To review or add aliases:**
 
 1. Open the experiment detail page.
 2. Open **Settings** and select the **Aliases** tab.
@@ -85,6 +87,14 @@ Aliases apply to all future executions of the experiment. If you add an alias af
 <Tip>
   Add common misspellings, abbreviations, ticker symbols, and product names that AI models are likely to use when referencing your brand.
 </Tip>
+
+## Tracked competitors
+
+**Tracked competitors** are the brands XLR8.ai watches for mention rate alongside yours.
+
+Domain analysis in [Query Generation](/query-generation) infers competitors for every subtype. For **Competitor alternatives**, the names also match the competitor list on that step. Creating an experiment from the query set saves those names on the experiment.
+
+You can still add or edit them in **Settings → Competitors**. Saving competitor names recomputes mention rate from existing results — you do not need to re-run the experiment.
 
 ## Tracked URLs
 
