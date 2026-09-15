@@ -1,0 +1,67 @@
+---
+title: "Billing"
+description: "View invoices, pay outstanding balances on Stripe or in XLR8, and manage your payment method."
+icon: "credit-card"
+keywords:
+  - "billing"
+  - "invoice"
+  - "stripe"
+  - "payment"
+  - "subscription"
+---
+
+**Billing** is where you review invoices, pay what's due, and manage your payment method.
+
+Navigate to **Settings → Billing** in the sidebar.
+
+---
+
+## Pay an invoice
+
+Invoices that are due appear under **Action required**. Each card shows card and bank transfer (ACH) amounts when both are available.
+
+You can pay in either of these ways when they appear:
+
+- **Stripe invoice** — opens Stripe's hosted invoice in a new tab. This control is shown when a Stripe invoice link is available.
+- **Pay on XLR8** — continues to in-app checkout. Choose **Bank transfer (ACH)** or **Credit or debit card**, then complete payment on Stripe.
+
+<Note>
+  **Stripe invoice** is optional. If it is not shown, use **Pay on XLR8**.
+</Note>
+
+Scheduled invoices that have not been issued yet appear under **Upcoming**.
+
+---
+
+## Invoice history
+
+**Invoice history** lists every invoice with description, billing interval, amount, method, status, and date.
+
+- Open invoices can include a **Stripe invoice** link when a Stripe hosted invoice is available.
+- Paid invoices can include a **Receipt** link.
+
+If you have no invoices yet, the page asks you to contact your account manager.
+
+If the rest of the platform is locked for an outstanding invoice, you will see **Payment required**. Use **Pay now** to go to checkout, or **View billing details** to open this page. After a cancelled subscription, **Go to billing** brings you here so you can renew.
+
+---
+
+## Manage payment method and subscription
+
+When a payment method is on file, **Manage payment method** opens the Stripe customer portal so you can update cards or bank details.
+
+If you have an active subscription, **Cancel subscription** appears. Click it, then confirm with **Confirm cancel?** to cancel.
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Configure your company profile, brand guidelines, and integrations.
+  </Card>
+
+  <Card title="Authentication" icon="lock" href="/account/authentication">
+    Manage organizations, roles, and team access.
+  </Card>
+</CardGroup>
