@@ -36,7 +36,7 @@ Creating a query set has three steps: **Company**, **Categories**, and **Queries
     - **Sub-type** — for visibility: Discovery, Informational, or Competitor Alternatives; for sentiment: Competitor Comparison or Brand Sentiment
     - **Company name** (required)
     - **Company website** (required)
-    - **Categories & queries CSV** (optional) — upload a CSV with **Category** and **Query** columns to use your own queries instead of AI generation. Click **Download sample CSV** for the format (max 5MB)
+    - **Categories & queries CSV** (optional) — upload a CSV with **Category** and **Query** columns to use your own queries instead of AI generation. Click **Download sample CSV** for the format, which includes an optional **Citations** column (max 5MB). Rows without citations are tagged from your briefing (domain analysis, additional context, and sales transcript when those are filled), then enriched from uploaded documents and Keyword Planner data when company details are complete. If you import before filling company details, add them and re-import to enrich tags.
     - **Additional context** (optional) — ICP, goals, known keywords, competitors, phrasing notes
     - **Internal documents** (optional) — PDFs, Office files, text, or images; they are parsed and used when generating queries
     - **Sales transcript** (optional) — `.txt` file
@@ -62,7 +62,7 @@ Creating a query set has three steps: **Company**, **Categories**, and **Queries
     Set **Queries per category** (1–20, default 5) to control how many queries are generated for each category. Click **Continue** to generate them.
   </Step>
   <Step title="Queries — generate and refine">
-    A summary of **Company aliases** and **Tracked competitors** appears at the top — edit aliases on the Categories step. Review the query map. Use the pencil and trash icons on each row to edit or remove queries, or add a query to a category, then save the query set. Each query can show **citation** badges that explain where it came from, such as Domain, Document, Sales, Context, Keyword, Model, Manual, Edited, or CSV.
+    A summary of **Company aliases** and **Tracked competitors** appears at the top — edit aliases on the Categories step. Review the query map. Use the pencil and trash icons on each row to edit or remove queries, or add a query to a category, then save the query set. Each query can show **citation** badges that explain where it came from, such as Domain, Document, Sales, Context, Keyword, Model, Manual, Edited, or CSV. Click a badge to open **Why this query was generated**, with the supporting rationale. For **Document** sources, the panel lists **Source document** and links to download that file when the query set is saved. Queries without stored citation metadata show a **Manual** badge.
 
     Set **Queries per category** (1–20) and click **Regenerate queries** to run generation again with the current briefing, documents, and Keyword Planner selection. Queries you added or edited stay in the map; new suggestions are added around them. **Download CSV** exports the map (including citations when present).
 
