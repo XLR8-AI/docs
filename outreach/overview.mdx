@@ -20,6 +20,7 @@ Before you can send email, connect a sender account:
 
 1. Go to **Settings → Integrations → Outreach Email**
 2. Click **Connect Gmail**
+3. Optionally set a **Sender name** — used in generated emails and as the From name. Leave it blank to derive the name from the email address. You can also edit the name on a connected account and click **Save name**.
 3. Optionally set a **Default** connected account
 
 ---
@@ -50,9 +51,13 @@ On the Outreach hub you can switch between:
     Click **Write** or **Edit** in the Email column.
 
     You can **Generate from article** or write a custom message. Use the `[contact_name]` token in the body when you want personalization.
+
+    When you generate from the article, choose **Generate as** to pick which connected mailbox the draft should use. The sender name in the draft comes from that mailbox. You can generate again after changing the mailbox.
   </Step>
   <Step title="Send">
     Click **Send**, choose the Gmail account under **Send from**, and set the follow-up schedule.
+
+    Optionally turn on **CC recipients** to copy teammates (from your organization or another address) on the initial email and all automatic follow-ups.
 
     Follow-ups support up to 2 additional emails after 1–14 working days (weekends skipped).
   </Step>
@@ -60,6 +65,14 @@ On the Outreach hub you can switch between:
     Monitor prospect statuses: Pending, Sending, Sent, Follow-up sent, Reply received, Failed, or Inactive.
   </Step>
 </Steps>
+
+---
+
+## CC after sending
+
+After outreach is scheduled or sent, you can still change **CC recipients** from prospect **Details** or the conversation thread. People you add are copied on the next follow-up or reply; a reply you send now includes them.
+
+When you reply, turn on **Include last message** if you want that reply to quote the previous email — useful when you CC someone mid-thread so they have context.
 
 ---
 
@@ -90,7 +103,7 @@ In the experiment **Settings** modal, use the Outreach tab to exclude domains fr
   </Card>
 
   <Card title="Settings" icon="gear" href="/integrations/settings">
-    Connect Gmail under Outreach Email.
+    Connect a mailbox and set the sender name under Outreach Email.
   </Card>
 
   <Card title="Content generation" icon="pen-to-square" href="/content/generation">
