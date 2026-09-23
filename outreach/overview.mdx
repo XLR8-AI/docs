@@ -21,6 +21,7 @@ Before you can send email, connect a sender account:
 1. Go to **Settings → Integrations → Outreach Email**
 2. Click **Connect Gmail**
 3. Optionally set a **Sender name** — used in generated emails and as the From name. Leave it blank to derive the name from the email address. You can also edit the name on a connected account and click **Save name**.
+4. Optionally set a **Client tagline** for this organization. **Fill template** uses it in the draft; if you leave it empty, the template keeps `[Client tagline]` for you to replace. Click **Save tagline**.
 3. Optionally set a **Default** connected account
 
 ---
@@ -32,6 +33,16 @@ On the Outreach hub you can switch between:
 - **Experiments** — pick a visibility experiment to manage its outreach
 - **Outbox** — sent outreach emails across experiments
 - **Inbox** — replies across experiments
+
+**Inbox** and **Outbox** each have their own page.
+
+---
+
+## Inbox threads
+
+Click a reply in **Inbox** to open that conversation on its own page. You can reload the page and return to the same thread.
+
+On each row, set the thread to **Active**, **Inactive**, or **Done**. Use the status filter (**All**, **Active**, **Inactive**, **Done**) to show only matching conversations.
 
 ---
 
@@ -50,9 +61,11 @@ On the Outreach hub you can switch between:
   <Step title="Draft the email">
     Click **Write** or **Edit** in the Email column.
 
-    You can **Generate from article** or write a custom message. Use the `[contact_name]` token in the body when you want personalization.
+    Choose how to draft the email: **Generate from article**, **Write custom message**, or **Fill template**. Use the `[contact_name]` token in the body when you want personalization.
 
     When you generate from the article, choose **Generate as** to pick which connected mailbox the draft should use. The sender name in the draft comes from that mailbox. You can generate again after changing the mailbox.
+
+    **Fill template** inserts the XLR8 listicle template immediately, with sender name, company, and article already filled in. It uses the **Client tagline** from Outreach Email settings, or `[Client tagline]` if you have not saved one.
   </Step>
   <Step title="Send">
     Click **Send**, choose the Gmail account under **Send from**, and set the follow-up schedule.
@@ -103,7 +116,7 @@ In the experiment **Settings** modal, use the Outreach tab to exclude domains fr
   </Card>
 
   <Card title="Settings" icon="gear" href="/integrations/settings">
-    Connect a mailbox and set the sender name under Outreach Email.
+    Connect a mailbox and set the sender name and client tagline under Outreach Email.
   </Card>
 
   <Card title="Content generation" icon="pen-to-square" href="/content/generation">
