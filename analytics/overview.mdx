@@ -50,6 +50,8 @@ On **Overview**, choose a baseline comparison:
 - **Previous** — explicit previous-execution baseline
 - **First** — compare against the first successful execution
 
+On sentiment experiments, category **Delta** (and **Top movers**, which use the same logic) subtracts the baseline run’s sentiment index from the current run’s index. Each index uses that run’s own queries — not only queries that appeared in both runs. If a category’s query set changed versus the baseline, the delta shows a \* and may reflect a different query mix, not only a shift in tone.
+
 ---
 
 ## Themes
