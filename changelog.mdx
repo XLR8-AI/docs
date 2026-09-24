@@ -7,6 +7,8 @@ icon: "clock-rotate-left"
 <Update label="September 24, 2026" tags={["New","Improved","Fixed"]}>
   You can now add, edit, and remove queries on an existing experiment. Open **Settings → Queries** to review the list, then click **Edit queries** to make changes in Query Generation. Those edits apply to the next run — earlier results stay as they were.
 
+  On Analytics, sentiment category **Delta** now compares each run’s own scores instead of only queries shared with the baseline. A \* next to a delta means that category’s query set changed.
+
   After you re-run a model on a completed experiment run, **Settings → Execution** now shows that model as **In progress** or **Auto-retry** instead of still showing **Succeeded**.
 
   Content generation now shows live **Generation progress** — pipeline steps, an activity log, self-review notes, and sources — instead of a generic spinner. Agentic runs can take up to about 15 minutes; keep the tab open until the draft is ready.
