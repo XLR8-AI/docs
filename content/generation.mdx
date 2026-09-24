@@ -63,6 +63,12 @@ Navigate to **Content → Content Generation**, then click **Create New Content 
       Some older saved contexts already include a brand guide. Those items show a **Legacy context includes its original brand guide** notice. If you reuse one, your current brand-guide selections are not added again.
     </Note>
   </Step>
+  <Step title="Optionally add links">
+    Two toggles control extra linking during generation:
+
+    - **Add backlinks to content** — insert third-party authoritative source links.
+    - **Add internal links to content** — insert links to relevant pages on your company domain from the indexed sitemap. This option is available once a company domain is set.
+  </Step>
   <Step title="Choose an LLM model">
     Select the LLM you want to use for generation. The content form currently offers:
 
@@ -79,7 +85,9 @@ Navigate to **Content → Content Generation**, then click **Create New Content 
     Different models have different strengths. If you are generating content targeting a specific AI audience, consider generating with that family of models to better match its citation patterns.
   </Step>
   <Step title="Generate and review sections">
-    Click **Generate Content**. XLR8.ai sends your inputs to the selected LLM and returns the content as a set of scored sections. Generation typically takes 15–60 seconds depending on content type and model.
+    Click **Generate Content**. For most content types, XLR8.ai runs an agentic workflow and shows **Generation progress** instead of a spinner — pipeline steps (draft, optional links, compliance report, citations, and save), an activity log, self-review notes, and sources applied so far.
+
+    Agentic runs can take up to about 15 minutes. Keep the tab open; XLR8.ai keeps polling until the draft is ready. If you open the piece from the library while it is still running, you see the same progress view.
 
     Once complete, you are taken to the content detail view where you can review, edit, and manage each section.
   </Step>
@@ -129,22 +137,39 @@ The first section of your content includes a **metadata description** field. Thi
 
 ## Brand guidelines
 
-If your organization has configured **Organization Brand Guidelines** in Settings, content generation can include them by default. You can also toggle brand guideline inclusion on the generation form.
+If your organization has configured **Organization Brand Guidelines** in Settings, content generation can include them by default. You can also toggle **Use org brand guidelines** on the generation form. When the toggle is on, each guidelines text and uploaded file shows a short preview of the uploaded text so you can choose what to include.
 
-Approved **AI Brand Learnings** from comment threads further steer future content.
+Approved **AI Brand Learnings** from comment threads further steer future content. Use **Remember** in the Comments sidebar to save selected threads for review in Settings.
 
 ## Comments and review
 
-On the content detail view, the **Comments** sidebar lists comment and suggestion threads on the generated piece.
+On the content detail view, the **Comments** sidebar lists comment and suggestion threads on the generated piece. A **Suggested changes** tab sits next to Comments for brand-correction diffs.
 
 - Filter by type (**Comments**, **Suggestions**, or **All types**) and status (**Open**, **Resolved**, or **All**).
 - Select a thread to reply, **Resolve** it, or **Reopen** it.
-- Pending suggestions also offer **Accept** and **Reject**.
-- When the status filter is **Open**, click **Resolve All** to resolve every open thread at once. Confirm the prompt before the action runs; thread actions are disabled while bulk resolve is in progress.
-- Check the threads you want to reuse, then click **Add to brand learnings**. The button shows how many threads are selected. Threads already saved as a brand learning cannot be selected again.
+- Pending suggestions also offer **Accept** and **Reject**. Accepting a suggestion applies the edit and marks the thread as acted on.
+- When the status filter is **Open**, click **Resolve All** to mark every open thread as acted on. The confirmation notes that this does not add brand learnings. Thread actions are disabled while bulk resolve is in progress.
+- Check the threads you want to reuse, then click **Remember**. The button shows how many threads are selected. Threads already saved as a brand learning cannot be selected again.
 - Saved threads show a status badge under the title: **Pending**, **In learnings**, or **Dismissed**.
 
 Selected threads become **AI Brand Learnings** in [Settings](/integrations/settings) for review. Threads that are already saved or not reusable are skipped.
+
+## Reviewing a generated draft
+
+After generation finishes, the detail view can include:
+
+- **Compliance report** — expand it to see whether the draft passed, is blocked, or has issues. Issues are grouped by category and can include a short fix hint. Prompt contradictions appear separately when the draft conflicts with your instructions.
+- **Generation trace** — expand it to read the agent activity log and self-review notes. Long notes have **View full note**.
+- **Brand learning** or **Brand guideline** badges on sections — hover or click to see which approved learnings or guidelines shaped that section.
+
+## Suggested changes
+
+Use brand-correction feedback to update a generated piece without rewriting it by hand.
+
+- Click **Regenerate with feedback** in the toolbar to apply approved brand learnings across the piece.
+- Or click the sparkle button on a section to regenerate only that section.
+- Review the result on the **Suggested changes** tab, and **Accept** or **Reject** each section. Suggested diffs also appear inline on the changed sections.
+- If you leave the page before you finish reviewing, your pending suggested changes are saved and restored when you return.
 
 ## Download and export
 
