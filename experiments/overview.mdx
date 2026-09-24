@@ -119,10 +119,13 @@ From an experiment detail page you can:
 - **Rerun Experiment** — start a new execution with the current configuration
 - **Schedule** — set a recurring cadence (see [Scheduling](/experiments/scheduling))
 
+To re-run a single model on the current execution instead of starting a new run, use **Settings → Execution**.
+
 ### Experiment settings
 
 Open **Settings** on an experiment to manage:
 
+- **Execution** — per-model status for the selected run (**Succeeded**, **Failed**, **In progress**, or **Auto-retry**). Organization admins can click **Re-run** on a model, or **Re-run failed** when more than one failed. That writes into the same execution, and the row shows **In progress** or **Auto-retry** while it runs — even if the overall execution already completed.
 - **Web search** — organization admins can toggle **Enforce web search**. When on, supported GPT models search the web before responding. New experiments start with this on. The change saves immediately and applies to future runs, not past executions.
 - Company aliases — copied from the query set; you can still edit them here
 - Competitors — pre-filled from the query set's tracked competitors; edit names and aliases here
