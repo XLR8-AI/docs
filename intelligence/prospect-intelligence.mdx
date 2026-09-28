@@ -1,0 +1,119 @@
+---
+title: "Prospect Intelligence"
+description: "Upload prospect call transcripts to see what they talked about, asked, praised, and objected to."
+icon: "phone"
+keywords: ["prospect intelligence", "sales calls", "transcripts", "themes"]
+---
+
+Prospect Intelligence analyzes prospect call transcripts so you can see what they talked about, asked, praised, and objected to. XLR8.ai extracts statements, groups them by theme and type, and lets you open the supporting quotes.
+
+## Accessing Prospect Intelligence
+
+From the sidebar under **Strategy**, click **Prospect Intelligence**.
+
+## Set company identity first
+
+Company name, domain, and Internal Team come from [Settings](/integrations/settings). Prospect Intelligence uses them to tell your brand from the prospect and to keep prospect turns while skipping your team's speech.
+
+<Steps>
+  <Step title="Open Settings">
+    Go to **Settings** and open the company profile card (**Company Name, Domain & Internal Team**).
+  </Step>
+  <Step title="Save company name and domain">
+    Enter your **Company Name** and **Company Domain**. These identify your brand in the transcript.
+  </Step>
+  <Step title="Add Internal Team names">
+    In **Internal Team**, enter comma-separated names of people on your side of the call. Prospect Intelligence uses these so it can skip your team's speech and keep the prospect's turns.
+  </Step>
+</Steps>
+
+<Tip>
+  Update Internal Team when new sellers join calls. Missing names can mix your team's speech into the prospect analysis.
+</Tip>
+
+## Upload transcripts
+
+<Steps>
+  <Step title="Choose files">
+    Under **Transcripts or Zip**, select one or more files. Accepted formats include `.txt`, `.vtt`, `.srt`, `.docx`, `.pdf`, `.md`, and `.zip`.
+  </Step>
+  <Step title="Upload">
+    Click **Upload**. Files are grouped into a batch. Status moves from **Pending** to **Processing**, then **Succeeded** or **Failed**.
+  </Step>
+  <Step title="Refresh if needed">
+    The page polls automatically while a batch is processing. Click **Refresh** to reload immediately.
+  </Step>
+</Steps>
+
+<Note>
+  Processing can take a few minutes for large batches. Failed files show an error message you can review before you delete and retry.
+</Note>
+
+## Previously Added
+
+Uploaded batches appear under **Previously Added**. Expand a batch to see each file, its status, and how many statements were extracted.
+
+You can delete an entire batch or a single transcript. Deleting removes that analysis from the charts and review list.
+
+## Filter by theme and type
+
+Use the filters above the charts to focus the view:
+
+| Filter | Description |
+| --- | --- |
+| **Themes** | Limit results to selected themes such as Pricing & budget, ROI & value, Product & features, Competition, or Next steps. Leave empty for **All Themes**. |
+| **Type** | Limit results to **Question**, **Pain**, **Objection**, **Request**, **Praise**, or **Statement**. **All** shows every type. |
+
+Theme filters apply to the charts, heatmap, and **Calls To Review**. Type filters apply to the charts.
+
+## Theme charts
+
+After extraction succeeds, charts appear only when they have data:
+
+- **Most Talked About** — themes that appear in the most calls
+- **Most Asked** — themes with the most questions
+- **Most Praised** — themes with the most praise
+- **Most Painful** — themes with the most pain
+- **Most Objected** — themes with the most objections
+- **Most Requested** — themes with the most requests
+
+Each bar is a count of unique calls. Click a bar to open the statements and quotes for that theme.
+
+## Theme By Type
+
+The **Theme By Type** heatmap shows how often each theme appears as each type. Switch:
+
+- **By topic** — how many times that theme and type appear
+- **By call** — how many unique calls include that theme and type
+
+Click a cell to open the matching statements. In **By call** mode, quotes are grouped by call.
+
+## Calls To Review
+
+**Calls To Review** lists each call with counts per type. It uses the theme filter above. Choose which type columns to show — **Total** is only those types.
+
+Click a column header to sort, and click it again to reverse direction. Click a row to open that call's statements and quotes.
+
+## Reading quotes
+
+The quote drawer shows the extracted point, themes, type, and supporting quotes. Speaker and company appear only when they were in the transcript.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/integrations/settings">
+    Save company name, domain, and Internal Team names used on transcripts.
+  </Card>
+
+  <Card title="Action Center" icon="list-check" href="/intelligence/action-center">
+    Track prioritized recommendations from experiment results.
+  </Card>
+
+  <Card title="AI Insights Agent" icon="robot" href="/intelligence/insights-agent">
+    Ask questions about your experiment data in plain language.
+  </Card>
+
+  <Card title="Quick start" icon="rocket" href="/quickstart">
+    Set up your organization and run your first experiment.
+  </Card>
+</CardGroup>
