@@ -11,10 +11,11 @@ Navigate to **Settings** from the **General** section of the main sidebar at any
 
 ## Company profile
 
-Under **Company Profile → Company Name & Domain**, set:
+Under **Company Profile → Company Name, Domain & Internal Team**, set:
 
-- **Company Name** — your brand name as it should appear in experiments and content
-- **Company Domain** — your primary domain without a protocol (for example, `acme.com`)
+- **Company Name** — your brand name as it should appear in experiments, content, and Prospect Intelligence
+- **Company Domain** — your primary domain without a protocol (for example, `acme.com`). Prospect Intelligence uses it the same way to recognize your team in transcripts
+- **Internal Team** — comma-separated names of people on your side of a call. [Prospect Intelligence](/intelligence/prospect-intelligence) uses these to keep prospect turns and skip your team's speech
 - **Third-Party Reviews Domain** (optional) — used when analyzing third-party review sources
 
 XLR8.ai pre-fills your company name and domain when you create experiments, generate content, and configure social listeners.
@@ -144,6 +145,10 @@ The **Integrations** section links to configuration pages for third-party tools:
 <CardGroup cols={2}>
   <Card title="Content generation" icon="pen-to-square" href="/content/generation">
     Generate AI-optimized content using your company profile and brand guidelines.
+  </Card>
+
+  <Card title="Prospect Intelligence" icon="phone" href="/intelligence/prospect-intelligence">
+    Upload call transcripts using the company name, domain, and Internal Team from Settings.
   </Card>
 
   <Card title="Experiments" icon="flask" href="/experiments/overview">
