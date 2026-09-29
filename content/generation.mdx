@@ -85,7 +85,7 @@ Navigate to **Content → Content Generation**, then click **Create New Content 
     Different models have different strengths. If you are generating content targeting a specific AI audience, consider generating with that family of models to better match its citation patterns.
   </Step>
   <Step title="Generate and review sections">
-    Click **Generate Content**. For most content types, XLR8.ai runs an agentic workflow and shows **Generation progress** instead of a spinner — pipeline steps (draft, optional links, compliance report, citations, and save), an activity log, self-review notes, and sources applied so far.
+    Click **Generate Content**. For most content types, XLR8.ai runs an agentic workflow and shows **Generation progress** instead of a spinner — a **Pipeline overview** (write full draft including source references, optional links, compliance report, and save), a detailed activity log with readable step titles, self-review notes, and sources applied so far.
 
     Agentic runs can take up to about 15 minutes. Keep the tab open; XLR8.ai keeps polling until the draft is ready. If you open the piece from the library while it is still running, you see the same progress view.
 
@@ -114,6 +114,14 @@ Scores update automatically when you edit a section's content, giving you live f
 ### Editing sections
 
 Click into any section's text area to edit it inline. Your changes are saved automatically. The score recalculates after you finish editing.
+
+### Optimizing a section
+
+Click the target icon on a section to optimize that section for a specific query. Enter a **target query** (or keep the default from the piece), then click **Run optimize**. Review the results and click **Apply optimized** to save the new text, or **Discard** to keep the original. You do not need to set a page-wide query first.
+
+<Note>
+  This optimizes for semantic similarity to the query, which can make the wording less conversational. Review the result before you apply it.
+</Note>
 
 ### Adding sections
 
@@ -160,8 +168,8 @@ Selected threads become **AI Brand Learnings** in [Settings](/integrations/setti
 
 After generation finishes, the detail view can include:
 
-- **Compliance report** — expand it to see whether the draft passed, is blocked, or has issues. Issues are grouped by category and can include a short fix hint. Prompt contradictions appear separately when the draft conflicts with your instructions.
-- **Generation trace** — expand it to read the agent activity log and self-review notes. Long notes have **View full note**.
+- **Compliance report** — expand it to see whether the draft passed, is blocked, or has issues. A **What we verified** list shows which checks ran. Issues are grouped by category and can include a short fix hint. Prompt contradictions appear separately when the draft conflicts with your instructions.
+- **Generation trace** — expand it to read how the draft and source references were built, a **Pipeline overview** with each phase's status, the detailed activity log, and self-review notes. Long notes have **View full note**.
 - **Brand learning** or **Brand guideline** badges on sections — hover or click to see which approved learnings or guidelines shaped that section.
 
 ## Suggested changes
@@ -170,15 +178,15 @@ Use brand-correction feedback or a link plan to update a generated piece without
 
 - Click **Regenerate with feedback** in the toolbar to apply approved brand learnings across the piece.
 - Click **Apply link plan** to insert internal and backlink placements from a plan in Settings. Choose a plan, then turn **Internal links** and **Backlinks** on or off before you apply.
-- Or click the sparkle button on a section to regenerate only that section.
-- Review the result on the **Suggested changes** tab, and **Accept** or **Reject** each section. Suggested diffs also appear inline on the changed sections.
+- Or click the refresh button on a section to regenerate only that section.
+- Review the result on the **Suggested changes** tab. Changed sections open in edit mode with the suggested diff so you can tweak the proposed text, then **Accept** or **Reject**.
 - If you leave the page before you finish reviewing, your pending suggested changes are saved and restored when you return.
 
 If **Apply link plan** shows no plans, upload a link-placement brief PDF under **Settings → Brand Guidelines**.
 
 ## Download and export
 
-From the content editor, click the download button to export the full piece as **Markdown**, **HTML**, or **PDF**. The PDF uses your current section text — including any optimized versions you selected — and saves a letter-sized file named after the content title.
+From the content editor, click the download button to export the full piece as **Markdown**, **HTML**, or **PDF**. The PDF uses your current section text — including any optimized versions you applied — and saves a letter-sized file named after the content title.
 
 ## After generating: publish
 
