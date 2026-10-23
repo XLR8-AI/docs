@@ -1,217 +1,3365 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "XLR8 System Reporting API",
+    "description": "Machine-facing experiment and analytics reporting under /system-api/v1/reporting/*. Authenticate with Authorization: Bearer <Unkey API key>. Access is limited to experiments in configured organization allowlists.",
+    "version": "0.1.0"
   },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
   "paths": {
-    "/plants": {
+    "/system-api/v1/reporting/experiments": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "tags": [
+          "System"
+        ],
+        "summary": "List Reporting Experiments",
+        "operationId": "list_reporting_experiments_system_api_v1_reporting_experiments_get",
         "parameters": [
           {
-            "name": "limit",
+            "name": "archived",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "boolean",
+              "default": false,
+              "title": "Archived"
+            }
+          },
+          {
+            "name": "experiment_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ExperimentType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Experiment Type"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(created_at|name)$",
+              "default": "created_at",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(asc|desc)$",
+              "default": "desc",
+              "title": "Sort Order"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/ExperimentList"
                 }
               }
             }
           },
-          "400": {
-            "description": "Unexpected error",
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+        "security": [
+          {
+            "UnkeyBearer": []
           }
-        }
+        ]
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/system-api/v1/reporting/experiments/{experiment_id}": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get Reporting Experiment",
+        "operationId": "get_reporting_experiment_system_api_v1_reporting_experiments__experiment_id__get",
         "parameters": [
           {
-            "name": "id",
+            "name": "experiment_id",
             "in": "path",
-            "description": "ID of plant to delete",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ExperimentRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
       }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/executions": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "List Reporting Executions",
+        "operationId": "list_reporting_executions_system_api_v1_reporting_experiments__experiment_id__executions_get",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentExecutionsList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
         },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/results": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get Reporting Execution Results",
+        "operationId": "get_reporting_execution_results_system_api_v1_reporting_experiments__experiment_id__executions__execution_id__results_get",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "execution_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Execution Id"
+            }
+          },
+          {
+            "name": "models",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Models"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentExecutionResults"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/analyse-results": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Reporting Analyse Results",
+        "operationId": "reporting_analyse_results_system_api_v1_reporting_experiments__experiment_id__executions__execution_id__analyse_results_post",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "execution_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Execution Id"
+            }
+          },
+          {
+            "name": "models",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Models"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultAnalysis"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/citation-metadata": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Reporting Citation Metadata",
+        "operationId": "reporting_citation_metadata_system_api_v1_reporting_experiments__experiment_id__executions__execution_id__citation_metadata_post",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "execution_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Execution Id"
+            }
+          },
+          {
+            "name": "models",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Models"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CitationMetadataResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/theme-embedding-sync-status": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Reporting Theme Embedding Sync Status",
+        "operationId": "reporting_theme_embedding_sync_status_system_api_v1_reporting_experiments__experiment_id__theme_embedding_sync_status_get",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/theme-cluster-tsne": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Reporting Theme Cluster Tsne",
+        "operationId": "reporting_theme_cluster_tsne_system_api_v1_reporting_experiments__experiment_id__theme_cluster_tsne_get",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "polarity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^(pro|con)$",
+              "default": "pro",
+              "title": "Polarity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
+      }
+    },
+    "/system-api/v1/reporting/experiments/{experiment_id}/executions-trend": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get Reporting Executions Trend",
+        "operationId": "get_reporting_executions_trend_system_api_v1_reporting_experiments__experiment_id__executions_trend_get",
+        "parameters": [
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Experiment Id"
+            }
+          },
+          {
+            "name": "models",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Models"
+            }
+          },
+          {
+            "name": "sanitize_executions",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sanitize Executions"
+            }
+          },
+          {
+            "name": "breakdown_by_model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Breakdown By Model"
+            }
+          },
+          {
+            "name": "models_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Models Only"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "UnkeyBearer": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "BrandCitationShare": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "brand": {
+            "type": "integer",
+            "title": "Brand",
+            "default": 0
+          },
+          "nonbrand": {
+            "type": "integer",
+            "title": "Nonbrand",
+            "default": 0
+          },
+          "share_brand": {
+            "type": "number",
+            "title": "Share Brand",
+            "default": 0.0
+          },
+          "pct_brand": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct Brand"
+          },
+          "unique_domains": {
+            "type": "integer",
+            "title": "Unique Domains",
+            "default": 0
+          },
+          "top_nonbrand": {
+            "items": {
+              "$ref": "#/components/schemas/DomainShare"
+            },
+            "type": "array",
+            "title": "Top Nonbrand",
+            "default": []
+          },
+          "source_sentiment": {
+            "items": {
+              "$ref": "#/components/schemas/DomainShare"
+            },
+            "type": "array",
+            "title": "Source Sentiment",
+            "default": []
+          }
+        },
         "type": "object",
+        "title": "BrandCitationShare"
+      },
+      "BrandMentionAnalysis": {
+        "properties": {
+          "overall_mention": {
+            "type": "number",
+            "title": "Overall Mention"
+          },
+          "mention_per_category": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Mention Per Category"
+          },
+          "all_brands_category_distribution": {
+            "items": {
+              "$ref": "#/components/schemas/CategoryBrandDistribution"
+            },
+            "type": "array",
+            "title": "All Brands Category Distribution"
+          },
+          "response_count": {
+            "type": "integer",
+            "title": "Response Count",
+            "default": 0
+          },
+          "brand_returning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ScopedVisibilityMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "competitor_returning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ScopedVisibilityMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "overall_mention",
+          "mention_per_category",
+          "all_brands_category_distribution"
+        ],
+        "title": "BrandMentionAnalysis"
+      },
+      "CategoryBrandDistribution": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "brands": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Brands"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "brands"
+        ],
+        "title": "CategoryBrandDistribution"
+      },
+      "CategorySentimentAnalysis": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "mean_sentiment_score": {
+            "type": "number",
+            "title": "Mean Sentiment Score"
+          },
+          "sentiment_label": {
+            "type": "string",
+            "title": "Sentiment Label"
+          },
+          "query_sentiment_details": {
+            "items": {
+              "$ref": "#/components/schemas/QuerySentimentDetails"
+            },
+            "type": "array",
+            "title": "Query Sentiment Details"
+          },
+          "mix": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SentimentMix"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "mean_sentiment_score",
+          "sentiment_label",
+          "query_sentiment_details"
+        ],
+        "title": "CategorySentimentAnalysis"
+      },
+      "CitationAnalysis": {
+        "properties": {
+          "citation_domain_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Citation Domain Counts"
+          },
+          "citation_type_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Citation Type Counts"
+          },
+          "citation_parent_category_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Citation Parent Category Counts",
+            "default": {}
+          },
+          "citation_subcategory_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Citation Subcategory Counts",
+            "default": {}
+          },
+          "citation_details": {
+            "items": {
+              "$ref": "#/components/schemas/CitationDetails"
+            },
+            "type": "array",
+            "title": "Citation Details"
+          }
+        },
+        "type": "object",
+        "required": [
+          "citation_domain_counts",
+          "citation_type_counts",
+          "citation_details"
+        ],
+        "title": "CitationAnalysis"
+      },
+      "CitationDetails": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "citation_domain": {
+            "type": "string",
+            "title": "Citation Domain"
+          },
+          "citation_type": {
+            "type": "string",
+            "title": "Citation Type"
+          },
+          "source_parent_category": {
+            "type": "string",
+            "title": "Source Parent Category",
+            "default": ""
+          },
+          "source_subcategory": {
+            "type": "string",
+            "title": "Source Subcategory",
+            "default": ""
+          },
+          "citation_url_query_distribution": {
+            "items": {
+              "$ref": "#/components/schemas/CitationURLQueryDistribution"
+            },
+            "type": "array",
+            "title": "Citation Url Query Distribution"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "model_name",
+          "citation_domain",
+          "citation_type",
+          "citation_url_query_distribution"
+        ],
+        "title": "CitationDetails"
+      },
+      "CitationMetadata": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "response": {
+            "type": "string",
+            "title": "Response"
+          },
+          "citation_url": {
+            "type": "string",
+            "title": "Citation Url"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "url_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url Title"
+          },
+          "url_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category",
+          "query",
+          "response",
+          "citation_url",
+          "model_name",
+          "url_title",
+          "url_description"
+        ],
+        "title": "CitationMetadata"
+      },
+      "CitationMetadataResponse": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Experiment Id"
+          },
+          "execution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Execution Id"
+          },
+          "citation_metadata": {
+            "items": {
+              "$ref": "#/components/schemas/CitationMetadata"
+            },
+            "type": "array",
+            "title": "Citation Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "execution_id",
+          "citation_metadata"
+        ],
+        "title": "CitationMetadataResponse"
+      },
+      "CitationURLQueryDistribution": {
+        "properties": {
+          "citation_url": {
+            "type": "string",
+            "title": "Citation Url"
+          },
+          "queries_referenced": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Queries Referenced"
+          },
+          "query_run_counts": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Query Run Counts"
+          },
+          "citation_count": {
+            "type": "integer",
+            "title": "Citation Count",
+            "default": 0
+          },
+          "source_parent_category": {
+            "type": "string",
+            "title": "Source Parent Category",
+            "default": ""
+          },
+          "source_subcategory": {
+            "type": "string",
+            "title": "Source Subcategory",
+            "default": ""
+          },
+          "source_content_format": {
+            "type": "string",
+            "title": "Source Content Format",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "citation_url",
+          "queries_referenced"
+        ],
+        "title": "CitationURLQueryDistribution"
+      },
+      "CompetitorMentionAnalysis": {
         "properties": {
           "name": {
-            "description": "The name of the plant",
-            "type": "string"
+            "type": "string",
+            "title": "Name"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+          "overall_mention": {
+            "type": "number",
+            "title": "Overall Mention"
           },
-          {
-            "required": [
-              "id"
-            ],
+          "mention_per_category": {
+            "additionalProperties": {
+              "type": "number"
+            },
             "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+            "title": "Mention Per Category"
           }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+        },
         "type": "object",
+        "required": [
+          "name",
+          "overall_mention",
+          "mention_per_category"
+        ],
+        "title": "CompetitorMentionAnalysis"
+      },
+      "DomainShare": {
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "domain": {
+            "type": "string",
+            "title": "Domain"
           },
-          "message": {
-            "type": "string"
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "share": {
+            "type": "number",
+            "title": "Share",
+            "default": 0.0
+          },
+          "pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct"
+          },
+          "n_responses": {
+            "type": "integer",
+            "title": "N Responses",
+            "default": 0
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "pct_negative": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct Negative"
+          },
+          "neg_carry": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Neg Carry"
           }
-        }
+        },
+        "type": "object",
+        "required": [
+          "domain",
+          "count"
+        ],
+        "title": "DomainShare"
+      },
+      "ExecutionRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "experiment_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Experiment Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExperimentExecutionStatus"
+          },
+          "models_snapshot": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Models Snapshot"
+          },
+          "runs_per_query": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Runs Per Query",
+            "default": 1
+          },
+          "model_statuses": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Statuses"
+          },
+          "serial_number": {
+            "type": "integer",
+            "title": "Serial Number"
+          },
+          "has_action_items_synced": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Has Action Items Synced"
+          },
+          "action_items_sync_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Items Sync Status"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "experiment_id",
+          "status",
+          "serial_number"
+        ],
+        "title": "ExecutionRead"
+      },
+      "ExperimentExecutionResults": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Experiment Id"
+          },
+          "execution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Execution Id"
+          },
+          "experiment_type": {
+            "$ref": "#/components/schemas/ExperimentType"
+          },
+          "visibility_results": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/VisibilityResultRead"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visibility Results"
+          },
+          "sentiment_results": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SentimentResultRead"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentiment Results"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "execution_id",
+          "experiment_type",
+          "visibility_results",
+          "sentiment_results"
+        ],
+        "title": "ExperimentExecutionResults"
+      },
+      "ExperimentExecutionStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "in_progress",
+          "updating",
+          "success",
+          "failed"
+        ],
+        "title": "ExperimentExecutionStatus"
+      },
+      "ExperimentExecutionsList": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Experiment Id"
+          },
+          "executions": {
+            "items": {
+              "$ref": "#/components/schemas/ExecutionRead"
+            },
+            "type": "array",
+            "title": "Executions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id"
+        ],
+        "title": "ExperimentExecutionsList"
+      },
+      "ExperimentList": {
+        "properties": {
+          "experiments": {
+            "items": {
+              "$ref": "#/components/schemas/ExperimentRead"
+            },
+            "type": "array",
+            "title": "Experiments"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiments"
+        ],
+        "title": "ExperimentList"
+      },
+      "ExperimentRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "experiment_type": {
+            "$ref": "#/components/schemas/ExperimentType"
+          },
+          "experiment_sub_type": {
+            "$ref": "#/components/schemas/ExperimentSubType"
+          },
+          "company_name": {
+            "type": "string",
+            "title": "Company Name"
+          },
+          "company_domain": {
+            "type": "string",
+            "title": "Company Domain"
+          },
+          "company_aliases": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Aliases"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "category_map": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Category Map"
+          },
+          "query_set_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query Set Id"
+          },
+          "models": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Models"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\w{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City"
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id"
+          },
+          "created_by": {
+            "type": "string",
+            "title": "Created By"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned"
+          },
+          "first_execution_created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Execution Created At"
+          },
+          "last_execution_created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Execution Created At"
+          },
+          "schedule": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ScheduleRead"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "experiment_type",
+          "experiment_sub_type",
+          "company_name",
+          "company_domain",
+          "company_aliases",
+          "description",
+          "category_map",
+          "models",
+          "organization_id",
+          "created_by",
+          "is_archived",
+          "is_pinned"
+        ],
+        "title": "ExperimentRead"
+      },
+      "ExperimentSubType": {
+        "type": "string",
+        "enum": [
+          "discovery",
+          "informational",
+          "competitor_alternatives",
+          "competitor_comparison",
+          "brand_sentiment"
+        ],
+        "title": "ExperimentSubType"
+      },
+      "ExperimentType": {
+        "type": "string",
+        "enum": [
+          "visibility",
+          "sentiment"
+        ],
+        "title": "ExperimentType"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ModelName": {
+        "type": "string",
+        "enum": [
+          "perplexity",
+          "sonar",
+          "sonar-pro",
+          "gpt-fast-gpt-5.1",
+          "gpt-thinking-gpt-5.1",
+          "gpt-fast-gpt-5.3-chat-latest",
+          "gpt-thinking-gpt-5.4",
+          "gpt-6-luna",
+          "gpt-6.1-sol",
+          "gpt-5.6-sol",
+          "gpt-5.6-terra",
+          "gpt-5.6-luna",
+          "gpt-5.5",
+          "claude-sonnet-5",
+          "claude-sonnet-5.5",
+          "claude-opus-4.8",
+          "claude-opus-4.7",
+          "claude-opus-5",
+          "claude-opus-5.5",
+          "claude-sonnet-4.6",
+          "claude-sonnet-4.5",
+          "grok-4",
+          "grok-4.20",
+          "grok-4.3",
+          "grok-4.5",
+          "grok-4.6",
+          "grok-4.7",
+          "chatgpt",
+          "chatgpt-cloro",
+          "microsoft_copilot",
+          "copilot-cloro",
+          "google_ai_overview",
+          "google_ai_mode",
+          "google_ai_mode-cloro",
+          "gemini",
+          "gemini-web",
+          "gemini-3-flash-preview",
+          "gemini-3.1-pro-preview",
+          "gemini-3.1-pro",
+          "gemini-3.6-flash",
+          "gemini-3.7-flash",
+          "gemini-3.5-flash-lite",
+          "grok",
+          "claude",
+          "gpt-fast",
+          "gpt-thinking"
+        ],
+        "title": "ModelName"
+      },
+      "QueryAnalysis": {
+        "properties": {
+          "response": {
+            "type": "string",
+            "title": "Response"
+          },
+          "brands_mentioned": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Brands Mentioned"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "citation_url": {
+            "type": "string",
+            "title": "Citation Url"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "mentioned": {
+            "type": "boolean",
+            "title": "Mentioned"
+          }
+        },
+        "type": "object",
+        "required": [
+          "response",
+          "brands_mentioned",
+          "category",
+          "query",
+          "citation_url",
+          "model_name",
+          "mentioned"
+        ],
+        "title": "QueryAnalysis"
+      },
+      "QuerySentimentDetails": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "sentiment_score": {
+            "type": "number",
+            "title": "Sentiment Score"
+          },
+          "sentiment_label": {
+            "type": "string",
+            "title": "Sentiment Label"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "response": {
+            "type": "string",
+            "title": "Response"
+          },
+          "citations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "pros": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Pros"
+          },
+          "cons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cons"
+          },
+          "pros_citations": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pros Citations"
+          },
+          "cons_citations": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cons Citations"
+          },
+          "pro_brands": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pro Brands"
+          },
+          "con_brands": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Con Brands"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "sentiment_score",
+          "sentiment_label",
+          "model_name",
+          "response",
+          "citations",
+          "pros",
+          "cons"
+        ],
+        "title": "QuerySentimentDetails"
+      },
+      "ResultAnalysis": {
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Experiment Id"
+          },
+          "execution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Execution Id"
+          },
+          "serial_number": {
+            "type": "integer",
+            "title": "Serial Number"
+          },
+          "execution_created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Created At"
+          },
+          "execution_updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Updated At"
+          },
+          "experiment_type": {
+            "$ref": "#/components/schemas/ExperimentType"
+          },
+          "visibility_result_analysis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VisibilityResultAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sentiment_result_analysis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SentimentResultAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "shopping_analysis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShoppingAnalysis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "experiment_id",
+          "execution_id",
+          "serial_number",
+          "experiment_type",
+          "visibility_result_analysis",
+          "sentiment_result_analysis"
+        ],
+        "title": "ResultAnalysis"
+      },
+      "ScheduleFrequency": {
+        "type": "string",
+        "enum": [
+          "DAILY",
+          "WEEKLY",
+          "BIWEEKLY",
+          "MONTHLY"
+        ],
+        "title": "ScheduleFrequency"
+      },
+      "ScheduleRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "schedule_frequency": {
+            "$ref": "#/components/schemas/ScheduleFrequency"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active",
+            "default": true
+          },
+          "next_run_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Next Run Date"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id"
+          },
+          "created_by": {
+            "type": "string",
+            "title": "Created By"
+          },
+          "last_run_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Run Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "schedule_frequency",
+          "next_run_date",
+          "organization_id",
+          "created_by"
+        ],
+        "title": "ScheduleRead"
+      },
+      "ScopedVisibilityMetrics": {
+        "properties": {
+          "mention_rate": {
+            "type": "number",
+            "title": "Mention Rate"
+          },
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "mentions": {
+            "type": "integer",
+            "title": "Mentions"
+          },
+          "mention_per_category": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Mention Per Category",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "mention_rate",
+          "n",
+          "mentions"
+        ],
+        "title": "ScopedVisibilityMetrics",
+        "description": "Company mention rate under a filtered response denominator."
+      },
+      "SentimentItem": {
+        "properties": {
+          "aspect": {
+            "type": "string",
+            "title": "Aspect"
+          },
+          "opinion": {
+            "type": "string",
+            "title": "Opinion"
+          },
+          "modifier": {
+            "type": "string",
+            "title": "Modifier"
+          },
+          "intensity": {
+            "type": "string",
+            "enum": [
+              "mild",
+              "moderate",
+              "severe"
+            ],
+            "title": "Intensity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "aspect",
+          "opinion",
+          "modifier",
+          "intensity"
+        ],
+        "title": "SentimentItem",
+        "description": "Stored structured pro/con fields; list membership supplies polarity.\n\nBrand lives in the parallel ``pro_brands`` / ``con_brands`` slots, not here."
+      },
+      "SentimentMix": {
+        "properties": {
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "n_positive": {
+            "type": "integer",
+            "title": "N Positive",
+            "default": 0
+          },
+          "n_neutral": {
+            "type": "integer",
+            "title": "N Neutral",
+            "default": 0
+          },
+          "n_negative": {
+            "type": "integer",
+            "title": "N Negative",
+            "default": 0
+          },
+          "share_positive": {
+            "type": "number",
+            "title": "Share Positive",
+            "default": 0.0
+          },
+          "share_neutral": {
+            "type": "number",
+            "title": "Share Neutral",
+            "default": 0.0
+          },
+          "share_negative": {
+            "type": "number",
+            "title": "Share Negative",
+            "default": 0.0
+          },
+          "pct_positive": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct Positive"
+          },
+          "pct_neutral": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct Neutral"
+          },
+          "pct_negative": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pct Negative"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "n"
+        ],
+        "title": "SentimentMix"
+      },
+      "SentimentResultAnalysis": {
+        "properties": {
+          "mean_sentiment_score": {
+            "type": "number",
+            "title": "Mean Sentiment Score"
+          },
+          "sentiment_label": {
+            "type": "string",
+            "title": "Sentiment Label"
+          },
+          "category_sentiment_analysis": {
+            "items": {
+              "$ref": "#/components/schemas/CategorySentimentAnalysis"
+            },
+            "type": "array",
+            "title": "Category Sentiment Analysis"
+          },
+          "citation_analysis": {
+            "$ref": "#/components/schemas/CitationAnalysis"
+          },
+          "tracked_urls_impact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrackedUrlsImpact"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mix": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SentimentMix"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "by_model": {
+            "items": {
+              "$ref": "#/components/schemas/SentimentMix"
+            },
+            "type": "array",
+            "title": "By Model",
+            "default": []
+          },
+          "brand_citation_share": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BrandCitationShare"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "positive_themes": {
+            "items": {
+              "$ref": "#/components/schemas/ThemeCount"
+            },
+            "type": "array",
+            "title": "Positive Themes",
+            "default": []
+          },
+          "negative_themes": {
+            "items": {
+              "$ref": "#/components/schemas/ThemeCount"
+            },
+            "type": "array",
+            "title": "Negative Themes",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "mean_sentiment_score",
+          "sentiment_label",
+          "category_sentiment_analysis",
+          "citation_analysis"
+        ],
+        "title": "SentimentResultAnalysis"
+      },
+      "SentimentResultRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "response": {
+            "type": "string",
+            "title": "Response"
+          },
+          "citations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "fanout_queries": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fanout Queries"
+          },
+          "shopping": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shopping"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "sentiment_score": {
+            "type": "number",
+            "title": "Sentiment Score"
+          },
+          "pros": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Pros"
+          },
+          "cons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cons"
+          },
+          "pros_citations": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pros Citations"
+          },
+          "cons_citations": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cons Citations"
+          },
+          "pro_brands": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pro Brands"
+          },
+          "con_brands": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Con Brands"
+          },
+          "pro_items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SentimentItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pro Items"
+          },
+          "con_items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SentimentItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Con Items"
+          },
+          "execution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Execution Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "category",
+          "query",
+          "response",
+          "citations",
+          "model_name",
+          "sentiment_score",
+          "pros",
+          "cons",
+          "execution_id"
+        ],
+        "title": "SentimentResultRead"
+      },
+      "ShoppingAnalysis": {
+        "properties": {
+          "prompts_captured": {
+            "type": "integer",
+            "title": "Prompts Captured"
+          },
+          "prompts_with_products": {
+            "type": "integer",
+            "title": "Prompts With Products"
+          },
+          "products_shown": {
+            "type": "integer",
+            "title": "Products Shown"
+          },
+          "unique_products": {
+            "type": "integer",
+            "title": "Unique Products"
+          },
+          "own_placements": {
+            "type": "integer",
+            "title": "Own Placements"
+          },
+          "own_share": {
+            "type": "number",
+            "title": "Own Share"
+          },
+          "own_prompts": {
+            "type": "integer",
+            "title": "Own Prompts"
+          },
+          "own_avg_rank": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Own Avg Rank"
+          },
+          "own_top1": {
+            "type": "integer",
+            "title": "Own Top1",
+            "default": 0
+          },
+          "own_site_placements": {
+            "type": "integer",
+            "title": "Own Site Placements",
+            "default": 0
+          },
+          "gap_prompts": {
+            "type": "integer",
+            "title": "Gap Prompts",
+            "default": 0
+          },
+          "brands": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingBrand"
+            },
+            "type": "array",
+            "title": "Brands",
+            "default": []
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingProduct"
+            },
+            "type": "array",
+            "title": "Products",
+            "default": []
+          },
+          "sellers": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingSeller"
+            },
+            "type": "array",
+            "title": "Sellers",
+            "default": []
+          },
+          "queries": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingQuery"
+            },
+            "type": "array",
+            "title": "Queries",
+            "default": []
+          },
+          "by_category": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ShoppingAnalysis"
+            },
+            "type": "object",
+            "title": "By Category",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "prompts_captured",
+          "prompts_with_products",
+          "products_shown",
+          "unique_products",
+          "own_placements",
+          "own_share",
+          "own_prompts"
+        ],
+        "title": "ShoppingAnalysis",
+        "description": "Product cards ChatGPT showed. Prompts count only rows where shopping was captured."
+      },
+      "ShoppingBrand": {
+        "properties": {
+          "brand": {
+            "type": "string",
+            "title": "Brand"
+          },
+          "brand_kind": {
+            "type": "string",
+            "title": "Brand Kind"
+          },
+          "placements": {
+            "type": "integer",
+            "title": "Placements"
+          },
+          "share": {
+            "type": "number",
+            "title": "Share"
+          },
+          "unique_products": {
+            "type": "integer",
+            "title": "Unique Products"
+          },
+          "prompts": {
+            "type": "integer",
+            "title": "Prompts"
+          },
+          "avg_rank": {
+            "type": "number",
+            "title": "Avg Rank"
+          },
+          "top1": {
+            "type": "integer",
+            "title": "Top1"
+          },
+          "avg_price_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Price Value"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "rank_sum": {
+            "type": "number",
+            "title": "Rank Sum",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "brand",
+          "brand_kind",
+          "placements",
+          "share",
+          "unique_products",
+          "prompts",
+          "avg_rank",
+          "top1"
+        ],
+        "title": "ShoppingBrand"
+      },
+      "ShoppingPlacement": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "brand": {
+            "type": "string",
+            "title": "Brand"
+          },
+          "brand_kind": {
+            "type": "string",
+            "title": "Brand Kind"
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "group": {
+            "type": "integer",
+            "title": "Group",
+            "default": 1
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "price_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price Value"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "seller": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seller"
+          },
+          "seller_is_own_site": {
+            "type": "boolean",
+            "title": "Seller Is Own Site",
+            "default": false
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          },
+          "image": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "brand",
+          "brand_kind",
+          "rank"
+        ],
+        "title": "ShoppingPlacement",
+        "description": "One product card. Rank is its place inside that card group, using the position Cloro sent."
+      },
+      "ShoppingProduct": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "brand": {
+            "type": "string",
+            "title": "Brand"
+          },
+          "brand_kind": {
+            "type": "string",
+            "title": "Brand Kind"
+          },
+          "image": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image"
+          },
+          "placements": {
+            "type": "integer",
+            "title": "Placements"
+          },
+          "prompts": {
+            "type": "integer",
+            "title": "Prompts"
+          },
+          "avg_rank": {
+            "type": "number",
+            "title": "Avg Rank"
+          },
+          "best_rank": {
+            "type": "integer",
+            "title": "Best Rank"
+          },
+          "top1": {
+            "type": "integer",
+            "title": "Top1"
+          },
+          "prices": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Prices",
+            "default": []
+          },
+          "min_price_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Price Value"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "sellers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sellers",
+            "default": []
+          },
+          "queries": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingProductQuery"
+            },
+            "type": "array",
+            "title": "Queries",
+            "default": []
+          },
+          "rank_sum": {
+            "type": "number",
+            "title": "Rank Sum",
+            "default": 0
+          },
+          "price_sum": {
+            "type": "number",
+            "title": "Price Sum",
+            "default": 0
+          },
+          "price_count": {
+            "type": "integer",
+            "title": "Price Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "brand",
+          "brand_kind",
+          "placements",
+          "prompts",
+          "avg_rank",
+          "best_rank",
+          "top1"
+        ],
+        "title": "ShoppingProduct"
+      },
+      "ShoppingProductQuery": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "category",
+          "model_name",
+          "rank"
+        ],
+        "title": "ShoppingProductQuery"
+      },
+      "ShoppingQuery": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/ShoppingPlacement"
+            },
+            "type": "array",
+            "title": "Products"
+          },
+          "has_own": {
+            "type": "boolean",
+            "title": "Has Own"
+          },
+          "has_competitor": {
+            "type": "boolean",
+            "title": "Has Competitor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "category",
+          "model_name",
+          "products",
+          "has_own",
+          "has_competitor"
+        ],
+        "title": "ShoppingQuery"
+      },
+      "ShoppingSeller": {
+        "properties": {
+          "seller": {
+            "type": "string",
+            "title": "Seller"
+          },
+          "is_own_site": {
+            "type": "boolean",
+            "title": "Is Own Site"
+          },
+          "placements": {
+            "type": "integer",
+            "title": "Placements"
+          },
+          "share": {
+            "type": "number",
+            "title": "Share"
+          },
+          "unique_products": {
+            "type": "integer",
+            "title": "Unique Products"
+          },
+          "prompts": {
+            "type": "integer",
+            "title": "Prompts"
+          },
+          "own_brand_placements": {
+            "type": "integer",
+            "title": "Own Brand Placements"
+          }
+        },
+        "type": "object",
+        "required": [
+          "seller",
+          "is_own_site",
+          "placements",
+          "share",
+          "unique_products",
+          "prompts",
+          "own_brand_placements"
+        ],
+        "title": "ShoppingSeller"
+      },
+      "ThemeCount": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "share": {
+            "type": "number",
+            "title": "Share",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "count"
+        ],
+        "title": "ThemeCount"
+      },
+      "TrackedUrlDetail": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Queries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "queries"
+        ],
+        "title": "TrackedUrlDetail"
+      },
+      "TrackedUrlImpact": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "citations": {
+            "type": "integer",
+            "title": "Citations"
+          },
+          "prompts": {
+            "type": "integer",
+            "title": "Prompts"
+          },
+          "urls": {
+            "items": {
+              "$ref": "#/components/schemas/TrackedUrlDetail"
+            },
+            "type": "array",
+            "title": "Urls"
+          },
+          "mean_sentiment": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean Sentiment"
+          },
+          "by_model": {
+            "items": {
+              "$ref": "#/components/schemas/TrackedUrlModelRating"
+            },
+            "type": "array",
+            "title": "By Model",
+            "default": []
+          },
+          "theme_pros": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Theme Pros",
+            "default": []
+          },
+          "theme_cons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Theme Cons",
+            "default": []
+          },
+          "prompts_with_brand_mention": {
+            "type": "integer",
+            "title": "Prompts With Brand Mention",
+            "default": 0
+          },
+          "queries_with_brand_mention": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Queries With Brand Mention",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "citations",
+          "prompts",
+          "urls"
+        ],
+        "title": "TrackedUrlImpact"
+      },
+      "TrackedUrlModelRating": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "n_positive": {
+            "type": "integer",
+            "title": "N Positive",
+            "default": 0
+          },
+          "n_neutral": {
+            "type": "integer",
+            "title": "N Neutral",
+            "default": 0
+          },
+          "n_negative": {
+            "type": "integer",
+            "title": "N Negative",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "model",
+          "n"
+        ],
+        "title": "TrackedUrlModelRating"
+      },
+      "TrackedUrlsImpact": {
+        "properties": {
+          "totals": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Totals"
+          },
+          "per_url": {
+            "items": {
+              "$ref": "#/components/schemas/TrackedUrlImpact"
+            },
+            "type": "array",
+            "title": "Per Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totals",
+          "per_url"
+        ],
+        "title": "TrackedUrlsImpact"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VisibilityResultAnalysis": {
+        "properties": {
+          "brand_mention_analysis": {
+            "$ref": "#/components/schemas/BrandMentionAnalysis"
+          },
+          "citation_analysis": {
+            "$ref": "#/components/schemas/CitationAnalysis"
+          },
+          "query_analysis": {
+            "items": {
+              "$ref": "#/components/schemas/QueryAnalysis"
+            },
+            "type": "array",
+            "title": "Query Analysis"
+          },
+          "tracked_urls_impact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrackedUrlsImpact"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tracked_competitor_mention_analysis": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CompetitorMentionAnalysis"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tracked Competitor Mention Analysis"
+          }
+        },
+        "type": "object",
+        "required": [
+          "brand_mention_analysis",
+          "citation_analysis",
+          "query_analysis"
+        ],
+        "title": "VisibilityResultAnalysis"
+      },
+      "VisibilityResultRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "response": {
+            "type": "string",
+            "title": "Response"
+          },
+          "citations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "fanout_queries": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fanout Queries"
+          },
+          "shopping": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shopping"
+          },
+          "model_name": {
+            "$ref": "#/components/schemas/ModelName"
+          },
+          "brands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Brands"
+          },
+          "execution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Execution Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "category",
+          "query",
+          "response",
+          "citations",
+          "model_name",
+          "brands",
+          "execution_id"
+        ],
+        "title": "VisibilityResultRead"
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
+      "UnkeyBearer": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Unkey-issued API key"
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://engine-mono-production.up.railway.app",
+      "description": "Production (Railway)"
+    },
+    {
+      "url": "https://api.tryxlr8.ai",
+      "description": "Production (api.tryxlr8.ai)"
+    }
+  ]
 }
