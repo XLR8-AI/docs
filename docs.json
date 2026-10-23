@@ -88,6 +88,18 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "System API",
+            "pages": [
+              "api-reference/overview"
+            ]
+          }
+        ],
+        "openapi": "api-reference/openapi.json"
       }
     ]
   },

@@ -1,0 +1,83 @@
+---
+title: System Reporting API
+description: Unkey-authenticated experiment and analytics endpoints for internal reporting integrations.
+---
+
+The **System Reporting API** exposes read-only experiment data and analytics under `/system-api/v1/reporting/*`. It is separate from the Clerk-authenticated Platform API used by the XLR8.ai web app.
+
+Use this API when you need programmatic access to experiments, executions, raw results, analyses, citation metadata, and execution trends—for example, internal reporting dashboards.
+
+## Base URLs
+
+| Environment | Base URL |
+|-------------|----------|
+| Production (Railway) | `https://engine-mono-production.up.railway.app` |
+| Production (custom domain) | `https://api.tryxlr8.ai` |
+
+Paths in this API are **absolute from the host root** (for example, `GET /system-api/v1/reporting/experiments`).
+
+## Interactive reference
+
+- **ReDoc (production):** [engine-mono-production.up.railway.app/system-api/redoc](https://engine-mono-production.up.railway.app/system-api/redoc)
+- **OpenAPI JSON:** [engine-mono-production.up.railway.app/system-api/openapi.json](https://engine-mono-production.up.railway.app/system-api/openapi.json)
+
+The **API Reference** tab in this docs site is generated from the same OpenAPI document (checked into `api-reference/openapi.json`).
+
+## Authentication
+
+Every request must include a valid **Unkey** API key:
+
+```http
+Authorization: Bearer <your_unkey_secret>
+```
+
+<Warning>
+  Keys are secrets. Do not embed them in client-side code or commit them to git.
+</Warning>
+
+Reporting routes enforce an **organization allowlist** on the server. Your key must be permitted for the integration, and each experiment must belong to an allowed organization or the API returns **403 Forbidden**.
+
+Contact your XLR8 administrator for key issuance and org access.
+
+## Endpoints (summary)
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| `GET` | `/system-api/v1/reporting/experiments` | List experiments (filter by type, archived, sort) |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}` | Experiment detail |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}/executions` | Execution history |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/results` | Raw visibility/sentiment rows |
+| `POST` | `/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/analyse-results` | Aggregated visibility/sentiment analysis |
+| `POST` | `/system-api/v1/reporting/experiments/{experiment_id}/executions/{execution_id}/citation-metadata` | Citation metadata for URLs in results |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}/theme-embedding-sync-status` | Theme embedding sync status |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}/theme-cluster-tsne` | Theme cluster visualization data |
+| `GET` | `/system-api/v1/reporting/experiments/{experiment_id}/executions-trend` | Execution trend series (optional model breakdown) |
+
+Optional query parameters such as `models`, `breakdown_by_model`, and `sanitize_executions` are documented on each operation in the reference below.
+
+## Example: list experiments
+
+```bash
+curl -sS \
+  -H "Authorization: Bearer $UNKEY_API_KEY" \
+  "https://api.tryxlr8.ai/system-api/v1/reporting/experiments?archived=false&sort_by=created_at&sort_order=desc"
+```
+
+## What is not included
+
+These routes do **not** cover:
+
+- Clerk session auth used by the web app (`/api/v1/...`)
+- System content generation (`POST /system-api/v1/generate-content-sections` is intentionally excluded from this OpenAPI document)
+
+For the full Platform API (Swagger), use `{base}/docs` on a running Platform API deployment.
+
+## Errors
+
+| Status | Meaning |
+|--------|---------|
+| `401` | Missing or invalid Unkey bearer token |
+| `403` | Experiment outside allowed organizations |
+| `404` | Unknown experiment or execution |
+| `422` | Invalid query or path parameters |
+| `503` | Reporting allowlist not configured on the server |
