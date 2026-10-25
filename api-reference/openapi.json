@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "XLR8 System Reporting API",
-    "description": "Machine-facing experiment and analytics reporting under /system-api/v1/reporting/*. Authenticate with Authorization: Bearer <Unkey API key>. Access is limited to experiments in configured organization allowlists.",
+    "description": "Machine-facing experiment and analytics reporting under /system-api/v1/reporting/*. Authenticate with Authorization: Bearer <System Reporting API key> issued by XLR8. Access is limited to experiments in configured organization allowlists.",
     "version": "0.1.0"
   },
   "paths": {
@@ -87,7 +87,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -135,7 +135,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -183,7 +183,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -260,7 +260,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -337,7 +337,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -414,7 +414,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -460,7 +460,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -517,7 +517,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -612,7 +612,7 @@
         },
         "security": [
           {
-            "UnkeyBearer": []
+            "ReportingApiKey": []
           }
         ]
       }
@@ -3345,10 +3345,10 @@
       }
     },
     "securitySchemes": {
-      "UnkeyBearer": {
+      "ReportingApiKey": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Unkey-issued API key"
+        "description": "Bearer token (System Reporting API key issued by XLR8)"
       }
     }
   },

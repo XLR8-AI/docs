@@ -1,11 +1,11 @@
 ---
 title: System Reporting API
-description: Unkey-authenticated experiment and analytics endpoints for internal reporting integrations.
+description: Bearer-authenticated experiment and analytics endpoints for reporting integrations.
 ---
 
 The **System Reporting API** exposes read-only experiment data and analytics under `/system-api/v1/reporting/*`. It is separate from the Clerk-authenticated Platform API used by the XLR8.ai web app.
 
-Use this API when you need programmatic access to experiments, executions, raw results, analyses, citation metadata, and execution trends—for example, internal reporting dashboards.
+Use this API when you need programmatic access to experiments, executions, raw results, analyses, citation metadata, and execution trends—for example, internal or partner reporting dashboards.
 
 ## Base URLs
 
@@ -25,11 +25,13 @@ The **API Reference** tab in this docs site is generated from the same OpenAPI d
 
 ## Authentication
 
-Every request must include a valid **Unkey** API key:
+Every request must include a **System Reporting API key** that XLR8 issued for your integration:
 
 ```http
-Authorization: Bearer <your_unkey_secret>
+Authorization: Bearer <your_api_key>
 ```
+
+You do not need a separate API-key vendor account. Store the secret like any other production credential.
 
 <Warning>
   Keys are secrets. Do not embed them in client-side code or commit them to git.
@@ -59,7 +61,7 @@ Optional query parameters such as `models`, `breakdown_by_model`, and `sanitize_
 
 ```bash
 curl -sS \
-  -H "Authorization: Bearer $UNKEY_API_KEY" \
+  -H "Authorization: Bearer $XLR8_REPORTING_API_KEY" \
   "https://api.tryxlr8.ai/system-api/v1/reporting/experiments?archived=false&sort_by=created_at&sort_order=desc"
 ```
 
@@ -76,7 +78,7 @@ For the full Platform API (Swagger), use `{base}/docs` on a running Platform API
 
 | Status | Meaning |
 |--------|---------|
-| `401` | Missing or invalid Unkey bearer token |
+| `401` | Missing or invalid API key |
 | `403` | Experiment outside allowed organizations |
 | `404` | Unknown experiment or execution |
 | `422` | Invalid query or path parameters |
