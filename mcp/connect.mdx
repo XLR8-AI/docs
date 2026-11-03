@@ -1,0 +1,241 @@
+---
+title: "Connect the MCP server"
+sidebarTitle: "MCP server"
+description: "Connect Claude, Cursor, Claude Code, VS Code, or Codex to the hosted XLR8.ai MCP server with OAuth or an API key."
+icon: "plug"
+keywords: ["mcp", "oauth", "api key", "cursor", "claude", "claude code"]
+---
+
+Connect Claude, Cursor, Claude Code, VS Code, Codex, or any remote MCP client to the hosted XLR8.ai server. There is nothing to install.
+
+The server URL is `https://mcp.tryxlr8.ai/mcp`. Use that exact path. The server speaks Streamable HTTP.
+
+## Choose a credential
+
+The server accepts two credentials. Both are sent as `Authorization: Bearer <credential>`.
+
+<Columns cols={2}>
+  <Card title="OAuth" icon="key-round">
+    Paste the server URL and sign in with the same XLR8.ai account you use at [app.tryxlr8.ai](https://app.tryxlr8.ai). The client discovers the login flow, registers itself, and opens a browser. Use this on your own machine.
+  </Card>
+  <Card title="API key" icon="rectangle-ellipsis">
+    Send a user API key in the `Authorization` header. Use this for clients that cannot open a browser, and for agents. The key must belong to your user.
+  </Card>
+</Columns>
+
+<Info>
+  OAuth uses authorization-code login with PKCE and requests the `openid`, `email`, and `profile` scopes. You do not create a Clerk app or a client id. The server publishes its own discovery metadata, and the client follows it.
+</Info>
+
+An API key is not a JWT. The server treats a credential that contains exactly two `.` characters as an OAuth access token and validates it on the OAuth path. A key must be active and must be tied to your user id. An organization id on the key is optional. When the key has no organization, call `list_my_orgs` after you connect and pass that `org_id` into later tools.
+
+<Note>
+  The System Reporting API key is a different credential. It authenticates `https://api.tryxlr8.ai` and does not sign a client into this MCP server.
+</Note>
+
+Keep the key in an environment variable or a secrets store. Config files are not shell scripts. If a sample below shows `$XLR8_API_KEY` and your client does not expand variables, paste the key itself. Some clients, including Claude Desktop on Windows, leave the header empty when they do not expand a variable, and the server then returns `401`.
+
+## Connect your client
+
+<Tabs>
+  <Tab title="Cursor">
+    Open **Settings → MCP** and add a global or project server, or edit `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (this project).
+
+    OAuth:
+
+    ```json
+    {
+      "mcpServers": {
+        "xlr8": {
+          "url": "https://mcp.tryxlr8.ai/mcp"
+        }
+      }
+    }
+    ```
+
+    Cursor opens a browser so you can sign in with your XLR8.ai account.
+
+    API key:
+
+    ```json
+    {
+      "mcpServers": {
+        "xlr8": {
+          "url": "https://mcp.tryxlr8.ai/mcp",
+          "headers": {
+            "Authorization": "Bearer $XLR8_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="Claude">
+    In Claude on the web, desktop, or mobile, open **Settings → Connectors → Add custom connector**.
+
+    <Steps>
+      <Step title="Name the connector">
+        Use `XLR8`.
+      </Step>
+      <Step title="Paste the server URL">
+        Use `https://mcp.tryxlr8.ai/mcp`.
+      </Step>
+      <Step title="Sign in">
+        Claude redirects you to sign in with your XLR8.ai account. The connector stays inactive until that sign-in finishes.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Claude Code">
+    OAuth:
+
+    ```bash
+    claude mcp add --transport http xlr8 https://mcp.tryxlr8.ai/mcp
+    ```
+
+    Then, inside Claude Code, run `/mcp` and finish sign-in in the browser.
+
+    API key:
+
+    ```bash
+    claude mcp add --transport http xlr8 https://mcp.tryxlr8.ai/mcp \
+      --header "Authorization: Bearer $XLR8_API_KEY"
+    ```
+
+    `claude mcp list` shows whether the server connected.
+  </Tab>
+  <Tab title="VS Code">
+    In the project, create `.vscode/mcp.json`.
+
+    OAuth:
+
+    ```json
+    {
+      "servers": {
+        "xlr8": {
+          "type": "http",
+          "url": "https://mcp.tryxlr8.ai/mcp"
+        }
+      }
+    }
+    ```
+
+    API key:
+
+    ```json
+    {
+      "servers": {
+        "xlr8": {
+          "type": "http",
+          "url": "https://mcp.tryxlr8.ai/mcp",
+          "headers": {
+            "Authorization": "Bearer $XLR8_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+
+    VS Code prompts you to start the server and, for OAuth, to sign in.
+  </Tab>
+  <Tab title="Codex">
+    OAuth:
+
+    ```bash
+    codex mcp add xlr8 --url https://mcp.tryxlr8.ai/mcp
+    codex mcp login xlr8
+    ```
+
+    That writes:
+
+    ```toml
+    [mcp_servers.xlr8]
+    url = "https://mcp.tryxlr8.ai/mcp"
+    ```
+
+    API key. Point Codex at the variable name so the key stays out of the file:
+
+    ```bash
+    codex mcp add xlr8 --url https://mcp.tryxlr8.ai/mcp --bearer-token-env-var XLR8_API_KEY
+    ```
+
+    ```toml
+    [mcp_servers.xlr8]
+    url = "https://mcp.tryxlr8.ai/mcp"
+    bearer_token_env_var = "XLR8_API_KEY"
+    ```
+  </Tab>
+  <Tab title="Other">
+    Any client that speaks Streamable HTTP can use the same URL. For OAuth, paste `https://mcp.tryxlr8.ai/mcp` and let the client open the browser. For an API key, send this header on every request:
+
+    ```http
+    Authorization: Bearer <your_api_key>
+    ```
+
+    A JSON config often looks like this:
+
+    ```json
+    {
+      "mcpServers": {
+        "xlr8": {
+          "type": "http",
+          "url": "https://mcp.tryxlr8.ai/mcp",
+          "headers": {
+            "Authorization": "Bearer $XLR8_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+
+    Omit `headers` when the client will sign in with OAuth.
+
+    If the client only runs local stdio servers (`command` and `args`), bridge to the hosted server:
+
+    ```json
+    {
+      "mcpServers": {
+        "xlr8": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote@latest",
+            "https://mcp.tryxlr8.ai/mcp"
+          ]
+        }
+      }
+    }
+    ```
+
+    `mcp-remote` opens a browser for OAuth. To use an API key instead, add `"--header"` and `"Authorization: Bearer $XLR8_API_KEY"` after the URL.
+  </Tab>
+</Tabs>
+
+## Confirm the connection
+
+Ask the assistant to list your XLR8.ai organizations. A working session calls `list_my_orgs` and returns each organization id, name, slug, and role.
+
+You only see organizations your user belongs to. Most later tools need an `org_id`. If the key or the OAuth token does not already carry one, pass an id from `list_my_orgs`, or ask the assistant to resolve an organization name with `org_resolve_name_to_id`.
+
+The first tool list is short on purpose. The assistant starts with organization lookup, `list_capabilities`, `search_tools`, and `call_tool`, then searches for the rest. A short list means the connection succeeded.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="401 Unauthorized">
+    The server rejected the credential. Its error tells the client to clear saved tokens and connect again so the client can register and sign in.
+
+    With an API key, copy the key again with no extra spaces. A value that contains two `.` characters is handled as an OAuth token, not as an API key. The key also has to be active and tied to your user id.
+  </Accordion>
+  <Accordion title="The client cannot find the server">
+    The URL must be `https://mcp.tryxlr8.ai/mcp`, including `/mcp`. The host root returns `404`.
+  </Accordion>
+  <Accordion title="Sign-in never finishes">
+    Remove the server or connector and add it again. Clients keep a failed OAuth attempt until you do. Then sign in with the same account you use at app.tryxlr8.ai.
+  </Accordion>
+  <Accordion title="Organization access denied">
+    Call `list_my_orgs` and pass one of those organization ids. The assistant can only act in organizations that account belongs to.
+  </Accordion>
+  <Accordion title="Edits to the config do nothing">
+    Quit the client completely and open it again. A window reload often keeps the old MCP process.
+  </Accordion>
+</AccordionGroup>
