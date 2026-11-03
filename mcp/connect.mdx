@@ -1,44 +1,134 @@
 ---
 title: "Connect the MCP server"
 sidebarTitle: "MCP server"
-description: "Connect Claude, Cursor, Claude Code, VS Code, or Codex to XLR8.ai. Paste the server URL and sign in with your account."
+description: "Use XLR8.ai from Claude, ChatGPT, Cursor, Claude Code, VS Code, or Codex. Add the server URL, sign in with your XLR8.ai account, and start asking."
 icon: "plug"
-keywords:
-  - "mcp"
-  - "oauth"
-  - "api key"
-  - "cursor"
-  - "claude"
-  - "claude code"
+keywords: ["mcp", "claude connector", "chatgpt", "cursor", "claude code", "codex", "vs code", "api key"]
 ---
 
-Connect XLR8.ai to Claude, Cursor, Claude Code, VS Code, Codex, or another AI assistant. Paste the server URL and sign in with the same account you use at [app.tryxlr8.ai](https://app.tryxlr8.ai). There is nothing to install.
+The XLR8.ai MCP server lets your AI assistant work in your XLR8.ai account. Ask it to build a query set, start an experiment, break down which sources AI models cite, draft on-brand content, or find Reddit threads to join, all from the chat you already use.
 
-The server URL is `https://mcp.tryxlr8.ai/mcp`.
+To connect, add the server URL to your assistant and sign in with the same account you use at [app.tryxlr8.ai](https://app.tryxlr8.ai). There is nothing to install.
 
-<Note>
-  Opening this URL in a browser does not load a page. Paste it into your AI client.
-</Note>
+```text
+https://mcp.tryxlr8.ai/mcp
+```
 
-<Columns cols={2}>
-  <Card title="Sign in" icon="key-round">
-    Paste the URL and approve access in the browser. Use this on your own computer.
+<Columns cols={3}>
+  <Card title="Claude" href="#claude">
+    Web, desktop, and Cowork
   </Card>
-
-  <Card title="API key" icon="rectangle-ellipsis" href="/mcp/connect#use-an-api-key">
-    For a client that cannot open a browser. Use the key issued for your XLR8.ai account.
+  <Card title="ChatGPT and Codex" href="#chatgpt-desktop-and-codex">
+    ChatGPT desktop app, Codex CLI, and IDE extension
+  </Card>
+  <Card title="Cursor" href="#cursor">
+    One-click install
+  </Card>
+  <Card title="Claude Code" href="#claude-code">
+    One terminal command
+  </Card>
+  <Card title="VS Code" href="#vs-code">
+    With GitHub Copilot
+  </Card>
+  <Card title="Other clients" href="#other-clients">
+    Any client that supports remote MCP
   </Card>
 </Columns>
 
-## Connect your client
+## Set up your client
+
+### Claude
+
+Add XLR8.ai as a custom connector. It works in Claude on the web, Claude Desktop, and Cowork. For more detail, see [Claude's custom connector guide](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
+
+<Tabs>
+  <Tab title="Free, Pro, and Max">
+    <Steps>
+      <Step title="Add a custom connector">
+        Go to **Customize → Connectors**, select **+ Add**, then select **Add custom connector**.
+      </Step>
+      <Step title="Enter the server details">
+        Name the connector `XLR8.ai`, paste `https://mcp.tryxlr8.ai/mcp`, and select **Continue**.
+      </Step>
+      <Step title="Sign in">
+        Keep the authentication settings Claude detects, choose **Sign in now**, and select **Add**. Sign in with your XLR8.ai account.
+      </Step>
+      <Step title="Turn it on in a chat">
+        In a conversation, select **+**, open **Connectors**, and turn on XLR8.ai.
+      </Step>
+    </Steps>
+
+    Free plans can add one custom connector.
+  </Tab>
+  <Tab title="Team and Enterprise">
+    An owner adds the connector once for the organization. Each member then connects their own XLR8.ai account.
+
+    <Steps>
+      <Step title="Owner: add the connector">
+        Go to **Organization settings → Connectors**, select **Add**, hover over **Custom**, and select **Web**. Name it `XLR8.ai`, paste `https://mcp.tryxlr8.ai/mcp`, keep the detected authentication settings, and select **Add**.
+      </Step>
+      <Step title="Member: connect your account">
+        Go to **Customize → Connectors**, find XLR8.ai, and select **Connect**. Sign in with your XLR8.ai account.
+      </Step>
+      <Step title="Turn it on in a chat">
+        In a conversation, select **+**, open **Connectors**, and turn on XLR8.ai.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+### ChatGPT desktop and Codex
+
+The ChatGPT desktop app, the Codex CLI, and the Codex IDE extension share one MCP configuration. Add XLR8.ai in one of them and it is available in all three. For more detail, see the [Codex MCP documentation](https://developers.openai.com/codex/mcp/).
+
+<Tabs>
+  <Tab title="ChatGPT desktop app">
+    <Steps>
+      <Step title="Add the server">
+        Open **Settings → MCP servers** and select **Add server**. Name it `xlr8`, choose **Streamable HTTP**, and paste `https://mcp.tryxlr8.ai/mcp`.
+      </Step>
+      <Step title="Restart and sign in">
+        Save the server and select **Restart**. Then select **Authenticate** next to `xlr8` and sign in with your XLR8.ai account.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Codex CLI">
+    <Steps>
+      <Step title="Add the server">
+        ```bash
+        codex mcp add xlr8 --url https://mcp.tryxlr8.ai/mcp
+        ```
+      </Step>
+      <Step title="Sign in">
+        ```bash
+        codex mcp login xlr8
+        ```
+
+        Your browser opens so you can sign in with your XLR8.ai account.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Codex IDE extension">
+    <Steps>
+      <Step title="Add the server">
+        Open the gear menu, select **MCP servers**, then select **Add server**. Name it `xlr8`, choose **Streamable HTTP**, and paste `https://mcp.tryxlr8.ai/mcp`.
+      </Step>
+      <Step title="Restart and sign in">
+        Save the server and select **Restart extension**. Then select **Authenticate** and sign in with your XLR8.ai account.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ### Cursor
 
-Cursor connects from its MCP settings. You can also follow the [Cursor MCP documentation](https://cursor.com/docs/mcp).
+For more detail, see the [Cursor MCP documentation](https://cursor.com/docs/mcp).
 
 <Steps>
   <Step title="Add the server">
-    Open **Settings → MCP** and add a server, or create `.cursor/mcp.json` in the project (or `~/.cursor/mcp.json` for every project):
+    [Add XLR8.ai to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=xlr8&config=eyJ1cmwiOiJodHRwczovL21jcC50cnl4bHI4LmFpL21jcCJ9) and confirm the install when Cursor asks.
+
+    To add it by hand, put this in `~/.cursor/mcp.json` to use it in every project, or in `.cursor/mcp.json` for one project:
 
     ```json
     {
@@ -51,216 +141,226 @@ Cursor connects from its MCP settings. You can also follow the [Cursor MCP docum
     ```
   </Step>
   <Step title="Sign in">
-    Cursor opens a browser. Sign in with your XLR8.ai account.
-  </Step>
-</Steps>
-
-### Claude
-
-In Claude on the web, desktop, or mobile, open **Settings → Connectors → Add custom connector**.
-
-<Steps>
-  <Step title="Name the connector">
-    Use `XLR8`.
-  </Step>
-  <Step title="Paste the server URL">
-    Use `https://mcp.tryxlr8.ai/mcp`.
-  </Step>
-  <Step title="Sign in">
-    Claude opens a browser so you can sign in with your XLR8.ai account. The connector stays off until that sign-in finishes.
+    Open **Customize** in Cursor's sidebar, turn on XLR8.ai, and sign in with your XLR8.ai account when your browser opens.
   </Step>
 </Steps>
 
 ### Claude Code
 
-Install [Claude Code](https://code.claude.com/docs/en/setup) first. Details are in the [Claude Code MCP documentation](https://docs.anthropic.com/en/docs/claude-code/mcp).
+For more detail, see the [Claude Code MCP documentation](https://docs.anthropic.com/en/docs/claude-code/mcp).
 
 <Steps>
   <Step title="Add the server">
     ```bash
     claude mcp add --transport http xlr8 https://mcp.tryxlr8.ai/mcp
     ```
+
+    To use XLR8.ai in every project, not only the current one, add `--scope user` after `xlr8`.
   </Step>
   <Step title="Sign in">
-    In Claude Code, run `/mcp` and finish sign-in in the browser.
+    Start Claude Code, run `/mcp`, select `xlr8`, and sign in with your XLR8.ai account in the browser.
   </Step>
 </Steps>
 
-`claude mcp list` shows whether XLR8.ai is connected.
-
 ### VS Code
 
-Create `.vscode/mcp.json` in the project. See the [VS Code MCP documentation](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+Use XLR8.ai with GitHub Copilot in VS Code. For more detail, see the [VS Code MCP documentation](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+
+<Steps>
+  <Step title="Add the server">
+    Open the Command Palette (`Cmd+Shift+P` on Mac, `Ctrl+Shift+P` on Windows and Linux) and run **MCP: Add Server**. Choose **HTTP**, paste `https://mcp.tryxlr8.ai/mcp`, and enter `xlr8` as the server ID.
+  </Step>
+  <Step title="Choose where to save it">
+    Select **Global**, then **Copilot Global**, to use XLR8.ai in every workspace.
+  </Step>
+  <Step title="Sign in">
+    When VS Code asks, allow the sign-in and sign in with your XLR8.ai account.
+  </Step>
+</Steps>
+
+### Other clients
+
+Any client that supports remote MCP servers can connect. Use these settings:
+
+- **URL:** `https://mcp.tryxlr8.ai/mcp`
+- **Transport:** Streamable HTTP (some clients call it HTTP)
+- **Authentication:** OAuth. Sign in with your XLR8.ai account when the client asks.
+
+If your client takes a JSON configuration:
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "xlr8": {
-      "type": "http",
       "url": "https://mcp.tryxlr8.ai/mcp"
     }
   }
 }
 ```
 
-VS Code asks you to start the server, then opens a browser so you can sign in.
-
-### Codex
-
-Install the [Codex CLI](https://developers.openai.com/codex/cli) first. See the [Codex MCP documentation](https://developers.openai.com/codex/mcp/).
-
-<Steps>
-  <Step title="Add the server">
-    ```bash
-    codex mcp add xlr8 --url https://mcp.tryxlr8.ai/mcp
-    ```
-  </Step>
-  <Step title="Sign in">
-    ```bash
-    codex mcp login xlr8
-    ```
-
-    Finish sign-in in the browser.
-  </Step>
-</Steps>
-
-### Another client
-
-Paste `https://mcp.tryxlr8.ai/mcp` into the client's custom server field and sign in when the browser opens. If it asks for a transport, choose HTTP.
-
-If the client can only run a program on your computer, use this configuration. It opens a browser so you can sign in.
+If your client can only run local servers, connect through [mcp-remote](https://www.npmjs.com/package/mcp-remote). It needs Node.js and opens your browser so you can sign in.
 
 ```json
 {
   "mcpServers": {
     "xlr8": {
       "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.tryxlr8.ai/mcp"]
+      "args": ["-y", "mcp-remote", "https://mcp.tryxlr8.ai/mcp"]
     }
   }
 }
 ```
 
-## Use an API key
+## Check the connection
 
-Use an API key when the client cannot open a browser, including when you are connecting an agent.
+Start a new chat and ask:
 
-The key is issued for your XLR8.ai account. The API key for system reporting at `https://api.tryxlr8.ai` is a different key. It will not connect you here.
+<Prompt description="Test the connection">
+List my XLR8.ai organizations.
+</Prompt>
 
-Send the key with every request:
+The assistant should list each organization you belong to and your role in it. If you belong to more than one, tell it which one to use, for example "Use Acme for this chat."
+
+## What you can ask
+
+Copy one of these prompts and replace the text in brackets.
+
+<Prompt description="**Start a visibility experiment**">
+Create a visibility query set for [company] at [domain] with about 20 queries. Show me the categories and queries first. After I approve them, save the query set and start an experiment with it.
+</Prompt>
+
+<Prompt description="**See which sources AI models cite**">
+For the experiment [experiment name], group the cited sources by category and tell me which third-party sites appear most often. Suggest where we should work on getting mentioned.
+</Prompt>
+
+<Prompt description="**Draft on-brand content**">
+Write a blog post about [topic] for [organization]. Follow our brand guidelines and add internal links to our site.
+</Prompt>
+
+<Prompt description="**Check a draft for AI detection**">
+Scan each section of [content title] with GPTZero. For any section that reads as AI-written, show me a humanized version and wait for my approval before you save it.
+</Prompt>
+
+<Prompt description="**Find Reddit threads to join**">
+Find recent Reddit threads where people ask about [topic]. Pick the three most relevant and draft a helpful reply for each.
+</Prompt>
+
+<Tip>
+  Some requests start work in your account, such as running an experiment, generating content, or sending an outreach email. Keep tool approval on in your assistant so you can review each action before it runs.
+</Tip>
+
+## Connect with an API key
+
+Use an API key when your client can't open a browser to sign in, for example an agent that runs on a server. Contact XLR8.ai to get an API key for your account.
+
+The client sends the key as a bearer token on every request:
 
 ```http
 Authorization: Bearer <your_api_key>
 ```
 
-Keep the key somewhere private. The samples below use `$XLR8_API_KEY` as a placeholder. If your client saves that text instead of the key, paste the key itself. Some clients, including Claude Desktop on Windows, send an empty header when they leave the placeholder as-is, and sign-in fails.
+<CodeGroup>
 
-If the key is for your account and not one organization, ask the assistant which organizations you can use, then pick one.
-
-<AccordionGroup>
-  <Accordion title="Cursor">
-    Add the key to the same `mcp.json` file:
-
-    ```json
-    {
-      "mcpServers": {
-        "xlr8": {
-          "url": "https://mcp.tryxlr8.ai/mcp",
-          "headers": {
-            "Authorization": "Bearer $XLR8_API_KEY"
-          }
-        }
+```json Cursor
+{
+  "mcpServers": {
+    "xlr8": {
+      "url": "https://mcp.tryxlr8.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:XLR8_API_KEY}"
       }
     }
-    ```
-  </Accordion>
+  }
+}
+```
 
-  <Accordion title="Claude Code">
-    ```bash
-    claude mcp add --transport http xlr8 https://mcp.tryxlr8.ai/mcp \
-      --header "Authorization: Bearer $XLR8_API_KEY"
-    ```
-  </Accordion>
+```bash Claude Code
+claude mcp add --transport http xlr8 https://mcp.tryxlr8.ai/mcp \
+  --header "Authorization: Bearer $XLR8_API_KEY"
+```
 
-  <Accordion title="VS Code">
-    ```json
-    {
-      "servers": {
-        "xlr8": {
-          "type": "http",
-          "url": "https://mcp.tryxlr8.ai/mcp",
-          "headers": {
-            "Authorization": "Bearer $XLR8_API_KEY"
-          }
-        }
+```toml Codex
+[mcp_servers.xlr8]
+url = "https://mcp.tryxlr8.ai/mcp"
+bearer_token_env_var = "XLR8_API_KEY"
+```
+
+```json Other clients
+{
+  "mcpServers": {
+    "xlr8": {
+      "url": "https://mcp.tryxlr8.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer <your_api_key>"
       }
     }
-    ```
-  </Accordion>
+  }
+}
+```
 
-  <Accordion title="Codex">
-    Point Codex at the variable name so the key stays out of the file:
+</CodeGroup>
 
-    ```bash
-    codex mcp add xlr8 --url https://mcp.tryxlr8.ai/mcp --bearer-token-env-var XLR8_API_KEY
-    ```
+The Cursor, Claude Code, and Codex examples read the key from an `XLR8_API_KEY` environment variable, so the key stays out of your config files. Set that variable before you start the client. If your client doesn't fill in environment variables, paste the key in place of the variable.
 
-    ```toml
-    [mcp_servers.xlr8]
-    url = "https://mcp.tryxlr8.ai/mcp"
-    bearer_token_env_var = "XLR8_API_KEY"
-    ```
-  </Accordion>
+In Claude, add the custom connector as described above, choose **No sign in**, and add a request header named `Authorization` with the value `Bearer <your_api_key>`.
 
-  <Accordion title="Another client">
-    ```json
-    {
-      "mcpServers": {
-        "xlr8": {
-          "type": "http",
-          "url": "https://mcp.tryxlr8.ai/mcp",
-          "headers": {
-            "Authorization": "Bearer $XLR8_API_KEY"
-          }
-        }
-      }
-    }
-    ```
+<Warning>
+  On Claude Team and Enterprise plans, everyone who uses a connector set up with an API key acts as the key's owner. Use sign-in instead so each member connects their own account.
+</Warning>
 
-    For a client that can only run a local program, add `"--header"` and `"Authorization: Bearer $XLR8_API_KEY"` after the URL in the `mcp-remote` configuration above.
-  </Accordion>
-</AccordionGroup>
-
-## Check the connection
-
-Ask the assistant to list your XLR8.ai organizations. You should see each organization on your account, with its name and your role.
-
-You only see organizations you belong to. Tell the assistant which organization to use before you ask it to do anything else.
-
-The assistant starts with a few tools and looks up the rest as you ask. A short list means the connection worked.
+If your key isn't tied to one organization, tell the assistant which organization to use. The [System Reporting API](/api-reference/overview) key is a different key and doesn't work with the MCP server.
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="I opened the URL in a browser">
-    Opening `https://mcp.tryxlr8.ai/mcp` in a browser does not load a page. Paste that URL into your AI client and sign in there.
+  <Accordion title="Sign-in fails or never finishes">
+    Remove XLR8.ai from your client, add it again, and sign in with the same account you use at [app.tryxlr8.ai](https://app.tryxlr8.ai).
+
+    If you connect through `mcp-remote`, also delete the `.mcp-auth` folder in your home directory to clear its saved sign-ins, then try again.
   </Accordion>
+  <Accordion title="The assistant says it isn't authorized">
+    Your saved sign-in expired or is no longer valid. Disconnect XLR8.ai in your client's connector or MCP settings and connect again.
 
-  <Accordion title="Sign-in never finishes">
-    Remove the server or connector and add it again. Then sign in with the same account you use at [app.tryxlr8.ai](https://app.tryxlr8.ai).
+    With an API key, check that the header contains the key itself and not the name of the environment variable. Copy the key again with no extra spaces.
   </Accordion>
-
-  <Accordion title="The client says Unauthorized">
-    The saved sign-in is missing or wrong. Remove the server and connect again so you can sign in from scratch.
-
-    If you are using an API key, paste it again with no extra spaces. The reporting key for `https://api.tryxlr8.ai` will not work here. If the header still contains `$XLR8_API_KEY`, the client did not fill in your key.
+  <Accordion title="XLR8.ai doesn't show up in the chat">
+    Make sure the server is turned on. In Claude, select **+** in the conversation and check **Connectors**. In Cursor, check **Customize**. If you edited a config file, quit the client completely and open it again.
   </Accordion>
-
-  <Accordion title="I cannot use an organization">
-    Ask the assistant to list your organizations and choose one of those. It can only work in organizations your account belongs to.
+  <Accordion title="My organization is missing">
+    The assistant only sees organizations your account belongs to. Ask an admin to [invite you](/account/authentication#inviting-team-members), or sign in with the account that already has access.
   </Accordion>
-
-  <Accordion title="I changed the config and nothing happened">
-    Quit the client completely and open it again. Reloading the window often keeps the old connection.
+  <Accordion title="My company blocks the connection">
+    Your IT team may restrict external MCP servers. Ask them to allow `mcp.tryxlr8.ai`. On Claude Team and Enterprise plans, only owners can add custom connectors.
   </Accordion>
 </AccordionGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does the assistant ask to run search_tools and call_tool?">
+    XLR8.ai has a large set of tools. The assistant starts with a few, uses `search_tools` to find the one your request needs, and runs it with `call_tool`. Expand the approval request to see which XLR8.ai tool it will run and what it will send.
+  </Accordion>
+  <Accordion title="What can the assistant access?">
+    Only organizations your XLR8.ai account belongs to. In those organizations, it can work with query sets, experiments, citation results, content, brand guidelines, Reddit listening, outreach, and videos.
+  </Accordion>
+  <Accordion title="How do I disconnect?">
+    Remove XLR8.ai from your client's connector or MCP settings. In Claude, go to **Customize → Connectors** and select **Remove**.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Experiments" icon="flask" href="/experiments/overview">
+    Track how AI models talk about your brand.
+  </Card>
+  <Card title="Query generation" icon="magnifying-glass" href="/query-generation">
+    Build the query sets your experiments run.
+  </Card>
+  <Card title="Content generation" icon="pen-to-square" href="/content/generation">
+    Create content designed to improve your AI visibility.
+  </Card>
+  <Card title="Social listening" icon="comments" href="/intelligence/social-listening">
+    Find Reddit conversations worth joining.
+  </Card>
+</CardGroup>
